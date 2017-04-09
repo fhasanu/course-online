@@ -1,0 +1,38 @@
+.custom-footer{
+	color: white;
+	background-color: #292c6c;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	width: 100%;
+	text-align: center;
+	padding: 20px 25px;
+
+}
+.footer-menu{
+	color:  #8f9296;
+	font-size: 14px;
+	margin: 0;
+}
+
+p.footer-links{
+	font-size:18px;
+	font-weight: bold;
+	color:  #ffffff;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+p.footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.panel-custom{
+	margin-top: 2px;
+	padding: 5px;
+}
+
+.below-navbar-custom{
+	padding-top: 55px;
+}
