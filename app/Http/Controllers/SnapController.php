@@ -5,21 +5,25 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Veritrans\Veritrans;
+use App\Veritrans\Midtrans;
 
-class VtwebController extends Controller
+class SnapController extends Controller
 {
     public function __construct()
     {   
-        Veritrans::$serverKey = '<your server key>';
-
-        //set Veritrans::$isProduction  value to true for production mode
-        Veritrans::$isProduction = false;
+        Midtrans::$serverKey = 'your server key';
+        Midtrans::$isProduction = false;
     }
 
-    public function vtweb() 
+    public function snap()
     {
-        $vt = new Veritrans;
+        return view('snap_checkout');
+    }
+
+    public function token() 
+    {
+        error_log('masuk ke snap token adri ajax');
+        $midtrans = new Midtrans;
 
         $transaction_details = array(
             'order_id'          => uniqid(),
@@ -77,11 +81,6 @@ class VtwebController extends Controller
         // Data yang akan dikirim untuk request redirect_url.
         // Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
         $transaction_data = array(
-            'payment_type'          => 'vtweb', 
-            'vtweb'                         => array(
-                //'enabled_payments'    => [],
-                'credit_card_3d_secure' => true
-            ),
             'transaction_details'=> $transaction_details,
             'item_details'           => $items,
             'customer_details'   => $customer_details
@@ -89,8 +88,9 @@ class VtwebController extends Controller
     
         try
         {
-            $vtweb_url = $vt->vtweb_charge($transaction_data);
-            return redirect($vtweb_url);
+            $snap_token = $midtrans->getSnapToken($transaction_data);
+            //return redirect($vtweb_url);
+            echo $snap_token;
         } 
         catch (Exception $e) 
         {   
@@ -98,15 +98,25 @@ class VtwebController extends Controller
         }
     }
 
+    public function finish(Request $request)
+    {
+        $result = $request->input('result_data');
+        $result = json_decode($result);
+        echo $result->status_message . '<br>';
+        echo 'RESULT <br><pre>';
+        var_dump($result);
+        echo '</pre>' ;
+    }
+
     public function notification()
     {
-        $vt = new Veritrans;
+        $midtrans = new Midtrans;
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
         $result = json_decode($json_result);
 
         if($result){
-        $notif = $vt->status($result->order_id);
+        $notif = $midtrans->status($result->order_id);
         }
 
         error_log(print_r($result,TRUE));
