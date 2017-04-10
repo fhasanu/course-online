@@ -11,7 +11,7 @@ class SnapController extends Controller
 {
     public function __construct()
     {   
-        Midtrans::$serverKey = 'your server key';
+        Midtrans::$serverKey = 'VT-server-USJezPOK2HxDwG-kvkrDDugI';
         Midtrans::$isProduction = false;
     }
 
@@ -22,7 +22,7 @@ class SnapController extends Controller
 
     public function token() 
     {
-        error_log('masuk ke snap token adri ajax');
+        error_log('masuk ke snap token dari ajax');
         $midtrans = new Midtrans;
 
         $transaction_details = array(
