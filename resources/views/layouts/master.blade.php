@@ -30,7 +30,7 @@
     <script src="{{ asset('/vendor/jquery/jquery.min.js',true)}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('/vendor/bootstrap/js/bootstrap.min.js',true)}}"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
