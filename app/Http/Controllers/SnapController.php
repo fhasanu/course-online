@@ -110,8 +110,12 @@ class SnapController extends Controller
 
     public function notification(Request $request)
     {
-        echo $request;
-        echo 'is this successful';
+        echo json_decode($request);
+        echo '<br />is this successful<br />';
+        $test = file_get_contents('php://input');
+        echo $test;
+        echo '<br />this may be successful<br />';
+        echo json_decode($test);
 /*
         $midtrans = new Midtrans();
         echo 'test notification handler';
