@@ -115,9 +115,10 @@ class SnapController extends Controller
         $json_result = file_get_contents('php://input');
         $result = json_decode($json_result);
 
-        // if($result){
-        //     $notif = $midtrans->status($result->order_id);
-        // }
+        if($result){
+            $notif = $midtrans->status($result->order_id);
+            echo 'result is an object'
+        }
 /*
         error_log(print_r($result,TRUE));
 
