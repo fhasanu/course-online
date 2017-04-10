@@ -19,7 +19,7 @@
     <link href="/public/css/kursusin.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">    
-        @include('layouts.header')
+        @include('layouts.nav')
     <div class="container">
         @yield('content')
     </div>
