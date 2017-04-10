@@ -11,10 +11,11 @@
     <title>Kursusin</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{{ HTML::style('vendor/bootstrap/css/bootstrap.min.css', array(), true) }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/public/vendor/font-awesome/css/font-awesome.min.css"
+    <link href="{{ HTML::style('vendor/font-awesome/css/font-awesome.min.css', array(), true) }}"
     rel="stylesheet" type="text/css">
     <link href="/public/css/kursusin.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -26,7 +27,7 @@
         @include('layouts.footer')
 
     <!-- jQuery -->
-    <script src="/public/vendor/jquery/jquery.min.js"></script>
+    <script src="{{ HTML::style('vendor/jquery/jquery.min.js', array(), true) }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
