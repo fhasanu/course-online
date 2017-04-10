@@ -13,5 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'http://midtrans.co.id',
+        'http://midtrans.com',
     ];
 }
