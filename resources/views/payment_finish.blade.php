@@ -1,6 +1,5 @@
 @extends('layouts.master')
 
 @section('content')
-	Testdrive
-	HelloHai
+<h1>Payment Finish</h1>
 @endsection
