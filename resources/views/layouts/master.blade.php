@@ -12,12 +12,12 @@
 
     <!-- Bootstrap Core CSS -->
 
-    <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css', array(), true) }}" rel="stylesheet">
+    <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{ asset('/vendor/font-awesome/css/font-awesome.min.css', array(), true) }}"
+    <link href="{{ asset('/vendor/font-awesome/css/font-awesome.min.css') }}"
     rel="stylesheet" type="text/css">
-    <link href="/public/css/kursusin.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/css/kursusin.css') }}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">    
         @include('layouts.nav')
@@ -27,7 +27,7 @@
         @include('layouts.footer')
 
     <!-- jQuery -->
-    <script src="{{ asset('/vendor/jquery/jquery.min.js', array(), true) }}"></script>
+    <script src="{{ asset('/vendor/jquery/jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/public/vendor/bootstrap/js/bootstrap.min.js"></script>
