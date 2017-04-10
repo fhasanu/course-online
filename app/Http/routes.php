@@ -2,27 +2,14 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
-Route::get('/payment/notification', 'PaymentController@notification');
-Route::get('/payment/error', 'PaymentController@error');
-Route::get('/payment/finish', 'PaymentController@finish');
-Route::get('/payment/unfinish', 'PaymentController@unfinish');
 
 Route::get('/vtweb', 'PagesController@vtweb');
 

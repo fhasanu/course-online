@@ -3,7 +3,7 @@
     <head>
         <script type="text/javascript"
                         src="https://app.sandbox.midtrans.com/snap/snap.js"
-                        data-client-key="VT-client-4Vq6baZyl6N7a-B6"></script>
+                        data-client-key="<CLIENT-KEY>"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     </head>
     <body>
@@ -26,16 +26,19 @@
             
             url: './snaptoken',
             cache: false,
+
             success: function(data) {
-                //location = data;
+
                 console.log('token = '+data);
                 
                 var resultType = document.getElementById('result-type');
                 var resultData = document.getElementById('result-data');
+
                 function changeResult(type,data){
                     $("#result-type").val(type);
                     $("#result-data").val(JSON.stringify(data));
                 }
+
                 snap.pay(data, {
                     
                     onSuccess: function(result){
@@ -58,6 +61,7 @@
             }
         });
     });
+
     </script>
 
 
