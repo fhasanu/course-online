@@ -117,7 +117,7 @@ class SnapController extends Controller
 
         if($result){
             $notif = $midtrans->status($result->order_id);
-            echo 'result is an object'
+            echo 'result is an object';
         }
 /*
         error_log(print_r($result,TRUE));
