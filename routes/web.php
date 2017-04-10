@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-<<<<<<< HEAD
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -30,6 +30,3 @@ Route::get('/snap', function  () {
 });
 
 Route::get('/snaptoken', 'PaymentController@token');
-=======
-
->>>>>>> 7a9486c18204f992059789ac9f70fe9259abe698
