@@ -110,6 +110,9 @@ class SnapController extends Controller
 
     public function notification(Request $request)
     {
+        echo $request;
+        echo 'is this successful';
+/*
         $midtrans = new Midtrans();
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
@@ -118,7 +121,7 @@ class SnapController extends Controller
         if($result){
             $notif = $midtrans->status($result->order_id);
             echo 'result is an object';
-        }
+        }*/
 /*
         error_log(print_r($result,TRUE));
 
