@@ -108,7 +108,7 @@ class SnapController extends Controller
         echo '</pre>' ;
     }
 
-    public function notification()
+    public function notification(Request $request)
     {
         $midtrans = new Midtrans();
         echo 'test notification handler';
