@@ -110,7 +110,7 @@ class SnapController extends Controller
 
     public function notification()
     {
-        $midtrans = new Midtrans;
+        $midtrans = new Midtrans();
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
         $result = json_decode($json_result);
