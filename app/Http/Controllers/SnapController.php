@@ -108,8 +108,8 @@ class SnapController extends Controller
         echo '</pre>' ;
     }
 
-    public function notification(Request $request)
-    {/*
+    public function notification()
+    {
         $midtrans = new Midtrans;
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
@@ -120,8 +120,7 @@ class SnapController extends Controller
         }
 
         error_log(print_r($result,TRUE));
-*/
-        return 'SUCCESS';
+
         /*
         $transaction = $notif->transaction_status;
         $type = $notif->payment_type;
