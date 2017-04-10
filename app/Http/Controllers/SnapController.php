@@ -115,7 +115,7 @@ class SnapController extends Controller
         $test = file_get_contents('php://input');
         echo $test;
         echo '<br />this may be successful<br />';
-        echo json_decode($test);
+//        echo json_decode($test);
 /*
         $midtrans = new Midtrans();
         echo 'test notification handler';
