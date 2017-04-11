@@ -21,49 +21,46 @@
         $('#pay-button').click(function (event) {
             event.preventDefault();
             $(this).attr("disabled", "disabled");
-        
-        $.ajax({
-            
-            url: './snaptoken',
-            cache: false,
 
-            success: function(data) {
-
-                console.log('token = '+data);
+            $.ajax({
                 
-                var resultType = document.getElementById('result-type');
-                var resultData = document.getElementById('result-data');
+                url: './snaptoken',
+                cache: false,
+/*
+                success: function(data) {
 
-                function changeResult(type,data){
-                    $("#result-type").val(type);
-                    $("#result-data").val(JSON.stringify(data));
-                }
-
-                snap.pay(data, {
+                    console.log('token = '+data);
                     
-                    onSuccess: function(result){
-                        changeResult('success', result);
-                        console.log(result.status_message);
-                        console.log(result);
-                        $("#payment-form").submit();
-                    },
-                    onPending: function(result){
-                        changeResult('pending', result);
-                        console.log(result.status_message);
-                        $("#payment-form").submit();
-                    },
-                    onError: function(result){
-                        changeResult('error', result);
-                        console.log(result.status_message);
-                        $("#payment-form").submit();
+                    var resultType = document.getElementById('result-type');
+                    var resultData = document.getElementById('result-data');
+
+                    function changeResult(type,data){
+                        $("#result-type").val(type);
+                        $("#result-data").val(JSON.stringify(data));
                     }
-                });
-            }
+
+                    snap.pay(data, {
+                        
+                        onSuccess: function(result){
+                            changeResult('success', result);
+                            console.log(result.status_message);
+                            console.log(result);
+                            $("#payment-form").submit();
+                        },
+                        onPending: function(result){
+                            changeResult('pending', result);
+                            console.log(result.status_message);
+                            $("#payment-form").submit();
+                        },
+                        onError: function(result){
+                            changeResult('error', result);
+                            console.log(result.status_message);
+                            $("#payment-form").submit();
+                        }
+                    });
+                }*/
+            });
         });
-    });
-
-    </script>
-
-
-</body>
+        </script>
+    </body>
 </html>
