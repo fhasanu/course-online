@@ -108,17 +108,25 @@ class SnapController extends Controller
         echo '</pre>' ;
     }
 
-    public function notification()
+    public function notification(Request $request)
     {
-        $midtrans = new Midtrans;
+        echo json_decode($request);
+        echo '<br />is this successful<br />';
+        $test = file_get_contents('php://input');
+        echo $test;
+        echo '<br />this may be successful<br />';
+//        echo json_decode($test);
+/*
+        $midtrans = new Midtrans();
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
         $result = json_decode($json_result);
 
         if($result){
-        $notif = $midtrans->status($result->order_id);
-        }
-
+            $notif = $midtrans->status($result->order_id);
+            echo 'result is an object';
+        }*/
+/*
         error_log(print_r($result,TRUE));
 
         $transaction = $notif->transaction_status;
@@ -151,7 +159,6 @@ class SnapController extends Controller
           else if ($transaction == 'deny') {
           // TODO set payment status in merchant's database to 'Denied'
           echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
-        }
-   
+        }*/
     }
 }    
