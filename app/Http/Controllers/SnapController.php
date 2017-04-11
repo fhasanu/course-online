@@ -24,10 +24,10 @@ class SnapController extends Controller
     {
         error_log('masuk ke snap token dari ajax');
         $midtrans = new Midtrans;
-        Midtrans::config([
-            'server_key' => 'VT-server-USJezPOK2HxDwG-kvkrDDugI',
-            'production' => false,
-        ]);
+        // Midtrans::config([
+        //     'server_key' => 'VT-server-USJezPOK2HxDwG-kvkrDDugI',
+        //     'production' => false,
+        // ]);
 
         $transaction_details = array(
             'order_id'          => uniqid(),
