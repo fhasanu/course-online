@@ -23,7 +23,13 @@ class SnapController extends Controller
     public function token() 
     {
         error_log('masuk ke snap token dari ajax');
+        return 'TOKEN TESTING';
+/*
         $midtrans = new Midtrans;
+        // Midtrans::config([
+        //     'server_key' => 'VT-server-USJezPOK2HxDwG-kvkrDDugI',
+        //     'production' => false,
+        // ]);
 
         $transaction_details = array(
             'order_id'          => uniqid(),
@@ -95,7 +101,7 @@ class SnapController extends Controller
         catch (Exception $e) 
         {   
             return $e->getMessage;
-        }
+        }*/
     }
 
     public function finish(Request $request)
@@ -110,7 +116,7 @@ class SnapController extends Controller
 
     public function notification(Request $request)
     {
-        echo json_decode($request);
+        echo $request;
         echo '<br />is this successful<br />';
         $test = file_get_contents('php://input');
         echo $test;
