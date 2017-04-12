@@ -9,7 +9,7 @@
     <body>
 
         
-        <form id="payment-form" method="get" action="snapfinish">
+        <form id="payment-form" method="post" action="snapfinish">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <input type="hidden" name="result_type" id="result-type" value=""></div>
             <input type="hidden" name="result_data" id="result-data" value=""></div>

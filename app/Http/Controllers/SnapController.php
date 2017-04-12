@@ -23,6 +23,8 @@ class SnapController extends Controller
     public function token() 
     {
         error_log('masuk ke snap token dari ajax');
+
+        return 'TOKEN HERE';
 /*
         $midtrans = new Midtrans;
         // Midtrans::config([
