@@ -30,8 +30,6 @@ class SnapController extends Controller
             'order_id'          => uniqid(),
             'gross_amount'  => 200000
         );
-
-        return 'TOKEN HERE';
         // Populate items
         $items = [
             array(
@@ -87,6 +85,8 @@ class SnapController extends Controller
             'item_details'           => $items,
             'customer_details'   => $customer_details
         );
+
+        return 'TOKEN HERE';
     
         try
         {
