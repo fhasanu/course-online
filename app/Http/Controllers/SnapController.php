@@ -26,7 +26,7 @@ class SnapController extends Controller
 
         return 'TOKEN HERE';
 
-        $midtrans = new Midtrans;
+        $midtrans = new Midtrans();
         Midtrans::config([
             'server_key' => 'VT-server-USJezPOK2HxDwG-kvkrDDugI',
             'production' => false,
