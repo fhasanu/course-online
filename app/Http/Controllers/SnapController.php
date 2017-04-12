@@ -30,6 +30,7 @@ class SnapController extends Controller
             'order_id'          => uniqid(),
             'gross_amount'  => 200000
         );
+        
         // Populate items
         $items = [
             array(
