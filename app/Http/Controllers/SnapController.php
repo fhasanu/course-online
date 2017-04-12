@@ -88,9 +88,9 @@ class SnapController extends Controller
     
         try
         {
-            $snap_token = $midtrans->getSnapToken($transaction_data);
-            //return redirect($vtweb_url);
-            return $snap_token;
+            // $snap_token = $midtrans->getSnapToken($transaction_data);
+            // return $snap_token;
+            return 'TOKEN HERE';
         } 
         catch (Exception $e) 
         {   
