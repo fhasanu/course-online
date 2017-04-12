@@ -30,12 +30,12 @@ class SnapController extends Controller
             'production' => false,
         ]);
 
+        return 'TOKEN HERE';
+
         $transaction_details = array(
             'order_id'          => uniqid(),
             'gross_amount'  => 200000
         );
-        error_log('sampe sini');
-/*
         // Populate items
         $items = [
             array(
@@ -101,7 +101,7 @@ class SnapController extends Controller
         catch (Exception $e) 
         {   
             return $e->getMessage;
-        }*/
+        }
     }
 
     public function finish(Request $request)
