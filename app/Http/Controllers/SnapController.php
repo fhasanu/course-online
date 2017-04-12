@@ -24,8 +24,6 @@ class SnapController extends Controller
     {
         error_log('masuk ke snap token dari ajax');
 
-        return 'TOKEN HERE';
-
         $midtrans = new Midtrans();
         Midtrans::config([
             'server_key' => 'VT-server-USJezPOK2HxDwG-kvkrDDugI',
