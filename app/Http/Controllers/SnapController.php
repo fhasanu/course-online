@@ -85,14 +85,12 @@ class SnapController extends Controller
             'item_details'           => $items,
             'customer_details'   => $customer_details
         );
-
-        return 'TOKEN HERE';
     
         try
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
             //return redirect($vtweb_url);
-            echo $snap_token;
+            return $snap_token;
         } 
         catch (Exception $e) 
         {   
