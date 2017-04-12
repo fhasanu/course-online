@@ -88,8 +88,9 @@ class SnapController extends Controller
     
         try
         {
-            $snap_token = $midtrans->getSnapToken($transaction_data);
-            return $snap_token;
+            // $snap_token = $midtrans->getSnapToken($transaction_data);
+            // return $snap_token;
+            return $midtrans->serverKey;
         }
         catch (Exception $e) 
         {   
