@@ -78,8 +78,8 @@ class Midtrans {
         $curl_options = array(
             CURLOPT_URL => $url,
             CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
                 'Accept: application/json',
+                'Content-Type: application/json',
                 'Authorization: Basic ' . base64_encode($server_key . ':'),
             ),
             CURLOPT_RETURNTRANSFER => 1,
