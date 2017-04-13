@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/../../Veritrans.php');
 //Set Your server key
-Veritrans_Config::$serverKey = "<your server key>";
+Veritrans_Config::$serverKey = "VT-server-JyE4OeMQnsBAW0s6SrB1SgST";
 
 // Uncomment for production environment
 // Veritrans_Config::$isProduction = true;
@@ -88,7 +88,7 @@ catch (Exception $e) {
       echo "In file: " . __FILE__;
       echo "<br>";
       echo "<br>";
-      echo htmlspecialchars('Veritrans_Config::$serverKey = \'<your server key>\';');
+      echo htmlspecialchars('Veritrans_Config::$serverKey = \'VT-server-JyE4OeMQnsBAW0s6SrB1SgST\';');
       die();
 }
 

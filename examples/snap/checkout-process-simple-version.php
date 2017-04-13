@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/../../Veritrans.php');
 //Set Your server key
-Veritrans_Config::$serverKey = "<Set your ServerKey here>";
+Veritrans_Config::$serverKey = "VT-server-JyE4OeMQnsBAW0s6SrB1SgST";
 // Uncomment for production environment
 // Veritrans_Config::$isProduction = true;
 Veritrans_Config::$isSanitized = Veritrans_Config::$is3ds = true;
