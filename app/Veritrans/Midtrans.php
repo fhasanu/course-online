@@ -80,7 +80,7 @@ class Midtrans {
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json',
                 'Accept: application/json',
-                'Authorization: Basic ' . base64_encode($server_key . ':')
+                'Authorization: Basic ' . base64_encode($server_key . ':'),
             ),
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_CAINFO => dirname(__FILE__) . "/data/cacert.pem"
