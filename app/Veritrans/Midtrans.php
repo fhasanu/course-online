@@ -114,6 +114,7 @@ class Midtrans {
 
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
+        dd($info);
         // curl_close($ch);
 
         if ($result === FALSE) {
