@@ -78,9 +78,9 @@ class Midtrans {
         $curl_options = array(
             CURLOPT_URL => $url,
             CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
                 'Accept: application/json',
-                'Authorization: Basic ' . base64_encode($server_key . ':')
+                'Content-Type: application/json',
+                'Authorization: Basic ' . base64_encode($server_key . ':'),
             ),
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_CAINFO => dirname(__FILE__) . "/data/cacert.pem"
@@ -114,6 +114,7 @@ class Midtrans {
 
         $result = curl_exec($ch);
         $info = curl_getinfo($ch);
+        dd($result);
         // curl_close($ch);
 
         if ($result === FALSE) {
