@@ -86,7 +86,7 @@ class SnapController extends Controller
             'item_details'           => $items,
             'customer_details'   => $customer_details
         );
-    
+        return "suatu string apapun";
         try
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
