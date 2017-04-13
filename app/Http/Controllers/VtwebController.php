@@ -11,7 +11,7 @@ class VtwebController extends Controller
 {
     public function __construct()
     {   
-        Veritrans::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
+        Veritrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
 
         //set Veritrans::$isProduction  value to true for production mode
         Veritrans::$isProduction = false;

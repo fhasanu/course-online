@@ -6,15 +6,15 @@ if(empty($_POST['token_id'])) {
   die('Empty token_id!');
 }
 
-Veritrans_Config::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
+Veritrans_Config::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
 
-if (Veritrans_Config::$serverKey == 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST') {
+if (Veritrans_Config::$serverKey == 'VT-server-2VeBbUOXLfMXxH04FznIt83J') {
   echo "<code>";
   echo "<h4>Please set real server key from sandbox</h4>";
   echo "In file: " . __FILE__;
   echo "<br>";
   echo "<br>";
-  echo htmlspecialchars('Veritrans_Config::$serverKey = \'VT-server-JyE4OeMQnsBAW0s6SrB1SgST\';');
+  echo htmlspecialchars('Veritrans_Config::$serverKey = \'VT-server-2VeBbUOXLfMXxH04FznIt83J\';');
   die();
 }
 
