@@ -4,7 +4,7 @@ class VeritransTransactionTest extends PHPUnit_Framework_TestCase
 {
 
     public function testStatus() {
-      Veritrans_Config::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
+      Veritrans_Config::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{
         "status_code": "200",
@@ -39,7 +39,7 @@ class VeritransTransactionTest extends PHPUnit_Framework_TestCase
     }
 
     public function testFailureStatus() {
-      Veritrans_Config::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
+      Veritrans_Config::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{
         "status_code": "404",
