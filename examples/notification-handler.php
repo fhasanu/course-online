@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__) . '/../Veritrans.php');
 Veritrans_Config::$isProduction = false;
-Veritrans_Config::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
+Veritrans_Config::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
 $notif = new Veritrans_Notification();
 
 $transaction = $notif->transaction_status;

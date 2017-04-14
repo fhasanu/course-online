@@ -4,7 +4,7 @@ class VeritransSnapTest extends PHPUnit_Framework_TestCase
 {
 
     public function testGetSnapToken() {
-      Veritrans_Config::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
+      Veritrans_Config::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{ "token": "abcdefghijklmnopqrstuvwxyz" }';
       VT_Tests::$stubHttpStatus = array('http_code' => 201);

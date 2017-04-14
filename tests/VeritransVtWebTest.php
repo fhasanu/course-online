@@ -4,7 +4,7 @@ class VeritransVtWebTest extends PHPUnit_Framework_TestCase
 {
 
     public function testGetRedirectionUrl() {
-      Veritrans_Config::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
+      Veritrans_Config::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
       VT_Tests::$stubHttp = true;
       VT_Tests::$stubHttpResponse = '{ "status_code": 200, "redirect_url": "http://host.com/pay" }';
 

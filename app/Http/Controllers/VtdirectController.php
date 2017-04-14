@@ -11,7 +11,7 @@ class VtdirectController extends Controller
 {
     public function __construct()
     {   
-        Veritrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
+        Veritrans::$serverKey = 'VT-server-JyE4OeMQnsBAW0s6SrB1SgST';
         Veritrans::$isProduction = false;
     }
 
