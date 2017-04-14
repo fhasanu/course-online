@@ -38,3 +38,7 @@ Route::get('/snap', 'SnapController@snap');
 Route::get('/snaptoken', 'SnapController@token');
 Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
