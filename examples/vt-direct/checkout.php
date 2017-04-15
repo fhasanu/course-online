@@ -3,9 +3,9 @@ require_once(dirname(__FILE__) . '/../../Veritrans.php');
 
 // YOUR CLIENT KEY
 // can find in Merchant Portal -> Settings -> Access keys
-Veritrans_Config::$clientKey = "<your client key>";
+Veritrans_Config::$clientKey = "VT-client-v8kFj8XeK35WZJPA";
 
-if (Veritrans_Config::$clientKey == "<your client key>") {
+if (Veritrans_Config::$clientKey == "VT-client-v8kFj8XeK35WZJPA") {
   echo "<p style='background: #FFB588; padding: 10px;'>";
   echo "Please set your client key in file " . __FILE__;
   echo "</p>";
