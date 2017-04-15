@@ -14,11 +14,12 @@ class CreateAkAdminTable extends Migration {
 	{
 		Schema::create('ak_admin', function(Blueprint $table)
 		{
-			$table->integer('ak_admin_id', true);
-			$table->string('ak_admin_username', 45)->unique();
-			$table->string('ak_admin_password', 45);
-			$table->timestamps('ak_admin_last_activity');
+			$table->integer('id', true);
+			$table->string('username', 45)->unique();
+			$table->string('password', 45);
+			$table->dateTime('last_activity');
             $table->rememberToken();
+            $table->timestamps();
 		});
 	}
 

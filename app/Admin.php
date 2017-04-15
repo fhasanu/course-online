@@ -8,10 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use Notifiable;
-    public $timestamps = false;
     public $table = "ak_admin";
     protected $guard = 'admin';
-    protected $primaryKey = 'ak_admin_username';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +17,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'ak_admin_username', 'password',
+        'username', 'password',
     ];
 
     /**

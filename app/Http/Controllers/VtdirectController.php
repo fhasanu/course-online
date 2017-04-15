@@ -13,6 +13,7 @@ class VtdirectController extends Controller
     {   
         Veritrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
         Veritrans::$isProduction = false;
+        $this->middleware('auth');
     }
 
     public function vtdirect() 

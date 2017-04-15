@@ -15,10 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-
 Route::get('/payment/notification', 'PaymentController@notification');
 Route::get('/payment/error', 'PaymentController@error');
 Route::get('/payment/finish', 'PaymentController@finish');
@@ -38,3 +34,7 @@ Route::get('/snap', 'SnapController@snap');
 Route::get('/snaptoken', 'SnapController@token');
 Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
+
+Auth::routes();
+Route::get('/home','HomeController@index');
+Route::get('/admin','AdminController@index');

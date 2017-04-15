@@ -15,13 +15,13 @@ class CreateAkUserTable extends Migration {
 	{
 		Schema::create('ak_user', function(Blueprint $table)
 		{
-			$table->integer('ak_user_id', true);
-			$table->string('ak_user_firstname');
-			$table->string('ak_user_lastname');
-			$table->string('ak_user_email')->unique();
-			$table->string('ak_user_password');
-			$table->date('ak_user_dob');
-			$table->integer('ak_user_phone');
+			$table->integer('id', true);
+			$table->string('firstname');
+			$table->string('lastname');
+			$table->string('email')->unique();
+			$table->string('password');
+			$table->date('dob');
+			$table->integer('phone');
             $table->rememberToken();
             $table->timestamps();
 

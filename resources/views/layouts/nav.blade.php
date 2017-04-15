@@ -13,7 +13,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
 			<li>
-				<a href="#">Transaction</a>
+				<a href="{{url('/snap')}}">Snap</a>
 			</li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -23,8 +23,26 @@
 					<div class="form-group">
 						<label class="filter-col" for="pref-search"></label> <input class="form-control input-sm" id="keyword" placeholder="Keyword" type="text">
 					</div><!-- form group [search] -->
-					 <button class="btn btn-default filter-col" type="submit"><span class="glyphicon glyphicon-search"></span>Search</button> <button class="btn btn-default filter-col" data-target='#advancedsearch' data-toggle='modal' type="button"><span class="glyphicon glyphicon-cog"></span></button> <button class="btn btn-default filter-col" data-target='#loginform' data-toggle='modal' type="button">Login</button>
+					 <button class="btn btn-default filter-col" type="submit"><span class="glyphicon glyphicon-search"></span>Search</button> <button class="btn btn-default filter-col" data-target='#advancedsearch' data-toggle='modal' type="button"><span class="glyphicon glyphicon-cog"></span></button>
+
 				</form>
+		        @if (Auth::guest())
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @else
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                    </li>
+                @endif
 			</div>
 			</li>
 
@@ -97,24 +115,3 @@
 	</div>
 </div><!-- form group [order by] -->
 <!-- Modal content-->
-<div class="modal fade" id="loginform" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content filter-panel" id="filter-panel">
-			<div class="modal-header">
-				<button class="close" data-dismiss="modal" type="button">&times;</button>
-				<h4 class="modal-title">Login</h4>
-			</div>
-			<div class='modal-body'>
-				<form class="form{{-- -inline --}}" role="form">
-					<div class="form-group">
-						<label class="filter-col" for="pref-search" style="margin-right:0;">Username</label> <input class="form-control input-sm" id="username" placeholder="Keyword" type="text">
-					</div><!-- form group [search] -->
-					<div class="form-group">
-						<label class="filter-col" for="pref-search" style="margin-right:0;">Password</label> <input class="form-control input-sm" id="password" placeholder="Lokasi" type="password">
-					</div><!-- form group [search] -->
-					<button class="btn btn-default filter-col" type="submit"><span class="glyphicon glyphicon-log-in"></span></button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div><!-- form group [order by] -->
