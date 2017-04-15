@@ -71,7 +71,6 @@ postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5
     ],
 */
 
-    parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["host"]
         'pgsql' => [
             'driver' => 'pgsql',
             'host'     => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["host"],
