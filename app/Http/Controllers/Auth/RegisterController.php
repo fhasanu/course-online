@@ -45,12 +45,27 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+    /*
+            $table->integer('ak_user_id', true);
+            $table->string('ak_user_firstname');
+            $table->string('ak_user_lastname');
+            $table->string('ak_user_email')->unique();
+            $table->string('ak_user_password');
+            $table->date('ak_user_dob');
+            $table->integer('ak_user_phone');
+            $table->rememberToken();
+            $table->timestamps();
+
+    */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'ak_user_firstname' => 'required|max:255',
+            'ak_user_lastname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'ak_user_dob' => 'required',
+            'ak_user_phone' => 'required',
         ]);
     }
 
@@ -63,9 +78,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'ak_user_firstname' => $data['ak_user_firstname'],
+            'ak_user_lastname' => $data['ak_user_lastname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'ak_user_dob' => $data['ak_user_dob'],
+            'ak_user_phone' => $data['ak_user_phone'],
         ]);
     }
 }

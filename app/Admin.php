@@ -5,19 +5,21 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
+    public $timestamps = false;
+    public $table = "ak_admin";
+    protected $guard = 'admin';
+    protected $primaryKey = 'ak_admin_username';
 
-    public $table = "ak_user";
-    protected $primaryKey = 'ak_user_id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'ak_user_id','ak_user_firstname', 'ak_user_lastname', 'ak_user_email', 'ak_user_password','ak_user_dob','ak_user_phone',
+        'ak_admin_username', 'password',
     ];
 
     /**
