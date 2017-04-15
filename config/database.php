@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'psql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,7 +53,8 @@ return [
             'strict' => true,
             'engine' => null,
         ],
-
+/*
+postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -65,6 +66,21 @@ return [
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'prefer',
+        ],
+
+    ],
+*/
+
+    parse_url(getenv("DATABASE_URL"))["host"]
+        'pgsql' => [
+            'driver' => 'pgsql',
+            'host'     => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["host"],
+            'database' => substr(parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["path"], 1),
+            'username' => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["user"],
+            'password' => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["pass"],
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
         ],
 
     ],
