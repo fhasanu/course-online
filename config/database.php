@@ -54,7 +54,7 @@ return [
             'engine' => null,
         ],
 /*
-postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl
+postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b
         'pgsql' => [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -73,10 +73,10 @@ postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'host'     => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["host"],
-            'database' => substr(parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["path"], 1),
-            'username' => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["user"],
-            'password' => parse_url(getenv("postgres://cisielzdsxuvmf:c8386254fc2859e31435f3b6c65f8d0608c307514415cc94f412d5264b736375@ec2-54-221-254-72.compute-1.amazonaws.com:5432/da99m22bbbnbtl"))["pass"],
+            'host'     => parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["host"],
+            'database' => substr(parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["path"], 1),
+            'username' => parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["user"],
+            'password' => parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["pass"],
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
