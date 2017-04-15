@@ -1,5 +1,12 @@
 <?php
 
+$url = parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"));
+
+$host = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$database = substr($url["path"], 1);
+
 return [
 
     /*
@@ -71,17 +78,16 @@ postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e281658
     ],
 */
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'host'     => parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["host"],
-            'database' => substr(parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["path"], 1),
-            'username' => parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["user"],
-            'password' => parse_url(getenv("postgres://neckwlogcyduqj:4567149203fced87aacf01dd0e2552e8be3a0c0bd927f77e28165853802d5371@ec2-54-235-153-124.compute-1.amazonaws.com:5432/daju7u2osc727b"))["pass"],
-            'charset'  => 'utf8',
-            'prefix'   => '',
-            'schema'   => 'public',
-        ],
-
+    'pgsql' => array(
+        'driver'   => 'pgsql',
+        'host'     => $host,
+        'database' => $database,
+        'username' => $username,
+        'password' => $password,
+        'charset'  => 'utf8',
+        'prefix'   => '',
+        'schema'   => 'public',
+    ),
     ],
 
     /*
