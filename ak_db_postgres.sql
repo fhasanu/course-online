@@ -7,8 +7,8 @@
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+-- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -27,11 +27,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE ak_admin (
-  ak_admin_id int(11) NOT NULL,
+  ak_admin_id SERIAL PRIMARY KEY NOT NULL,
   ak_admin_username varchar(45) NOT NULL,
   ak_admin_password varchar(45) NOT NULL,
-  ak_admin_last_activity datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_admin_last_activity datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
+);
 
 -- --------------------------------------------------------
 
@@ -40,11 +40,11 @@ CREATE TABLE ak_admin (
 --
 
 CREATE TABLE ak_course (
-  ak_course_id int(11) NOT NULL,
+  ak_course_id int PRIMARY KEY NOT NULL,
   ak_course_name varchar(45) NOT NULL,
-  ak_course_cat_id int(11) NOT NULL,
-  ak_course_prov_id int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_course_cat_id int NOT NULL REFERENCES ak_sub_category(ak_subcat_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+  ak_course_prov_id int NOT NULL REFERENCES ak_provider(ak_provider_id) ON UPDATE NO ACTION ON DELETE NO ACTION
+);
 
 -- --------------------------------------------------------
 
@@ -53,10 +53,10 @@ CREATE TABLE ak_course (
 --
 
 CREATE TABLE ak_course_age (
-  ak_course_age_id int(11) NOT NULL,
+  ak_course_age_id int PRIMARY KEY NOT NULL,
   ak_course_age_name_id tinytext NOT NULL,
   ak_course_age_name_eng tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Dumping data for table ak_course_age
@@ -74,15 +74,15 @@ INSERT INTO ak_course_age (ak_course_age_id, ak_course_age_name_id, ak_course_ag
 --
 
 CREATE TABLE ak_course_detail (
-  ak_course_detail_id int(11) NOT NULL,
-  ak_course_id int(11) NOT NULL,
+  ak_course_detail_id int PRIMARY KEY NOT NULL,
+  ak_course_id int NOT NULL,
   ak_course_detail_name varchar(45) NOT NULL,
-  ak_course_detail_price int(11) NOT NULL,
-  ak_course_detail_level int(11) NOT NULL,
-  ak_course_detail_age int(11) NOT NULL,
-  ak_course_detail_size smallint(3) NOT NULL,
+  ak_course_detail_price int NOT NULL,
+  ak_course_detail_level int NOT NULL,
+  ak_course_detail_age int NOT NULL,
+  ak_course_detail_size smallint NOT NULL,
   ak_course_detail_desc longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -91,10 +91,10 @@ CREATE TABLE ak_course_detail (
 --
 
 CREATE TABLE ak_course_facility (
-  ak_course_facility_id int(11) NOT NULL,
-  ak_course_facility_detid int(11) NOT NULL,
-  ak_facility_type_id int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_course_facility_id int PRIMARY KEY NOT NULL,
+  ak_course_facility_detid int NOT NULL,
+  ak_facility_type_id int NOT NULL
+);
 
 -- --------------------------------------------------------
 
@@ -103,9 +103,9 @@ CREATE TABLE ak_course_facility (
 --
 
 CREATE TABLE ak_course_level (
-  ak_course_level_id int(11) NOT NULL,
+  ak_course_level_id int PRIMARY KEY NOT NULL,
   ak_course_level_name tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Dumping data for table ak_course_level
@@ -123,11 +123,11 @@ INSERT INTO ak_course_level (ak_course_level_id, ak_course_level_name) VALUES
 --
 
 CREATE TABLE ak_course_schedule (
-  ak_course_schedule_id int(11) NOT NULL,
-  ak_course_schedule_detid int(11) NOT NULL,
+  ak_course_schedule_id int PRIMARY KEY NOT NULL,
+  ak_course_schedule_detid int NOT NULL,
   ak_course_schedule_day tinytext NOT NULL,
-  ak_course_schedule_time time(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_course_schedule_time time NOT NULL
+);
 
 -- --------------------------------------------------------
 
@@ -136,10 +136,10 @@ CREATE TABLE ak_course_schedule (
 --
 
 CREATE TABLE ak_facility_type (
-  ak_facility_type_id int(11) NOT NULL,
+  ak_facility_type_id int PRIMARY KEY NOT NULL,
   ak_facility_type_name_idn text NOT NULL,
   ak_facility_type_name_eng text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -148,9 +148,9 @@ CREATE TABLE ak_facility_type (
 --
 
 CREATE TABLE ak_main_category (
-  ak_maincat_id int(11) NOT NULL,
+  ak_maincat_id int PRIMARY KEY NOT NULL,
   ak_maincat_name varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -159,14 +159,14 @@ CREATE TABLE ak_main_category (
 --
 
 CREATE TABLE ak_pay_ment (
-  ak_pay_ment_id int(11) NOT NULL,
-  ak_pay_ment_tran_id int(11) NOT NULL,
+  ak_pay_ment_id int PRIMARY KEY NOT NULL,
+  ak_pay_ment_tran_id int NOT NULL,
   ak_pay_ment_price varchar(45) NOT NULL,
   ak_pay_ment_paid varchar(45) NOT NULL,
   ak_pay_ment_cc varchar(45) NOT NULL,
   ak_pay_ment_dc varchar(45) NOT NULL,
   ak_pay_ment_status tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -175,18 +175,18 @@ CREATE TABLE ak_pay_ment (
 --
 
 CREATE TABLE ak_provider (
-  ak_provider_id int(11) NOT NULL,
+  ak_provider_id int PRIMARY KEY NOT NULL,
   ak_provider_firstname varchar(45) NOT NULL,
   ak_provider_lastname varchar(45) NOT NULL,
   ak_provider_email varchar(45) NOT NULL,
   ak_provider_password varchar(45) NOT NULL,
-  ak_provider_region int(11) NOT NULL,
+  ak_provider_region int NOT NULL,
   ak_provider_address longtext NOT NULL,
-  ak_provider_zipcode smallint(5) NOT NULL,
+  ak_provider_zipcode smallint NOT NULL,
   ak_provider_description longtext NOT NULL,
-  ak_provider_telephone int(11) NOT NULL,
+  ak_provider_telephone int NOT NULL,
   ak_provider_last_activity datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -195,10 +195,10 @@ CREATE TABLE ak_provider (
 --
 
 CREATE TABLE ak_provider_img (
-  ak_provider_img_id int(11) NOT NULL,
-  ak_provider_id int(11) NOT NULL,
+  ak_provider_img_id int PRIMARY KEY NOT NULL,
+  ak_provider_id int NOT NULL,
   ak_provider_img_path varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -207,12 +207,12 @@ CREATE TABLE ak_provider_img (
 --
 
 CREATE TABLE ak_province (
-  ak_province_id int(11) NOT NULL,
+  ak_province_id int PRIMARY KEY NOT NULL,
   ak_province_name text NOT NULL,
   ak_province_name_abbr text NOT NULL,
   ak_province_name_idn text NOT NULL,
-  ak_province_name_eng int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_province_name_eng int NOT NULL
+);
 
 --
 -- Dumping data for table ak_province
@@ -261,13 +261,13 @@ INSERT INTO ak_province (ak_province_id, ak_province_name, ak_province_name_abbr
 --
 
 CREATE TABLE ak_region (
-  ak_region_id int(11) NOT NULL,
-  ak_region_prov_id int(11) NOT NULL,
+  ak_region_id int PRIMARY KEY NOT NULL,
+  ak_region_prov_id int NOT NULL,
   ak_region_cityname text NOT NULL,
   ak_region_name text NOT NULL,
   ak_region_namefull text NOT NULL,
-  ak_region_parent_id int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_region_parent_id int DEFAULT NULL
+);
 
 --
 -- Dumping data for table ak_region
@@ -781,10 +781,10 @@ INSERT INTO ak_region (ak_region_id, ak_region_prov_id, ak_region_cityname, ak_r
 --
 
 CREATE TABLE ak_sub_category (
-  ak_subcat_id int(11) NOT NULL,
-  ak_subcat_parent int(11) NOT NULL,
+  ak_subcat_id int PRIMARY KEY NOT NULL,
+  ak_subcat_parent int NOT NULL,
   ak_subcat_name varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 -- --------------------------------------------------------
 
@@ -793,12 +793,12 @@ CREATE TABLE ak_sub_category (
 --
 
 CREATE TABLE ak_tran_saction (
-  ak_tran_saction_id int(11) NOT NULL,
-  ak_tran_saction_type int(11) NOT NULL,
-  ak_tran_saction_user int(11) NOT NULL,
-  ak_tran_saction_course int(11) NOT NULL,
-  ak_tran_saction_status int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  ak_tran_saction_id int PRIMARY KEY NOT NULL,
+  ak_tran_saction_type int NOT NULL,
+  ak_tran_saction_user int NOT NULL,
+  ak_tran_saction_course int NOT NULL,
+  ak_tran_saction_status int NOT NULL
+);
 
 -- --------------------------------------------------------
 
@@ -807,9 +807,9 @@ CREATE TABLE ak_tran_saction (
 --
 
 CREATE TABLE ak_tran_status (
-  id_ak_tran_status_id int(11) NOT NULL,
+  id_ak_tran_status_id int PRIMARY KEY NOT NULL,
   ak_tran_status_name tinytext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 --
 -- Dumping data for table ak_tran_status
@@ -827,303 +827,11 @@ INSERT INTO ak_tran_status (id_ak_tran_status_id, ak_tran_status_name) VALUES
 --
 
 CREATE TABLE ak_user (
-  ak_user_id int(11) NOT NULL,
+  ak_user_id int PRIMARY KEY NOT NULL,
   ak_user_firstname varchar(45) NOT NULL,
   ak_user_lastname varchar(45) NOT NULL,
   ak_user_email varchar(45) NOT NULL,
   ak_user_password varchar(45) NOT NULL,
   ak_user_dob date NOT NULL,
-  ak_user_phone int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table ak_admin
---
-ALTER TABLE ak_admin
-  ADD PRIMARY KEY (ak_admin_id);
-
---
--- Indexes for table ak_course
---
-ALTER TABLE ak_course
-  ADD PRIMARY KEY (ak_course_id),
-  ADD KEY fk_ak_course_ak_provider1_idx (ak_course_prov_id),
-  ADD KEY fk_ak_course_ak_sub_category1_idx (ak_course_cat_id);
-
---
--- Indexes for table ak_course_age
---
-ALTER TABLE ak_course_age
-  ADD PRIMARY KEY (ak_course_age_id);
-
---
--- Indexes for table ak_course_detail
---
-ALTER TABLE ak_course_detail
-  ADD PRIMARY KEY (ak_course_detail_id),
-  ADD KEY fk_ak_course_detail_ak_course_idx (ak_course_id),
-  ADD KEY fk_ak_course_detail_ak_course_level1_idx (ak_course_detail_level),
-  ADD KEY fk_ak_course_detail_ak_course_age1_idx (ak_course_detail_age);
-
---
--- Indexes for table ak_course_facility
---
-ALTER TABLE ak_course_facility
-  ADD PRIMARY KEY (ak_course_facility_id),
-  ADD KEY ak_course_facility_detid (ak_course_facility_detid),
-  ADD KEY ak_course_facility_detid_2 (ak_course_facility_detid),
-  ADD KEY ak_facility_type_id (ak_facility_type_id);
-
---
--- Indexes for table ak_course_level
---
-ALTER TABLE ak_course_level
-  ADD PRIMARY KEY (ak_course_level_id);
-
---
--- Indexes for table ak_course_schedule
---
-ALTER TABLE ak_course_schedule
-  ADD PRIMARY KEY (ak_course_schedule_id),
-  ADD KEY fk_ak_course_schedule_ak_course_detail1_idx (ak_course_schedule_detid);
-
---
--- Indexes for table ak_facility_type
---
-ALTER TABLE ak_facility_type
-  ADD PRIMARY KEY (ak_facility_type_id);
-
---
--- Indexes for table ak_main_category
---
-ALTER TABLE ak_main_category
-  ADD PRIMARY KEY (ak_maincat_id);
-
---
--- Indexes for table ak_pay_ment
---
-ALTER TABLE ak_pay_ment
-  ADD PRIMARY KEY (ak_pay_ment_id),
-  ADD KEY fk_ak_pay_ment_ak_tran_saction1_idx (ak_pay_ment_tran_id);
-
---
--- Indexes for table ak_provider
---
-ALTER TABLE ak_provider
-  ADD PRIMARY KEY (ak_provider_id),
-  ADD KEY fk_ak_provider_ak_region1_idx (ak_provider_region);
-
---
--- Indexes for table ak_provider_img
---
-ALTER TABLE ak_provider_img
-  ADD PRIMARY KEY (ak_provider_img_id),
-  ADD KEY ak_provider_id (ak_provider_id);
-
---
--- Indexes for table ak_province
---
-ALTER TABLE ak_province
-  ADD PRIMARY KEY (ak_province_id);
-
---
--- Indexes for table ak_region
---
-ALTER TABLE ak_region
-  ADD PRIMARY KEY (ak_region_id),
-  ADD KEY fk_ak_region_ak_province1_idx (ak_region_prov_id);
-
---
--- Indexes for table ak_sub_category
---
-ALTER TABLE ak_sub_category
-  ADD PRIMARY KEY (ak_subcat_id),
-  ADD KEY fk_ak_sub_category_ak_main_category1_idx (ak_subcat_parent);
-
---
--- Indexes for table ak_tran_saction
---
-ALTER TABLE ak_tran_saction
-  ADD PRIMARY KEY (ak_tran_saction_id),
-  ADD KEY fk_ak_tran_saction_ak_user1_idx (ak_tran_saction_user),
-  ADD KEY fk_ak_tran_saction_ak_course1_idx (ak_tran_saction_course),
-  ADD KEY fk_ak_tran_saction_ak_tran_status1_idx (ak_tran_saction_status);
-
---
--- Indexes for table ak_tran_status
---
-ALTER TABLE ak_tran_status
-  ADD PRIMARY KEY (id_ak_tran_status_id);
-
---
--- Indexes for table ak_user
---
-ALTER TABLE ak_user
-  ADD PRIMARY KEY (ak_user_id);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table ak_admin
---
-ALTER TABLE ak_admin
-  MODIFY ak_admin_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_course
---
-ALTER TABLE ak_course
-  MODIFY ak_course_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_course_age
---
-ALTER TABLE ak_course_age
-  MODIFY ak_course_age_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table ak_course_detail
---
-ALTER TABLE ak_course_detail
-  MODIFY ak_course_detail_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_course_facility
---
-ALTER TABLE ak_course_facility
-  MODIFY ak_course_facility_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_course_level
---
-ALTER TABLE ak_course_level
-  MODIFY ak_course_level_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table ak_facility_type
---
-ALTER TABLE ak_facility_type
-  MODIFY ak_facility_type_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_main_category
---
-ALTER TABLE ak_main_category
-  MODIFY ak_maincat_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_pay_ment
---
-ALTER TABLE ak_pay_ment
-  MODIFY ak_pay_ment_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_provider
---
-ALTER TABLE ak_provider
-  MODIFY ak_provider_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_provider_img
---
-ALTER TABLE ak_provider_img
-  MODIFY ak_provider_img_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_province
---
-ALTER TABLE ak_province
-  MODIFY ak_province_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
---
--- AUTO_INCREMENT for table ak_region
---
-ALTER TABLE ak_region
-  MODIFY ak_region_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9472;
---
--- AUTO_INCREMENT for table ak_sub_category
---
-ALTER TABLE ak_sub_category
-  MODIFY ak_subcat_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_tran_saction
---
-ALTER TABLE ak_tran_saction
-  MODIFY ak_tran_saction_id int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table ak_tran_status
---
-ALTER TABLE ak_tran_status
-  MODIFY id_ak_tran_status_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table ak_user
---
-ALTER TABLE ak_user
-  MODIFY ak_user_id int(11) NOT NULL AUTO_INCREMENT;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table ak_course
---
-ALTER TABLE ak_course
-  ADD CONSTRAINT fk_ak_course_ak_provider1 FOREIGN KEY (ak_course_prov_id) REFERENCES ak_provider (ak_provider_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT fk_ak_course_ak_sub_category1 FOREIGN KEY (ak_course_cat_id) REFERENCES ak_sub_category (ak_subcat_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_course_detail
---
-ALTER TABLE ak_course_detail
-  ADD CONSTRAINT fk_ak_course_detail_ak_course FOREIGN KEY (ak_course_id) REFERENCES ak_course (ak_course_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT fk_ak_course_detail_ak_course_age1 FOREIGN KEY (ak_course_detail_age) REFERENCES ak_course_age (ak_course_age_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT fk_ak_course_detail_ak_course_level1 FOREIGN KEY (ak_course_detail_level) REFERENCES ak_course_level (ak_course_level_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_course_facility
---
-ALTER TABLE ak_course_facility
-  ADD CONSTRAINT ak_course_facility_ibfk_1 FOREIGN KEY (ak_course_facility_detid) REFERENCES ak_course_detail (ak_course_detail_id),
-  ADD CONSTRAINT ak_course_facility_ibfk_2 FOREIGN KEY (ak_facility_type_id) REFERENCES ak_facility_type (ak_facility_type_id);
-
---
--- Constraints for table ak_course_schedule
---
-ALTER TABLE ak_course_schedule
-  ADD CONSTRAINT fk_ak_course_schedule_ak_course_detail1 FOREIGN KEY (ak_course_schedule_detid) REFERENCES ak_course_detail (ak_course_detail_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_pay_ment
---
-ALTER TABLE ak_pay_ment
-  ADD CONSTRAINT fk_ak_pay_ment_ak_tran_saction1 FOREIGN KEY (ak_pay_ment_tran_id) REFERENCES ak_tran_saction (ak_tran_saction_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_provider
---
-ALTER TABLE ak_provider
-  ADD CONSTRAINT fk_ak_provider_ak_region1 FOREIGN KEY (ak_provider_region) REFERENCES ak_region (ak_region_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_provider_img
---
-ALTER TABLE ak_provider_img
-  ADD CONSTRAINT ak_provider_img_ibfk_1 FOREIGN KEY (ak_provider_id) REFERENCES ak_provider (ak_provider_id);
-
---
--- Constraints for table ak_region
---
-ALTER TABLE ak_region
-  ADD CONSTRAINT fk_ak_region_ak_province1 FOREIGN KEY (ak_region_prov_id) REFERENCES ak_province (ak_province_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_sub_category
---
-ALTER TABLE ak_sub_category
-  ADD CONSTRAINT fk_ak_sub_category_ak_main_category1 FOREIGN KEY (ak_subcat_parent) REFERENCES ak_main_category (ak_maincat_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table ak_tran_saction
---
-ALTER TABLE ak_tran_saction
-  ADD CONSTRAINT fk_ak_tran_saction_ak_course1 FOREIGN KEY (ak_tran_saction_course) REFERENCES ak_course (ak_course_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT fk_ak_tran_saction_ak_tran_status1 FOREIGN KEY (ak_tran_saction_status) REFERENCES ak_tran_status (id_ak_tran_status_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT fk_ak_tran_saction_ak_user1 FOREIGN KEY (ak_tran_saction_user) REFERENCES ak_user (ak_user_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  ak_user_phone int NOT NULL
+);
