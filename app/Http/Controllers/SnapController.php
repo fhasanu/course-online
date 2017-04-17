@@ -38,17 +38,21 @@ class SnapController extends Controller
         
         // Populate items
         $order_id = session('orders');
-        $populate = function ($id) {
-            $schedule = CourseSchedule::find($id);
-            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
-            return [
-                'id'       => $id,
-                'price'    => $detail->ak_course_detail_price,
-                'quantity' => 1,
-                'name'     => $detail->ak_course_detail_name
-            ];
-        };
-        $items = array_map($populate, $order_id);
+        if($order_id != null){#
+            $populate = function ($id) {
+                $schedule = CourseSchedule::find($id);
+                $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+                return [
+                    'id'       => $id,
+                    'price'    => $detail->ak_course_detail_price,
+                    'quantity' => 1,
+                    'name'     => $detail->ak_course_detail_name
+                ];
+            };
+            $items = array_map($populate, $order_id);
+        }else{
+            $items = array();
+        }
 
         // $items = [
         //     array(
