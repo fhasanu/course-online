@@ -9,6 +9,7 @@ use App\Veritrans\Midtrans;
 
 use App\CourseSchedule;
 use App\CourseDetail;
+use App\Customer;
 
 class SnapController extends Controller
 {
