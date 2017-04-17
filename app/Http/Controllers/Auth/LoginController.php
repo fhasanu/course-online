@@ -36,9 +36,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
-    public function username(){
-        return 'ak\_user\_email';
-    }
+    protected $username = "ak_user_email";
     // public function postLogin(Request $request)
     // {
     //     $this->validate($request, [
