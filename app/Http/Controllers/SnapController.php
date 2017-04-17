@@ -83,30 +83,22 @@ class SnapController extends Controller
         //     'phone'                 => "081322311801",
         //     'country_code'  => 'IDN'
         // );
-
-        $customer = Customer::find(session('user_id'));
-        $customer_details = [
-            'first_name'   => $customer->ak_user_firstname,
-            'last_name'    => $customer->ak_user_lastname,
-            'email'        => $customer->ak_user_email,
-            'phone'        => $customer->ak_user_phone
-        ];
-
-        // $customer_details = array(
-        //     'first_name'            => "Andri",
-        //     'last_name'             => "Setiawan",
-        //     'email'                     => "andrisetiawan@asdasd.com",
-        //     'phone'                     => "081322311801",
-        //     'billing_address' => $billing_address,
-        //     'shipping_address'=> $shipping_address
-        //     );
-
+/*
+        $customer_details = array(
+            'first_name'            => "Andri",
+            'last_name'             => "Setiawan",
+            'email'                     => "andrisetiawan@asdasd.com",
+            'phone'                     => "081322311801",
+            'billing_address' => $billing_address,
+            'shipping_address'=> $shipping_address
+            );
+*/
         // Data yang akan dikirim untuk request redirect_url.
         // Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
         $transaction_data = array(
             'transaction_details'  => $transaction_details,
             'item_details'         => $items,
-            'customer_details'     => $customer_details
+            // 'customer_details'     => $customer_details
         );
 
         dd($transaction_data);
