@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 
 use App\Veritrans\Midtrans;
 
+use App\CourseSchedule;
+use App\CourseDetail;
+
 class SnapController extends Controller
 {
     public function __construct()
