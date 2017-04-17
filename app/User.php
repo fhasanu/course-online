@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Notifiable;
 
     public $table = "ak_user";
-    protected $primarykey = "ak_user_id";
+    protected $primaryKey = "ak_user_id";
     /**
      * The attributes that are mass assignable.
      *
@@ -28,4 +28,30 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'ak_user_email' => 'required|email', 'password' => 'required',
+        ]);
+
+        $credentials = $request->only('ak_user_email', 'password');
+
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($this->loginPath())
+            ->withInput($request->only('ak_user_email', 'remember'))
+            ->withErrors([
+                'ak_user_email' => $this->getFailedLoginMessage(),
+            ]);
+    }
+    public function getAuthPassword()
+    {
+        return $this->ak_user_password;
+    }
+
+
 }
