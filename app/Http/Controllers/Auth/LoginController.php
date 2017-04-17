@@ -25,7 +25,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/snap';
 
     /**
      * Create a new controller instance.
@@ -39,24 +39,25 @@ class LoginController extends Controller
     public function username(){
         return 'ak_user_email';
     }
-    // public function postLogin(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'ak_user_email' => 'required|email', 'password' => 'required',
-    //     ]);
+    public function Login(Request $request)
+    {
+        dd("request");
+        $this->validate($request, [
+            'ak_user_email' => 'required|email', 'password' => 'required',
+        ]);
 
-    //     $credentials = $request->only('ak_user_email', 'password');
+        $credentials = $request->only('ak_user_email', 'password');
 
-    //     if ($this->auth->attempt($credentials, $request->has('remember')))
-    //     {
-    //         return redirect()->intended($this->redirectPath());
-    //     }
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            return redirect()->intended($this->redirectPath());
+        }
 
-    //     return redirect($this->loginPath())
-    //         ->withInput($request->only('ak_user_email', 'remember'))
-    //         ->withErrors([
-    //             'ak_user_email' => $this->getFailedLoginMessage(),
-    //         ]);
-    // }
+        return redirect($this->loginPath())
+            ->withInput($request->only('ak_user_email', 'remember'))
+            ->withErrors([
+                'ak_user_email' => $this->getFailedLoginMessage(),
+            ]);
+    }
 
 }
