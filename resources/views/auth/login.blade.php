@@ -54,7 +54,7 @@
                                     Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('ak_user_password.request') }}">
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your ak_user_password?
                                 </a>
                             </div>
