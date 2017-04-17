@@ -15,7 +15,7 @@ class VtwebController extends Controller
 
         //set Veritrans::$isProduction  value to true for production mode
         Veritrans::$isProduction = false;
-        $this->middleware('auth');
+        // $this->middleware('auth');
 
     }
 

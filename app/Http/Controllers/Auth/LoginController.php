@@ -57,10 +57,4 @@ class LoginController extends Controller
     //         ]);
     // }
 
-    public function username()
-    {
-        return 'ak_user_email';
-    }
-
-
 }

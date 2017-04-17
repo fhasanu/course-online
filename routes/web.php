@@ -29,6 +29,8 @@ Route::get('/', function () {
 // Route::post('/vt_transaction', 'PagesController@transaction_process');
 
 // Route::post('/vt_notif', 'PagesController@notification');
+// Route::get('/home','HomeController@index');
+// Route::get('/admin','AdminController@index');
 
 Route::resource('/courses', 'CourseController');
 
@@ -38,5 +40,3 @@ Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
 
 Auth::routes();
-Route::get('/home','HomeController@index');
-Route::get('/admin','AdminController@index');
