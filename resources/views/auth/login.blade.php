@@ -56,7 +56,7 @@
 {{-- 
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your ak_user_password?
- --}}                                </a>
+ </a>--}}                                
                             </div>
                         </div>
                     </form>
