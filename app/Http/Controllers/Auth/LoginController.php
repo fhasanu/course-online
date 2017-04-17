@@ -42,7 +42,6 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-        dd($request);
         $this->validate($request, [
             'ak_user_email' => 'required|email', 'password' => 'required',
         ]);
