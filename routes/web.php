@@ -40,4 +40,3 @@ Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
 
 Auth::routes();
-Route::post('/login','SnapController@login');
