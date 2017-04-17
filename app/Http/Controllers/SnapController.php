@@ -37,7 +37,7 @@ class SnapController extends Controller
         ];
         
         // Populate items
-        $order_id = session('orders');
+        $order_id = session('orders', []);
         $populate = function ($id) {
             $schedule = CourseSchedule::find($id);
             $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
@@ -65,21 +65,7 @@ class SnapController extends Controller
         //     )
         // ];
 
-        // Populate customer's billing address
-        $billing_address = [
-            'hahaha'
-        ];
-        // $billing_address = array(
-        //     'first_name'        => "Andri",
-        //     'last_name'         => "Setiawan",
-        //     'address'           => "Karet Belakang 15A, Setiabudi.",
-        //     'city'                  => "Jakarta",
-        //     'postal_code'   => "51161",
-        //     'phone'                 => "081322311801",
-        //     'country_code'  => 'IDN'
-        // );
-
-        $customer = Customer::find(session('user_id'));
+        $customer = Customer::find(session('user_id', 'guest'));
         $customer_details = [
             'first_name'   => $customer->ak_user_firstname,
             'last_name'    => $customer->ak_user_lastname,
@@ -103,8 +89,6 @@ class SnapController extends Controller
             'item_details'         => $items,
             'customer_details'     => $customer_details
         );
-
-        dd($transaction_data);
         
         try
         {
