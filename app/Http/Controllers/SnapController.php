@@ -22,7 +22,20 @@ class SnapController extends Controller
 
     public function snap()
     {
-        return view('snap_checkout');
+        $order_id = session('orders', []);
+        $populate = function ($id) {
+            $schedule = CourseSchedule::find($id);
+            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+            return [
+                'id'       => $id,
+                'price'    => $detail->ak_course_detail_price,
+                'quantity' => 1,
+                'name'     => $detail->ak_course_detail_name
+            ];
+        };
+        $cart = array_map($populate, $order_id);
+
+        return view('snap_checkout')->with('cart', $cart);
     }
 
     public function token() 
@@ -34,10 +47,11 @@ class SnapController extends Controller
         // Populate details
         $transaction_details = [
             'order_id'      => uniqid(),
-            'gross_amount'  => session('total')
+            'gross_amount'  => session('total', 0)
         ];
         
         // Populate items
+<<<<<<< HEAD
         $order_id = session('orders');
         if($order_id != null){#
             $populate = function ($id) {
@@ -93,16 +107,40 @@ class SnapController extends Controller
             'shipping_address'=> $shipping_address
             );
 */
+=======
+        $order_id = session('orders', []);
+        $populate = function ($id) {
+            $schedule = CourseSchedule::find($id);
+            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+            return [
+                'id'       => $id,
+                'price'    => $detail->ak_course_detail_price,
+                'quantity' => 1,
+                'name'     => $detail->ak_course_detail_name
+            ];
+        };
+        $items = array_map($populate, $order_id);
+
+        $customer = Customer::find(session('user_id', 0));
+        if($customer){
+            $customer_details = [
+                'first_name'   => $customer->ak_user_firstname,
+                'last_name'    => $customer->ak_user_lastname,
+                'email'        => $customer->ak_user_email,
+                'phone'        => $customer->ak_user_phone
+            ];
+        }else{
+            $customer_details = [];
+        }
+
+>>>>>>> 658a9cdd250a2376a6f3d96aee484bfd9b1b2e45
         // Data yang akan dikirim untuk request redirect_url.
-        // Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
         $transaction_data = array(
             'transaction_details'  => $transaction_details,
             'item_details'         => $items,
             // 'customer_details'     => $customer_details
         );
 
-        dd($transaction_data);
-        
         try
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
@@ -131,7 +169,8 @@ class SnapController extends Controller
         $test = file_get_contents('php://input');
         echo $test;
         echo '<br />this may be successful<br />';
-//        echo json_decode($test);
+        $ttest = json_decode($test);
+        dd($ttest);
 /*
         $midtrans = new Midtrans();
         echo 'test notification handler';

@@ -39,6 +39,11 @@ Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');
 Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
 
+Route::get('/checkout', 'SnapController@snap');
+// Route::get('/snaptoken', 'SnapController@token');
+// Route::post('/payment/finish', 'SnapController@finish');
+// Route::post('/payment/snapnotif', 'SnapController@notification');
+
 Auth::routes();
 Auth::routes();
 
