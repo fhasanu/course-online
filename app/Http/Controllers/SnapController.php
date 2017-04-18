@@ -24,14 +24,9 @@ class SnapController extends Controller
     {
         $order_id = session('orders', []);
         $populate = function ($id) {
-            $schedule = CourseSchedule::find($id);
-            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
-            return [
-                'id'       => $id,
-                'price'    => $detail->ak_course_detail_price,
-                'quantity' => 1,
-                'name'     => $detail->ak_course_detail_name
-            ];
+            $course = Course::find($id);
+            $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
+            return $course;
         };
         $cart = array_map($populate, $order_id);
 
@@ -44,7 +39,7 @@ class SnapController extends Controller
 
         $midtrans = new Midtrans();
 
-        // Populate details
+        // Populate transaction details
         $transaction_details = [
             'order_id'      => uniqid(),
             'gross_amount'  => session('total', 0)
@@ -53,24 +48,25 @@ class SnapController extends Controller
         // Populate items
         $order_id = session('orders', []);
         $populate = function ($id) {
-            $schedule = CourseSchedule::find($id);
-            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+            $course = Course::find($id);
+            $detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
             return [
                 'id'       => $id,
                 'price'    => $detail->ak_course_detail_price,
                 'quantity' => 1,
-                'name'     => $detail->ak_course_detail_name
+                'name'     => $course->ak_course_name,
             ];
         };
         $items = array_map($populate, $order_id);
 
+        // Populate customer details
         $customer = Customer::find(session('user_id', 0));
         if($customer){
             $customer_details = [
                 'first_name'   => $customer->ak_user_firstname,
                 'last_name'    => $customer->ak_user_lastname,
                 'email'        => $customer->ak_user_email,
-                'phone'        => $customer->ak_user_phone
+                'phone'        => $customer->ak_user_phone,
             ];
         }else{
             $customer_details = [];
@@ -80,7 +76,7 @@ class SnapController extends Controller
         $transaction_data = array(
             'transaction_details'  => $transaction_details,
             'item_details'         => $items,
-            'customer_details'     => $customer_details
+            'customer_details'     => $customer_details,
         );
 
         try

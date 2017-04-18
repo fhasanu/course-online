@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\CourseSchedule;
+use App\Course;
 use App\CourseDetail;
+use App\CourseSchedule;
+use App\Facility;
 
 class CourseController extends Controller
 {
@@ -16,9 +18,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = CourseSchedule::all();
+        $courses = Course::all();
         foreach ($courses as $course) {
-            $course->detail = CourseDetail::find($course->ak_course_schedule_detid);
+            $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
         }
 
         return view('course')->with('courses', $courses);
@@ -42,7 +44,11 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = new Course();
+        $detail = new Detail();
+        $schedules = [];
+
+        return redirect('/');
     }
 
     /**
@@ -53,13 +59,20 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $schedule  = CourseSchedule::find($id);
+        $course  = Course::find($id);
         if(!$schedule)
             return redirect('/courses');
 
-        $detail = CourseDetail::find($schedule->ak_course_schedule_detid);
+        $detail     = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
+        $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();
+        $facilities = Facility::where('ak_course_facility_detid', $detail->ak_course_detail_id)->get();
 
-        return view('course_detail')->with('schedule', $schedule)->with('detail', $detail);
+        return view('course_detail', [
+            'course' => $course,
+            'detail' => $detail,
+            'schedules' => $schedules,
+            'facilities' => $facilities,
+        ]);
     }
 
     /**
