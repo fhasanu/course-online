@@ -40,16 +40,15 @@ class LoginController extends Controller
     public function username(){
         return 'ak_user_email';
     }
-    public function login(Request $request)
-    {   
-        dd($this);
-
+        // Override to use 'ak_user_email'
+    public function postLogin(Request $request)
+    {
         $this->validate($request, [
-            'ak_user_email' => 'required|email',
-            'ak_user_password' => 'required',
+            'ak_user_email' => 'required|email', 'password' => 'required',
         ]);
 
-        $credentials = $request->only('ak_user_email', 'ak_user_password');
+        $credentials = $request->only('ak_user_email', 'password');
+
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
             return redirect()->intended($this->redirectPath());
