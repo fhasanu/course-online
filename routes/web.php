@@ -35,8 +35,11 @@ Route::get('/', function () {
 Route::resource('/courses', 'CourseController');
 
 Route::get('/snap', 'SnapController@snap');
-Route::get('/snaptoken', 'SnapController@token');
+Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');
 Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
 
 Auth::routes();
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
