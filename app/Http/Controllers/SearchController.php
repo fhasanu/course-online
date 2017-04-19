@@ -35,18 +35,18 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         // dd(request()->all());
-        $target = $request->input('key', '');
-        if ($target == null): $target = ''; endif;
-        $location = $request->input('location', '');
-        if ($location == null): $location = '';
-        $min = $request->input('min', 0); endif;
-        if ($min == null): $min = 0; endif;
-        $max = $request->input('max', 0);
-        if ($max == null): $max = 1000000; endif;
-        $age = $request->input('age', '');
-        if ($age == null): $age = ''; endif;
-        $level = $request->input('level', '');
-        if ($level == null): $level = ''; endif;
+        $target = $request->input('key');
+        if (!isset($target) || $target == null): $target = ''; endif;
+        $location = $request->input('location');
+        if (!isset($target) || $location == null): $location = '';
+        $min = $request->input('min'); endif;
+        if (!isset($target) || $min == null): $min = 0; endif;
+        $max = $request->input('max');
+        if (!isset($target) || $max == null): $max = 1000000; endif;
+        $age = $request->input('age');
+        if (!isset($target) || $age == null): $age = ''; endif;
+        $level = $request->input('level');
+        if (!isset($target) || $level == null): $level = ''; endif;
 
         $courses = DB::table('ak_course')
                     ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_detail_id')
