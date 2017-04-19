@@ -12,16 +12,37 @@ WHERE C.ak_course_id = CD.ak_course_id AND CD.ak_course_detail_level = CL.ak_cou
 SELECT C.ak_course_name AS Course, CL.ak_course_level_name AS Level, SC.ak_subcat_name AS Category, CAGE.ak_course_age_name_eng AS Age, CD.ak_course_detail_price AS Price, CD.ak_course_detail_desc AS Desc
 FROM ak_course C, ak_course_detail CD, ak_course_level CL, ak_sub_category SC, ak_course_age CAGE, ak_provider P, ak_region R, ak_province PV
 WHERE C.ak_course_id = CD.ak_course_id AND CD.ak_course_detail_level = CL.ak_course_level_id AND C.ak_course_cat_id = SC.ak_subcat_id AND CD.ak_course_detail_age = CAGE.ak_course_age_id AND C.ak_course_prov_id = P.ak_provider_id AND P.ak_provider_region = R.ak_region_id AND R.ak_region_prov_id = PV.ak_province_id
-AND ((R.ak_region_cityname LIKE '%X%') OR (R.ak_region_name LIKE '%X%') OR (R.ak_region_namefull LIKE '%X%') OR (PV.ak_province_name LIKE '%X%') OR (PV.ak_province_name_idn LIKE '%X%'))
+AND ((R.ak_region_cityname LIKE '%X%') OR
+    (R.ak_region_name LIKE '%X%') OR
+    (R.ak_region_namefull LIKE '%X%') OR
+    (PV.ak_province_name LIKE '%X%') OR
+    (PV.ak_province_name_idn LIKE '%X%'))
 AND ((CD.ak_course_detail_price >= min) AND (CD.ak_course_detail_price <= max))
-AND ((CAGE.ak_course_age_name_id LIKE '%AGE%') OR (CAGE.ak_course_age_name_eng LIKE '%AGE%'))
+AND ((CAGE.ak_course_age_name_id LIKE '%AGE%') OR
+(CAGE.ak_course_age_name_eng LIKE '%AGE%'))
 AND (CL.ak_course_level_name LIKE '%LEVEL%');
 
 -- Search
 SELECT C.ak_course_name AS Course, CL.ak_course_level_name AS Level, SC.ak_subcat_name AS Category, CAGE.ak_course_age_name_eng AS Age, CD.ak_course_detail_price AS Price, CD.ak_course_detail_desc AS Desc
-FROM ak_course C, ak_course_detail CD, ak_course_level CL, ak_sub_category SC, ak_course_age CAGE, ak_provider P, ak_region R, ak_province PV
 WHERE C.ak_course_id = CD.ak_course_id AND CD.ak_course_detail_level = CL.ak_course_level_id AND C.ak_course_cat_id = SC.ak_subcat_id AND CD.ak_course_detail_age = CAGE.ak_course_age_id AND C.ak_course_prov_id = P.ak_provider_id AND P.ak_provider_region = R.ak_region_id AND R.ak_region_prov_id = PV.ak_province_id
+FROM ak_course C, ak_course_detail CD, ak_course_level CL, ak_sub_category SC, ak_course_age CAGE, ak_provider P, ak_region R, ak_province PV
 AND ((R.ak_region_cityname LIKE '%X%') OR (R.ak_region_name LIKE '%X%') OR (R.ak_region_namefull LIKE '%X%') OR (PV.ak_province_name LIKE '%X%') OR (PV.ak_province_name_idn LIKE '%X%'))
 AND ((CD.ak_course_detail_price >= 0) AND (CD.ak_course_detail_price <= 1000000))
+AND ((CAGE.ak_course_age_name_id LIKE '%AGE%') OR (CAGE.ak_course_age_name_eng LIKE '%AGE%'))
+AND (CL.ak_course_level_name LIKE '%LEVEL%');
+
+SELECT C.ak_course_name AS Course, CL.ak_course_level_name AS Level,
+    SC.ak_subcat_name AS Category, CAGE.ak_course_age_name_eng AS Age,
+    CD.ak_course_detail_price AS Price, CD.ak_course_detail_desc AS Desc
+FROM ak_course C, ak_course_detail CD, ak_course_level CL, ak_sub_category SC, ak_course_age CAGE, ak_provider P, ak_region R, ak_province PV
+WHERE C.ak_course_id = CD.ak_course_id AND
+    CD.ak_course_detail_level = CL.ak_course_level_id AND
+    C.ak_course_cat_id = SC.ak_subcat_id AND
+    CD.ak_course_detail_age = CAGE.ak_course_age_id AND
+    C.ak_course_prov_id = P.ak_provider_id AND
+    P.ak_provider_region = R.ak_region_id AND
+    R.ak_region_prov_id = PV.ak_province_id
+AND ((R.ak_region_cityname LIKE '%X%') OR (R.ak_region_name LIKE '%X%') OR (R.ak_region_namefull LIKE '%X%') OR (PV.ak_province_name LIKE '%X%') OR (PV.ak_province_name_idn LIKE '%X%'))
+AND ((CD.ak_course_detail_price >= min) AND (CD.ak_course_detail_price <= max))
 AND ((CAGE.ak_course_age_name_id LIKE '%AGE%') OR (CAGE.ak_course_age_name_eng LIKE '%AGE%'))
 AND (CL.ak_course_level_name LIKE '%LEVEL%');

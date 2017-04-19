@@ -13,7 +13,7 @@
         <input type="text" class="form-control" id="location" name="location" value="<?php if (isset($location)): echo $location; endif; ?>">
     </div>
     <div class="form-group">
-        <label for="price">Filter by Price : </label>
+        <label>Filter by Price : </label>
         <label for="min">From : </label>
         <input type="number" class="form-control" id="min" name="min" value="<?php if (isset($max)): echo $min; endif; ?>">
         <label for="max">To : </label>
