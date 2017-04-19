@@ -9,6 +9,7 @@ use App\Veritrans\Midtrans;
 
 use App\CourseSchedule;
 use App\CourseDetail;
+use App\Customer;
 
 class SnapController extends Controller
 {
@@ -16,12 +17,25 @@ class SnapController extends Controller
     {   
         Midtrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
         Midtrans::$isProduction = false;
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public function snap()
     {
-        return view('snap_checkout');
+        $order_id = session('orders', []);
+        $populate = function ($id) {
+            $schedule = CourseSchedule::find($id);
+            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+            return [
+                'id'       => $id,
+                'price'    => $detail->ak_course_detail_price,
+                'quantity' => 1,
+                'name'     => $detail->ak_course_detail_name
+            ];
+        };
+        $cart = array_map($populate, $order_id);
+
+        return view('snap_checkout')->with('cart', $cart);
     }
 
     public function token() 
@@ -33,11 +47,68 @@ class SnapController extends Controller
         // Populate details
         $transaction_details = [
             'order_id'      => uniqid(),
-            'gross_amount'  => session('total')
+            'gross_amount'  => session('total', 0)
         ];
         
         // Populate items
-        $order_id = session('orders');
+// <<<<<<< HEAD
+//         $order_id = session('orders');
+//         if($order_id != null){#
+//             $populate = function ($id) {
+//                 $schedule = CourseSchedule::find($id);
+//                 $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+//                 return [
+//                     'id'       => $id,
+//                     'price'    => $detail->ak_course_detail_price,
+//                     'quantity' => 1,
+//                     'name'     => $detail->ak_course_detail_name
+//                 ];
+//             };
+//             $items = array_map($populate, $order_id);
+//         }else{
+//             $items = array();
+//         }
+
+//         // $items = [
+//         //     array(
+//         //         'id'                => 'item1',
+//         //         'price'         => 100000,
+//         //         'quantity'  => 1,
+//         //         'name'          => 'Adidas f50'
+//         //     ),
+//         //     array(
+//         //         'id'                => 'item2',
+//         //         'price'         => 50000,
+//         //         'quantity'  => 2,
+//         //         'name'          => 'Nike N90'
+//         //     )
+//         // ];
+
+//         // Populate customer's billing address
+//         $billing_address = [
+//             'hahaha'
+//         ];
+//         // $billing_address = array(
+//         //     'first_name'        => "Andri",
+//         //     'last_name'         => "Setiawan",
+//         //     'address'           => "Karet Belakang 15A, Setiabudi.",
+//         //     'city'                  => "Jakarta",
+//         //     'postal_code'   => "51161",
+//         //     'phone'                 => "081322311801",
+//         //     'country_code'  => 'IDN'
+//         // );
+// /*
+//         $customer_details = array(
+//             'first_name'            => "Andri",
+//             'last_name'             => "Setiawan",
+//             'email'                     => "andrisetiawan@asdasd.com",
+//             'phone'                     => "081322311801",
+//             'billing_address' => $billing_address,
+//             'shipping_address'=> $shipping_address
+//             );
+// */
+// =======
+        $order_id = session('orders', []);
         $populate = function ($id) {
             $schedule = CourseSchedule::find($id);
             $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
@@ -50,62 +121,26 @@ class SnapController extends Controller
         };
         $items = array_map($populate, $order_id);
 
-        // $items = [
-        //     array(
-        //         'id'                => 'item1',
-        //         'price'         => 100000,
-        //         'quantity'  => 1,
-        //         'name'          => 'Adidas f50'
-        //     ),
-        //     array(
-        //         'id'                => 'item2',
-        //         'price'         => 50000,
-        //         'quantity'  => 2,
-        //         'name'          => 'Nike N90'
-        //     )
-        // ];
+        $customer = Customer::find(session('user_id', 0));
+        if($customer){
+            $customer_details = [
+                'first_name'   => $customer->ak_user_firstname,
+                'last_name'    => $customer->ak_user_lastname,
+                'email'        => $customer->ak_user_email,
+                'phone'        => $customer->ak_user_phone
+            ];
+        }else{
+            $customer_details = [];
+        }
 
-        // Populate customer's billing address
-        $billing_address = [
-            'hahaha'
-        ];
-        // $billing_address = array(
-        //     'first_name'        => "Andri",
-        //     'last_name'         => "Setiawan",
-        //     'address'           => "Karet Belakang 15A, Setiabudi.",
-        //     'city'                  => "Jakarta",
-        //     'postal_code'   => "51161",
-        //     'phone'                 => "081322311801",
-        //     'country_code'  => 'IDN'
-        // );
-
-        $customer = Customer::find(session('user_id'));
-        $customer_details = [
-            'first_name'   => $customer->ak_user_firstname,
-            'last_name'    => $customer->ak_user_lastname,
-            'email'        => $customer->ak_user_email,
-            'phone'        => $customer->ak_user_phone
-        ];
-
-        // $customer_details = array(
-        //     'first_name'            => "Andri",
-        //     'last_name'             => "Setiawan",
-        //     'email'                     => "andrisetiawan@asdasd.com",
-        //     'phone'                     => "081322311801",
-        //     'billing_address' => $billing_address,
-        //     'shipping_address'=> $shipping_address
-        //     );
-
+// >>>>>>> 658a9cdd250a2376a6f3d96aee484bfd9b1b2e45
         // Data yang akan dikirim untuk request redirect_url.
-        // Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
         $transaction_data = array(
             'transaction_details'  => $transaction_details,
             'item_details'         => $items,
-            'customer_details'     => $customer_details
+            // 'customer_details'     => $customer_details
         );
 
-        dd($transaction_data);
-        
         try
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
@@ -134,7 +169,8 @@ class SnapController extends Controller
         $test = file_get_contents('php://input');
         echo $test;
         echo '<br />this may be successful<br />';
-//        echo json_decode($test);
+        $ttest = json_decode($test);
+        dd($ttest);
 /*
         $midtrans = new Midtrans();
         echo 'test notification handler';

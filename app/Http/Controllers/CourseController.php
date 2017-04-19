@@ -18,10 +18,10 @@ class CourseController extends Controller
     {
         $courses = CourseSchedule::all();
         foreach ($courses as $course) {
-            $course->ak_course_schedule_detail = CourseDetail::find($course->ak_course_schedule_detid);
+            $course->detail = CourseDetail::find($course->ak_course_schedule_detid);
         }
 
-        return view('course')->with('course', $course);
+        return view('course')->with('courses', $courses);
     }
 
     /**
@@ -54,7 +54,10 @@ class CourseController extends Controller
     public function show($id)
     {
         $schedule  = CourseSchedule::find($id);
-        $detail    = CourseDetail::find($schedule->ak_course_schedule_detid);
+        if(!$schedule)
+            return redirect('/courses');
+
+        $detail = CourseDetail::find($schedule->ak_course_schedule_detid);
 
         return view('course_detail')->with('schedule', $schedule)->with('detail', $detail);
     }

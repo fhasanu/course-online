@@ -29,14 +29,22 @@ Route::get('/', function () {
 // Route::post('/vt_transaction', 'PagesController@transaction_process');
 
 // Route::post('/vt_notif', 'PagesController@notification');
+// Route::get('/home','HomeController@index');
+// Route::get('/admin','AdminController@index');
 
 Route::resource('/courses', 'CourseController');
 
 Route::get('/snap', 'SnapController@snap');
-Route::get('/snaptoken', 'SnapController@token');
+Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');
 Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
 
+Route::get('/checkout', 'SnapController@snap');
+// Route::get('/snaptoken', 'SnapController@token');
+// Route::post('/payment/finish', 'SnapController@finish');
+// Route::post('/payment/snapnotif', 'SnapController@notification');
+
 Auth::routes();
-Route::get('/home','HomeController@index');
-Route::get('/admin','AdminController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

@@ -9,8 +9,9 @@ class Admin extends Authenticatable
 {
     use Notifiable;
     public $table = "ak_admin";
-    protected $primarykey = "ak_admin_id";
-    protected $guard = 'admin';
+    protected $guard = 'admin'
+    protected $primaryKey  = "ak_admin_id";
+
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'password',
+        'ak_admin_username', 'ak_admin_password',
     ];
 
     /**

@@ -22,5 +22,5 @@ Route::post('/vt_transaction', 'PagesController@transaction_process');
 Route::post('/vt_notif', 'PagesController@notification');
 
 Route::get('/snap', 'SnapController@snap');
-Route::get('/snaptoken', 'SnapController@token');
+Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');
 Route::post('/snapfinish', 'SnapController@finish');
