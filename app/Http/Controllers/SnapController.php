@@ -14,14 +14,14 @@ use App\Customer;
 
 class SnapController extends Controller
 {
-    public function __construct()
+    public function __construct ()
     {   
         Midtrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
         Midtrans::$isProduction = false;
         // $this->middleware('auth');
     }
 
-    public function snap()
+    public function snap ()
     {
         $order_id = session('orders', []);
         $populate = function ($id) {
@@ -74,8 +74,6 @@ class SnapController extends Controller
     {
         error_log('masuk ke snap token dari ajax');
 
-        $midtrans = new Midtrans();
-
         // Populate transaction details
         $transaction_details = [
             'order_id'      => uniqid(),
@@ -119,7 +117,13 @@ class SnapController extends Controller
 
         try
         {
+            $midtrans = new Midtrans();
             $snap_token = $midtrans->getSnapToken($transaction_data);
+
+            session([
+                'saveorder' => session('orders', [])
+            ]);
+
             return $snap_token;
         }
         catch (Exception $e) 
@@ -130,10 +134,44 @@ class SnapController extends Controller
 
     public function finish(Request $request)
     {
-        $this->reset();
         $result = $request->input('result_data');
         $result = json_decode($result);
+
+        switch ($result->transaction_status) {
+            case 'success':
+                $result->transaction_status = 1;
+                break;
+            case 'error':
+                $result->transaction_status = 2;
+                break;
+            case 'pending':
+                $result->transaction_status = 3;
+                break;
+            default:
+                $result->transaction_status = 0;
+                break;
+        }
+
+        $orders = session('saveorder', []);
+        $result->courses = json_encode($orders);
+
+        $user = session('user_id', 1);
+        $result->user_id = $user;
+
+        TransactionController::save($result);
+        $this->reset();
+
         return view('payment_finish')->with('snap', $result);
+    }
+
+    public function unfinish (Request $request)
+    {
+        dd($request);
+    }
+
+    public function error (Request $request)
+    {
+        dd($request);
     }
 
     public function notification(Request $request)

@@ -3,7 +3,7 @@ $(".addToCart").click(function(){
         $.ajax({
             url: url + '/addtocart',
             type: 'GET',
-            data: { 'course_id':$('input[name=courseid]').val() },
+            data: { 'course_id' : parseInt($('input[name=courseid]').val()) },
             success: function(data) {
             	console.log(data);
             }
