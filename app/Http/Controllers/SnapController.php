@@ -38,6 +38,9 @@ class SnapController extends Controller
         return view('snap_checkout')->with('cart', $cart);
     }
 
+    public function addtocart (Request $request) {
+    }
+
     public function token() 
     {
         error_log('masuk ke snap token dari ajax');

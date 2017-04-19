@@ -17,6 +17,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = CourseSchedule::all();
+        dd($courses);
         foreach ($courses as $course) {
             $course->detail = CourseDetail::find($course->ak_course_schedule_detid);
         }
