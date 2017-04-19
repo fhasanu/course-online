@@ -23,7 +23,6 @@ class CourseController extends Controller
         foreach ($courses as $course) {
             $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
         }
-
         return view('course')->with('courses', $courses);
     }
 
@@ -67,7 +66,7 @@ class CourseController extends Controller
         $detail     = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
         $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();
         $facilities = Facility::where('ak_course_facility_detid', $detail->ak_course_detail_id)->get();
-        
+
         return view('course_detail', [
 
             'course' => $course,

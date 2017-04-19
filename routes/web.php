@@ -40,7 +40,7 @@ Route::post('/snapfinish', 'SnapController@finish');
 Route::post('/snapnotif', 'SnapController@notification');
 
 Route::get('/checkout', 'SnapController@snap');
-Route::post('/addtocart', 'SnapController@addtocart');
+Route::get('/addtocart', 'SnapController@addtocart');
 // Route::get('/snaptoken', 'SnapController@token');
 // Route::post('/payment/finish', 'SnapController@finish');
 // Route::post('/payment/snapnotif', 'SnapController@notification');
