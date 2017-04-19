@@ -24,14 +24,9 @@ class SnapController extends Controller
     {
         $order_id = session('orders', []);
         $populate = function ($id) {
-            $schedule = CourseSchedule::find($id);
-            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
-            return [
-                'id'       => $id,
-                'price'    => $detail->ak_course_detail_price,
-                'quantity' => 1,
-                'name'     => $detail->ak_course_detail_name
-            ];
+            $course = Course::find($id);
+            $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
+            return $course;
         };
         $cart = array_map($populate, $order_id);
 
@@ -47,102 +42,47 @@ class SnapController extends Controller
 
         $midtrans = new Midtrans();
 
-        // Populate details
+        // Populate transaction details
         $transaction_details = [
             'order_id'      => uniqid(),
             'gross_amount'  => session('total', 0)
         ];
         
         // Populate items
-// <<<<<<< HEAD
-//         $order_id = session('orders');
-//         if($order_id != null){#
-//             $populate = function ($id) {
-//                 $schedule = CourseSchedule::find($id);
-//                 $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
-//                 return [
-//                     'id'       => $id,
-//                     'price'    => $detail->ak_course_detail_price,
-//                     'quantity' => 1,
-//                     'name'     => $detail->ak_course_detail_name
-//                 ];
-//             };
-//             $items = array_map($populate, $order_id);
-//         }else{
-//             $items = array();
-//         }
 
-//         // $items = [
-//         //     array(
-//         //         'id'                => 'item1',
-//         //         'price'         => 100000,
-//         //         'quantity'  => 1,
-//         //         'name'          => 'Adidas f50'
-//         //     ),
-//         //     array(
-//         //         'id'                => 'item2',
-//         //         'price'         => 50000,
-//         //         'quantity'  => 2,
-//         //         'name'          => 'Nike N90'
-//         //     )
-//         // ];
-
-//         // Populate customer's billing address
-//         $billing_address = [
-//             'hahaha'
-//         ];
-//         // $billing_address = array(
-//         //     'first_name'        => "Andri",
-//         //     'last_name'         => "Setiawan",
-//         //     'address'           => "Karet Belakang 15A, Setiabudi.",
-//         //     'city'                  => "Jakarta",
-//         //     'postal_code'   => "51161",
-//         //     'phone'                 => "081322311801",
-//         //     'country_code'  => 'IDN'
-//         // );
-// /*
-//         $customer_details = array(
-//             'first_name'            => "Andri",
-//             'last_name'             => "Setiawan",
-//             'email'                     => "andrisetiawan@asdasd.com",
-//             'phone'                     => "081322311801",
-//             'billing_address' => $billing_address,
-//             'shipping_address'=> $shipping_address
-//             );
-// */
-// =======
         $order_id = session('orders', []);
         $populate = function ($id) {
-            $schedule = CourseSchedule::find($id);
-            $detail   = CourseDetail::find($schedule->ak_course_schedule_detid);
+            $course = Course::find($id);
+            $detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
             return [
                 'id'       => $id,
                 'price'    => $detail->ak_course_detail_price,
                 'quantity' => 1,
-                'name'     => $detail->ak_course_detail_name
+                'name'     => $course->ak_course_name,
             ];
         };
         $items = array_map($populate, $order_id);
 
+        // Populate customer details
         $customer = Customer::find(session('user_id', 0));
         if($customer){
             $customer_details = [
                 'first_name'   => $customer->ak_user_firstname,
                 'last_name'    => $customer->ak_user_lastname,
                 'email'        => $customer->ak_user_email,
-                'phone'        => $customer->ak_user_phone
+                'phone'        => $customer->ak_user_phone,
             ];
         }else{
             $customer_details = [];
         }
 
-// >>>>>>> 658a9cdd250a2376a6f3d96aee484bfd9b1b2e45
         // Data yang akan dikirim untuk request redirect_url.
         $transaction_data = array(
             'transaction_details'  => $transaction_details,
             'item_details'         => $items,
-            // 'customer_details'     => $customer_details
-        );
+
+            'customer_details'     => $customer_details,
+       );
 
         try
         {

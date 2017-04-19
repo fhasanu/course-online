@@ -14,6 +14,18 @@
             <input type="hidden" name="result_type" id="result-type" value=""></div>
             <input type="hidden" name="result_data" id="result-data" value=""></div>
         </form>
+
+        @if (empty($cart))
+
+        <h1>EMPTY BIATCH</h1>
+        
+        @endif
+
+        @foreach($cart as $item)
+
+        <h1>{{$item[name]}}</h1>
+
+        @endforeach
         
         <button id="pay-button">Pay!</button>
         <script type="text/javascript">
