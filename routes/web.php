@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/search', function () {
+    return view('search');
+});
+
+Route::post('/search', 'SearchController@search');
+
 // Route::get('/payment/notification', 'PaymentController@notification');
 // Route::get('/payment/error', 'PaymentController@error');
 // Route::get('/payment/finish', 'PaymentController@finish');
