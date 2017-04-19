@@ -18,17 +18,17 @@ CREATE TABLE ak_admin (
   ak_admin_id SERIAL PRIMARY KEY NOT NULL,
   ak_admin_username varchar(45) NOT NULL,
   ak_admin_password varchar(45) NOT NULL,
-  ak_admin_last_activity timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+  ak_admin_last_activity timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CHECK (ak_admin_id <= 99999999999)
 );
 
-CREATE OR REPLACE FUNCTION update_ak_admin_timestamp() 
-RETURNS TRIGGER  AS $$ 
-BEGIN 
-  IF row(NEW.ak_admin_last_activity) IS DISTINCT FROM row(OLD.ak_admin_last_activity) THEN 
+CREATE OR REPLACE FUNCTION update_ak_admin_timestamp()
+RETURNS TRIGGER  AS $$
+BEGIN
+  IF row(NEW.ak_admin_last_activity) IS DISTINCT FROM row(OLD.ak_admin_last_activity) THEN
     NEW.ak_admin_last_activity = now();
     RETURN NEW;
-  ELSE 
+  ELSE
     RETURN OLD;
   END IF;
 END;
@@ -37,7 +37,7 @@ $$ language 'plpgsql';
 CREATE TABLE ak_course_age (
   ak_course_age_id SERIAL PRIMARY KEY NOT NULL,
   ak_course_age_name_id text NOT NULL,
-  ak_course_age_name_eng text NOT NULL, 
+  ak_course_age_name_eng text NOT NULL,
   CHECK (ak_course_age_id <= 99999999999)
 );
 
@@ -48,15 +48,15 @@ INSERT INTO ak_course_age (ak_course_age_id, ak_course_age_name_id, ak_course_ag
 
 CREATE TABLE ak_main_category (
   ak_maincat_id SERIAL PRIMARY KEY NOT NULL,
-  ak_maincat_name varchar(45) NOT NULL, 
+  ak_maincat_name varchar(45) NOT NULL,
   CHECK (ak_maincat_id <= 99999999999)
 );
 
 CREATE TABLE ak_sub_category (
   ak_subcat_id SERIAL PRIMARY KEY NOT NULL,
   ak_subcat_parent int NOT NULL REFERENCES ak_main_category(ak_maincat_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-  ak_subcat_name varchar(45) NOT NULL, 
-  CHECK (ak_subcat_id <= 99999999999 AND 
+  ak_subcat_name varchar(45) NOT NULL,
+  CHECK (ak_subcat_id <= 99999999999 AND
   	ak_subcat_parent <= 99999999999)
 );
 
@@ -65,8 +65,8 @@ CREATE TABLE ak_province (
   ak_province_name text NOT NULL,
   ak_province_name_abbr text NOT NULL,
   ak_province_name_idn text NOT NULL,
-  ak_province_name_eng int NOT NULL, 
-  CHECK (ak_province_id <= 99999999999 AND 
+  ak_province_name_eng int NOT NULL,
+  CHECK (ak_province_id <= 99999999999 AND
   	ak_province_name_eng <= 99999999999)
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE ak_region (
   ak_region_namefull text NOT NULL,
   ak_region_parent_id int DEFAULT NULL,
   CHECK (ak_region_id <= 99999999999 AND
-	ak_region_prov_id <= 99999999999 AND 
+	ak_region_prov_id <= 99999999999 AND
   	ak_region_parent_id <= 99999999999)
 );
 
@@ -93,17 +93,17 @@ CREATE TABLE ak_provider (
   ak_provider_zipcode smallint NOT NULL,
   ak_provider_description text NOT NULL,
   ak_provider_telephone varchar(12) NOT NULL,
-  ak_provider_last_activity timestamp NOT NULL, 
-  CHECK (ak_provider_id <= 99999999999 AND 
-  	ak_provider_region <= 99999999999 AND 
+  ak_provider_last_activity timestamp NOT NULL,
+  CHECK (ak_provider_id <= 99999999999 AND
+  	ak_provider_region <= 99999999999 AND
   	ak_provider_zipcode <= 99999)
 );
 
 CREATE TABLE ak_provider_img (
   ak_provider_img_id SERIAL PRIMARY KEY NOT NULL,
   ak_provider_id int NOT NULL REFERENCES ak_provider(ak_provider_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-  ak_provider_img_path varchar(100) NOT NULL, 
-  CHECK (ak_provider_img_id <= 99999999999 AND 
+  ak_provider_img_path varchar(100) NOT NULL,
+  CHECK (ak_provider_img_id <= 99999999999 AND
   	ak_provider_id <= 99999999999)
 );
 
@@ -111,15 +111,15 @@ CREATE TABLE ak_course (
   ak_course_id SERIAL PRIMARY KEY NOT NULL,
   ak_course_name varchar(45) NOT NULL,
   ak_course_cat_id int NOT NULL REFERENCES ak_sub_category(ak_subcat_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-  ak_course_prov_id int NOT NULL REFERENCES ak_provider(ak_provider_id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
-  CHECK (ak_course_id <= 99999999999 AND 
+  ak_course_prov_id int NOT NULL REFERENCES ak_provider(ak_provider_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CHECK (ak_course_id <= 99999999999 AND
     ak_course_cat_id <= 99999999999 AND
     ak_course_prov_id <= 99999999999)
 );
 
 CREATE TABLE ak_course_level (
   ak_course_level_id SERIAL PRIMARY KEY NOT NULL,
-  ak_course_level_name text NOT NULL, 
+  ak_course_level_name text NOT NULL,
   CHECK (ak_course_level_id <= 99999999999)
 );
 
@@ -131,26 +131,26 @@ CREATE TABLE ak_course_detail (
   ak_course_detail_level int NOT NULL REFERENCES ak_course_level(ak_course_level_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
   ak_course_detail_age int NOT NULL REFERENCES ak_course_age(ak_course_age_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
   ak_course_detail_size smallint NOT NULL,
-  ak_course_detail_desc text NOT NULL, 
-  CHECK (ak_course_detail_size <= 999 AND 
-    ak_course_detail_id <= 99999999999 AND 
-    ak_course_id <= 99999999999 AND 
-    ak_course_detail_price <= 99999999999 AND 
-    ak_course_detail_level <= 99999999999 AND 
+  ak_course_detail_desc text NOT NULL,
+  CHECK (ak_course_detail_size <= 999 AND
+    ak_course_detail_id <= 99999999999 AND
+    ak_course_id <= 99999999999 AND
+    ak_course_detail_price <= 99999999999 AND
+    ak_course_detail_level <= 99999999999 AND
     ak_course_detail_age <= 99999999999)
 );
 
 CREATE TABLE ak_facility_type (
   ak_facility_type_id SERIAL PRIMARY KEY NOT NULL,
   ak_facility_type_name_idn text NOT NULL,
-  ak_facility_type_name_eng text NOT NULL, 
+  ak_facility_type_name_eng text NOT NULL,
   CHECK (ak_facility_type_id <= 99999999999)
 );
 
 CREATE TABLE ak_course_facility (
   ak_course_facility_id SERIAL PRIMARY KEY NOT NULL,
   ak_course_facility_detid int NOT NULL REFERENCES ak_course_detail(ak_course_detail_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-  ak_facility_type_id int NOT NULL REFERENCES ak_facility_type(ak_facility_type_id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
+  ak_facility_type_id int NOT NULL REFERENCES ak_facility_type(ak_facility_type_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
   CHECK (ak_course_facility_id <= 99999999999 AND
     ak_course_facility_detid <= 99999999999 AND
     ak_facility_type_id <= 99999999999)
@@ -165,14 +165,14 @@ CREATE TABLE ak_course_schedule (
   ak_course_schedule_id int PRIMARY KEY NOT NULL,
   ak_course_schedule_detid int NOT NULL REFERENCES ak_course_detail(ak_course_detail_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
   ak_course_schedule_day text NOT NULL,
-  ak_course_schedule_time time NOT NULL, 
-  CHECK (ak_course_schedule_id <= 99999999999 AND 
+  ak_course_schedule_time time NOT NULL,
+  CHECK (ak_course_schedule_id <= 99999999999 AND
   	ak_course_schedule_detid <= 99999999999)
 );
 
 CREATE TABLE ak_tran_status (
   id_ak_tran_status_id SERIAL PRIMARY KEY NOT NULL,
-  ak_tran_status_name text NOT NULL, 
+  ak_tran_status_name text NOT NULL,
   CHECK (id_ak_tran_status_id <= 99999999999)
 );
 
@@ -183,8 +183,8 @@ CREATE TABLE ak_user (
   ak_user_email varchar(45) NOT NULL,
   ak_user_password varchar(45) NOT NULL,
   ak_user_dob date NOT NULL,
-  ak_user_phone int NOT NULL, 
-  CHECK (ak_user_id <= 99999999999 AND 
+  ak_user_phone int NOT NULL,
+  CHECK (ak_user_id <= 99999999999 AND
   	ak_user_phone <= 99999999999)
 );
 
@@ -193,11 +193,11 @@ CREATE TABLE ak_tran_saction (
   ak_tran_saction_type int NOT NULL,
   ak_tran_saction_user int NOT NULL REFERENCES ak_user(ak_user_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
   ak_tran_saction_course int NOT NULL REFERENCES ak_course(ak_course_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
-  ak_tran_saction_status int NOT NULL REFERENCES ak_tran_status(id_ak_tran_status_id) ON UPDATE NO ACTION ON DELETE NO ACTION, 
-  CHECK (ak_tran_saction_id <= 99999999999 AND 
-  	ak_tran_saction_type <= 99999999999 AND 
-  	ak_tran_saction_user <= 99999999999 AND 
-  	ak_tran_saction_course <= 99999999999 AND 
+  ak_tran_saction_status int NOT NULL REFERENCES ak_tran_status(id_ak_tran_status_id) ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CHECK (ak_tran_saction_id <= 99999999999 AND
+  	ak_tran_saction_type <= 99999999999 AND
+  	ak_tran_saction_user <= 99999999999 AND
+  	ak_tran_saction_course <= 99999999999 AND
   	ak_tran_saction_status <= 99999999999)
 );
 
@@ -208,9 +208,9 @@ CREATE TABLE ak_pay_ment (
   ak_pay_ment_paid varchar(45) NOT NULL,
   ak_pay_ment_cc varchar(45) NOT NULL,
   ak_pay_ment_dc varchar(45) NOT NULL,
-  ak_pay_ment_status smallint NOT NULL, 
-  CHECK (ak_pay_ment_id <= 99999999999 AND 
-  	ak_pay_ment_tran_id <= 99999999999 AND 
+  ak_pay_ment_status smallint NOT NULL,
+  CHECK (ak_pay_ment_id <= 99999999999 AND
+  	ak_pay_ment_tran_id <= 99999999999 AND
   	ak_pay_ment_status <= 9999)
 );
 
