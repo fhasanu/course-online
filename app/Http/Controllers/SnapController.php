@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Veritrans\Midtrans;
 
+use App\Course;
 use App\CourseSchedule;
 use App\CourseDetail;
 use App\Customer;
@@ -34,9 +35,42 @@ class SnapController extends Controller
     }
 
     public function addtocart (Request $request) {
+        $orders = session('orders', []);
+        $total = session('total', 0);
+        $course_id = $request->course_id;
+
+        if(!in_array($course_id, $orders)){
+            array_push($orders, $course_id);
+
+            $course = Course::find($course_id);
+            $detail = CourseDetail::where('ak_course_id', $course_id)->first();
+            $total += $detail->ak_course_detail_price;
+
+            session([
+                'orders'   => $orders,
+                'total'    => $total
+            ]);
+
+            return 'true';
+        }
+
+        return 'false';
     }
 
-    public function token() 
+    public function removefromcart (Request $request) {
+        return 'false';
+    }
+
+    public function reset () {
+        session([
+            'orders'   => [],
+            'total'    => 0
+        ]);
+
+        return redirect('/snap');
+    }
+
+    public function token ()
     {
         error_log('masuk ke snap token dari ajax');
 
@@ -49,7 +83,6 @@ class SnapController extends Controller
         ];
         
         // Populate items
-
         $order_id = session('orders', []);
         $populate = function ($id) {
             $course = Course::find($id);
@@ -97,24 +130,22 @@ class SnapController extends Controller
 
     public function finish(Request $request)
     {
+        $this->reset();
         $result = $request->input('result_data');
         $result = json_decode($result);
-        echo $result->status_message . '<br>';
-        echo 'RESULT <br><pre>';
-        var_dump($result);
-        echo '</pre>' ;
+        return view('payment_finish')->with('snap', $result);
     }
 
     public function notification(Request $request)
     {
-        echo $request;
-        echo '<br />is this successful<br />';
-        $test = file_get_contents('php://input');
-        echo $test;
-        echo '<br />this may be successful<br />';
-        $ttest = json_decode($test);
-        dd($ttest);
-/*
+        // echo $request;
+        // echo '<br />is this successful<br />';
+        // $test = file_get_contents('php://input');
+        // echo $test;
+        // echo '<br />this may be successful<br />';
+        // $ttest = json_decode($test);
+        // dd($ttest);
+
         $midtrans = new Midtrans();
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
@@ -123,7 +154,7 @@ class SnapController extends Controller
         if($result){
             $notif = $midtrans->status($result->order_id);
             echo 'result is an object';
-        }*/
+        }
 /*
         error_log(print_r($result,TRUE));
 

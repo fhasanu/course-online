@@ -23,7 +23,7 @@
 
         @foreach($cart as $item)
 
-        <h1>{{$item[name]}}</h1>
+        <h1>{{$item->ak_course_name}}</h1>
 
         @endforeach
         
