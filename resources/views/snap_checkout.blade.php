@@ -9,7 +9,7 @@
     <body>
 
         
-        <form id="payment-form" method="post" action="snapfinish">
+        <form id="payment-form" method="post" action="/payment/finish">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
             <input type="hidden" name="result_type" id="result-type" value=""></div>
             <input type="hidden" name="result_data" id="result-data" value=""></div>
@@ -19,7 +19,7 @@
 
         <h1>EMPTY BIATCH</h1>
         
-        @endif
+        @else
 
         @foreach($cart as $item)
 
@@ -28,8 +28,11 @@
         @endforeach
         
         <button id="pay-button">Pay!</button>
+
+        @endif
+
         <script type="text/javascript">
-    
+
         $('#pay-button').click(function (event) {
             event.preventDefault();
             $(this).attr("disabled", "disabled");
