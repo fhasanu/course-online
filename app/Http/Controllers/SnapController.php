@@ -18,7 +18,7 @@ class SnapController extends Controller
     {   
         Midtrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
         Midtrans::$isProduction = false;
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function snap ()

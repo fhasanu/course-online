@@ -51,7 +51,7 @@ class SearchController extends Controller
                     ->join('ak_provider', 'ak_course.ak_course_prov_id', '=', 'ak_provider.ak_provider_id')
                     ->join('ak_region', 'ak_provider.ak_provider_region', '=', 'ak_region.ak_region_id')
                     ->join('ak_province', 'ak_region.ak_region_prov_id', '=', 'ak_province.ak_province_id')
-                    ->select('ak_course.ak_course_name', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_eng', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc')
+                    ->select('ak_course.ak_course_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_eng', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc')
                     ->where(function ($query) use ($target) {
                         return $query->where('ak_course.ak_course_name', 'ilike', '%'.$target.'%')
                         ->orWhere('ak_course_detail.ak_course_detail_desc', 'ilike', '%'.$target.'%')
@@ -66,7 +66,7 @@ class SearchController extends Controller
                         ->orWhere('ak_province.ak_province_name_idn', 'ilike', '%'.$location.'%');
                     });
                     $query->where (function ($query) use ($min, $max) {
-                        return $query->where('ak_course_detail.ak_course_detail_price', '>=', $min)
+                    return $query->where('ak_course_detail.ak_course_detail_price', '>=', $min)
                         ->where('ak_course_detail.ak_course_detail_price', '<=', $max);
                     });
                     $query->where (function ($query) use ($age) {
@@ -77,7 +77,6 @@ class SearchController extends Controller
                         return $query->where('ak_course_level.ak_course_level_name', 'ilike', '%'.$level.'%');
                     });
         $courses = $query->get();
-
         return view('search')
             ->with('courses', $courses)
             ->with('target', $target)
