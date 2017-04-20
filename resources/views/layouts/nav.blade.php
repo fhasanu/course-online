@@ -19,13 +19,6 @@
           <ul class="nav navbar-nav navbar-right">
 			<li>
 			<div class='panel-custom'>
-				<form class="form-inline" role="form">
-					<div class="form-group">
-						<label class="filter-col" for="pref-search"></label> <input class="form-control input-sm" id="keyword" placeholder="Keyword" type="text">
-					</div><!-- form group [search] -->
-					 <button class="btn btn-default filter-col" type="submit"><span class="glyphicon glyphicon-search"></span>Search</button> <button class="btn btn-default filter-col" data-target='#advancedsearch' data-toggle='modal' type="button"><span class="glyphicon glyphicon-cog"></span></button>
-
-				</form>
 		        @if (Auth::guest())
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
