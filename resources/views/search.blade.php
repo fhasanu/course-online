@@ -43,7 +43,7 @@
             <p>Age : {{ $course->ak_course_age_name_eng }}</p>
             <p>Price : {{ $course->ak_course_detail_price }}</p>
             <p>Desc : {{ $course->ak_course_detail_desc }}</p>
-            <p>Link : <a href={!! '"'.url('/courses/').$courses->ak_course_id'"' !!}></a></p>
+            <p>Link : <a href="{!!'/courses/'.$courses->ak_course_id !!}£></a></p>
         </div>
     </div>
     <?php $result = $result + 1; ?>
