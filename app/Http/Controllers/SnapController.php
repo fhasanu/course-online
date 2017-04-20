@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Veritrans\Midtrans;
 
+use App\MainCategory;
 use App\Course;
 use App\CourseSchedule;
 use App\CourseDetail;
@@ -129,7 +130,7 @@ class SnapController extends Controller
             return $snap_token;
         }
         catch (Exception $e) 
-        {   
+        {  
             return $e->getMessage;
         }
     }
@@ -185,6 +186,12 @@ class SnapController extends Controller
         // echo '<br />this may be successful<br />';
         // $ttest = json_decode($test);
         // dd($ttest);
+
+        $maincat = new MainCategory();
+
+        $maincat->ak_maincat_name = 'newname';
+
+        $maincat->save();
 
         $midtrans = new Midtrans();
         echo 'test notification handler';
