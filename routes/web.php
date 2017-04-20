@@ -40,8 +40,8 @@ Route::resource('/courses', 'CourseController');
 // Route::post('/snapnotif', 'SnapController@notification');
 
 Route::get('/checkout', 'SnapController@snap');
-Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');;
-Route::post('/payment/snapnotif', 'SnapController@notification');
+Route::get('/snaptoken', 'SnapController@token');//->middleware('ajax');;
+Route::post('/payment/notification', 'SnapController@notification');
 Route::post('/payment/finish', 'SnapController@finish');
 Route::post('/payment/unfinish', 'SnapController@unfinish');
 Route::post('/payment/error', 'SnapController@error');

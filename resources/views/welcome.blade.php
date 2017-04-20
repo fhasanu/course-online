@@ -1,5 +1,5 @@
 @extends('layouts.master')
 
 @section('content')
-LOL
+{{Auth::user()->ak_user_id}}
 @endsection

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Veritrans\Midtrans;
 
 use App\Course;
@@ -18,7 +20,7 @@ class SnapController extends Controller
     {   
         Midtrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
         Midtrans::$isProduction = false;
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function snap ()
@@ -67,7 +69,7 @@ class SnapController extends Controller
             'total'    => 0
         ]);
 
-        return redirect('/snap');
+        return redirect('/checkout');
     }
 
     public function token ()
@@ -95,7 +97,7 @@ class SnapController extends Controller
         $items = array_map($populate, $order_id);
 
         // Populate customer details
-        $customer = Customer::find(session('user_id', 0));
+        $customer = Customer::find(Auth::user()->ak_user_id);
         if($customer){
             $customer_details = [
                 'first_name'   => $customer->ak_user_firstname,
@@ -118,11 +120,11 @@ class SnapController extends Controller
         try
         {
             $midtrans = new Midtrans();
-            $snap_token = $midtrans->getSnapToken($transaction_data);
 
             session([
                 'saveorder' => session('orders', [])
             ]);
+            $snap_token = $midtrans->getSnapToken($transaction_data);
 
             return $snap_token;
         }
@@ -155,7 +157,7 @@ class SnapController extends Controller
         $orders = session('saveorder', []);
         $result->courses = json_encode($orders);
 
-        $user = session('user_id', 1);
+        $user = Auth::user()->ak_user_id;
         $result->user_id = $user;
 
         TransactionController::save($result);

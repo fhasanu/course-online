@@ -14,8 +14,8 @@ class OnlyAjax
     */
     public function handle($request, Closure $next)
     {
-        if ( ! $request->ajax())
-            return redirect('snap');
+        if (!$request->ajax())
+            return redirect('/checkout');
 
         return $next($request);
     }
