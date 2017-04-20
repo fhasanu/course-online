@@ -1,10 +1,11 @@
 $(".addToCart").click(function(){
 	event.preventDefault();
         $.ajax({
-            url: url + '/addtocart?=' + $('input[name=courseid]').val(),
+            url: url + '/addtocart',
             type: 'GET',
-            success: function(r) {
-            	console.log(r);
+            data: { 'course_id' : parseInt($('input[name=courseid]').val()) },
+            success: function(data) {
+            	console.log(data);
             }
         });  
 });

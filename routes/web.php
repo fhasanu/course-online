@@ -40,16 +40,26 @@ Route::post('/search', 'SearchController@search');
 
 Route::resource('/courses', 'CourseController');
 
-Route::get('/snap', 'SnapController@snap');
-Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');
-Route::post('/snapfinish', 'SnapController@finish');
-Route::post('/snapnotif', 'SnapController@notification');
+// Route::get('/snap', 'SnapController@snap');
+// Route::get('/snaptoken', 'SnapController@token');
+// Route::post('/snapfinish', 'SnapController@finish');
+// Route::post('/snapnotif', 'SnapController@notification');
 
 Route::get('/checkout', 'SnapController@snap');
-Route::get('/addtocart', 'SnapController@addtocart');
+// <<<<<<< HEAD
+// Route::get('/addtocart', 'SnapController@addtocart');
 // Route::get('/snaptoken', 'SnapController@token');
 // Route::post('/payment/finish', 'SnapController@finish');
 // Route::post('/payment/snapnotif', 'SnapController@notification');
+// =======
+Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');;
+Route::post('/payment/snapnotif', 'SnapController@notification');
+Route::post('/payment/finish', 'SnapController@finish');
+Route::post('/payment/unfinish', 'SnapController@unfinish');
+Route::post('/payment/error', 'SnapController@error');
+Route::get('/addtocart', 'SnapController@addtocart');
+Route::get('/snapreset', 'SnapController@reset');
+// >>>>>>> cdb2e4810b37e7d2a581e62c412a428bfcb0e6aa
 
 Auth::routes();
 

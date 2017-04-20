@@ -1,74 +1,102 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Veritrans\Veritrans;
+use App\Transaction;
 
 class TransactionController extends Controller
 {
-    public function __construct()
-    {   
-        Veritrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
-        Veritrans::$isProduction = false;
-        // $this->middleware('auth');
-    }
-
-    public function transaction() 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return view('transaction'); 
+        //
     }
 
-    public function transaction_process(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $vt = new Veritrans;
-        $order_id = $request->input('order_id');
-        $action = $request->input('action');
-        switch ($action) {
-            case 'status':
-                $this->status($order_id);
-                break;
-            case 'approve':
-                $this->approve($order_id);
-                break;
-            case 'expire':
-                $this->expire($order_id);
-                break;
-            case 'cancel':
-                $this->cancel($order_id);
-                break;
-        } 
+        //
     }
 
-    public function status($order_id)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $vt = new Veritrans;
-        echo 'test get status </br>';
-        print_r ($vt->status($order_id) );
+        //
     }
 
-    public function cancel($order_id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $vt = new Veritrans;
-        echo 'test cancel trx </br>';
-        echo $vt->cancel($order_id);
+        //
     }
 
-    public function approve($order_id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
-        $vt = new Veritrans;
-        echo 'test get approve </br>';
-        print_r ($vt->approve($order_id) );
+        //
     }
 
-    public function expire($order_id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
-        $vt = new Veritrans;
-        echo 'test get expire </br>';
-        print_r ($vt->expire($order_id) );
+        //
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 
-}    
+    // Manual save
+    public static function save($data)
+    {
+        $transaction = new Transaction();
+
+        $transaction->ak_tran_saction_type     = $data->payment_type;
+        $transaction->ak_tran_saction_status   = $data->transaction_status;
+        $transaction->ak_tran_saction_user     = $data->user_id;
+        $transaction->ak_tran_saction_course   = $data->courses;
+
+        $transaction->save();
+
+        return 'true';
+    }
+}
