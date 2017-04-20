@@ -43,9 +43,8 @@
             <p>Age : {{ $course->ak_course_age_name_eng }}</p>
             <p>Price : {{ $course->ak_course_detail_price }}</p>
             <p>Desc : {{ $course->ak_course_detail_desc }}</p>
-{{--             <p><a href="{{ URL::to('/courses/' . $post->id) }}"></a>
-</p>
- --}}        </div>
+            <p>Detail : <a href="{{ URL::to('/courses/' . $courses->id) }}">DETAIL</a></p>
+        </div>
     </div>
     <?php $result = $result + 1; ?>
 @endforeach
