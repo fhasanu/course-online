@@ -25,7 +25,7 @@
             <li>Harga       :   {{$item->detail->ak_course_detail_price}}</li>
             <li>Level       :   {{$item->detail->ak_course_detail_level}}</li>
             <li>Deskirpsi   :  {{$item->detail->ak_course_detail_desc}}</li>
-            </ul>
+  add           </ul>
         </div>
     </div>
         @endforeach
