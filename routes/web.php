@@ -65,4 +65,4 @@ Route::get('/snapreset', 'SnapController@reset');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');

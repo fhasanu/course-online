@@ -1,13 +1,9 @@
-<html>
-<title>Checkout</title>
-    <head>
+@extends('layouts.master')
+@section('content')
         <script type="text/javascript"
                         src="https://app.sandbox.midtrans.com/snap/snap.js"
                         data-client-key="<CLIENT-KEY>"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    </head>
-    <body>
-
         
         <form id="payment-form" method="post" action="/payment/finish">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
@@ -20,14 +16,31 @@
         <h1>EMPTY</h1>
         
         @else
-
+        <ol>
         @foreach($cart as $item)
 
-        <h1>{{$item->ak_course_name}}</h1>
+            <li class="panel panel-default">
+<div class="panel panel-default">
+  <div class="panel-heading">
+        {{$item->ak_course_name}}
+  </div>
+  <div class="panel-body">
+        <ul>
+        <li>{{$item->ak_course_detail_price}}</li>
+        <li>{{$item->ak_course_detail_level}}</li>
+        <li>{{$item->ak_course_detail_age}}</li>
+        <li>{{$item->ak_course_detail_size}}</li>
+        <li>{{$item->ak_course_detail_desc}}</li>
+        </ul>
+  </div>
+</div>
+
+            </li>
 
         @endforeach
-        
-        <button id="pay-button">Pay!</button>
+        </ol>
+                
+        <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
 
         @endif
 
@@ -77,5 +90,4 @@
             });
         });
         </script>
-    </body>
-</html>
+@endsection
