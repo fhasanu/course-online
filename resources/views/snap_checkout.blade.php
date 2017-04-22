@@ -10,16 +10,12 @@
             <input type="hidden" name="result_type" id="result-type" value=""></div>
             <input type="hidden" name="result_data" id="result-data" value=""></div>
         </form>
-        {{var_dump($cart)}}
         @if (empty($cart))
 
         <h1>EMPTY</h1>
         
         @else
-        <ol>
         @foreach($cart as $item)
-
-<li class="panel panel-default">
     <div class="panel panel-default">
         <div class="panel-heading">
             {{$item->ak_course_name}}
@@ -34,11 +30,7 @@
             </ul>
         </div>
     </div>
-
-            </li>
-
         @endforeach
-        </ol>
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
 
