@@ -10,7 +10,7 @@
             <input type="hidden" name="result_type" id="result-type" value=""></div>
             <input type="hidden" name="result_data" id="result-data" value=""></div>
         </form>
-
+        {{$cart}}
         @if (empty($cart))
 
         <h1>EMPTY</h1>
@@ -19,21 +19,21 @@
         <ol>
         @foreach($cart as $item)
 
-            <li class="panel panel-default">
-<div class="panel panel-default">
-  <div class="panel-heading">
-        {{$item->ak_course_name}}
-  </div>
-  <div class="panel-body">
-        <ul>
-        <li>{{$item->ak_course_detail_price}}</li>
-        <li>{{$item->ak_course_detail_level}}</li>
-        <li>{{$item->ak_course_detail_age}}</li>
-        <li>{{$item->ak_course_detail_size}}</li>
-        <li>{{$item->ak_course_detail_desc}}</li>
-        </ul>
-  </div>
-</div>
+<li class="panel panel-default">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{$item->ak_course_name}}
+        </div>
+        <div class="panel-body">
+            <ul>
+            <li>{{$item->ak_course_detail_price}}</li>
+            <li>{{$item->ak_course_detail_level}}</li>
+            <li>{{$item->ak_course_detail_age}}</li>
+            <li>{{$item->ak_course_detail_size}}</li>
+            <li>{{$item->ak_course_detail_desc}}</li>
+            </ul>
+        </div>
+    </div>
 
             </li>
 

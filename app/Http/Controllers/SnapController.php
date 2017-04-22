@@ -32,8 +32,8 @@ class SnapController extends Controller
             $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
             return $course;
         };
-        $cart = array_map($populate, $order_id);
 
+        $cart = array_map($populate, $order_id);
         return view('snap_checkout')->with('cart', $cart);
     }
 
