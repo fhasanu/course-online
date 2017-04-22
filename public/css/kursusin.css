@@ -55,20 +55,100 @@ p.footer-links a{
 	width: 100%;
 }
 
-.margin-up {
+.parent {
+	position: relative;
+}
+
+.child {
+	position: absolute;
+}
+
+.set-up {
+	top: 15px;
+}
+
+.set-right {
+	right: 15px;
+}
+
+.set-left {
+	left: 15px;
+}
+
+.set-bottom {
+	bottom: 15px;
+}
+
+.margin-up-big {
 	margin-top: -25px;
 }
 
+.margin-up-med {
+	margin-top: -15px;
+}
+
+.margin-up-sml {
+	margin-top: -5px;
+}
+
+.margin-down-big {
+	margin-top: 25px;
+}
+
+.margin-down-med {
+	margin-top: 15px;
+}
+
+.margin-down-sml {
+	margin-top: 5px;
+}
+
+.margin-right-big {
+	margin-left: 25px;
+}
+
+.margin-right-med {
+	margin-left: 15pxl
+}
+
+.margin-right-sml {
+	margin-left: 5px;
+}
+
+.margin-left-big {
+	margin-right: 100px;
+}
+
+.margin-left-med {
+	margin-right: 75px;
+}
+
+.margin-left-sml {
+	margin-right: 5px;
+}
+
+.float-left {
+	float: left;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-normal {
+	float: none;
+}
+
 .width-big {
-	width: 500px;
+	width: 200px;
 }
 
 .width-med {
-	width: 300px;
+	width: 100px;
 }
 
 .width-sml {
-	width: 150px;
+	width: 90px;
 }
 
 .height-big {
@@ -89,4 +169,34 @@ p.footer-links a{
 .horizontal {
 	display: inline-table;
 	vertical-align: middle;
+}
+
+.course img {
+	height: 200px;
+	width: 150px;
+}
+
+.course h1 {
+	font-size: 1.4em;
+}
+
+.course h2 {
+	font-size: 1.2em;
+}
+
+.course p {
+	font-size: 0.9em;
+}
+
+.course a {
+	text-decoration: none;
+	color: blue;
+}
+
+.red {
+	color: red;
+}
+
+.result-text {
+	text-align: center;
 }

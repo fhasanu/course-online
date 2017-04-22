@@ -19,9 +19,11 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/search', function () {
-    return view('search');
-});
+// Route::get('/search', function () {
+//     return view('search');
+// });
+
+Route::get('/search', 'SearchController@search');
 
 Route::post('/search', 'SearchController@search');
 
