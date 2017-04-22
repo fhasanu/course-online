@@ -4,30 +4,31 @@
 
 <form method="POST" action="/search">
     {{ csrf_field() }}
-    <div class="form-group">
-        <label for="key">Search: </label>
-        <input type="text" class="form-control" id="key" name="key" value="<?php if (isset($target)): echo $target; endif; ?>">
+    <div class="form-inline row space">
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+            <input type="text" class="sharp-box space-item height-big" id="key" name="key" value="<?php if (isset($target)): echo $target; endif; ?>" placeholder="Search all courses by keyword">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
+            <input type="text" class="sharp-box space-item height-big" id="location" name="location" value="<?php if (isset($location)): echo $location; endif; ?>">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <button class="btn btn-danger sharp-box space-item height-big" type="submit">Search</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="location">Filter by Location : </label>
-        <input type="text" class="form-control" id="location" name="location" value="<?php if (isset($location)): echo $location; endif; ?>">
+    <div class="form-inline row space margin-up">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <input type="number" class="sharp-box space-item height-med" id="min" name="min" value="<?php if (isset($max)): echo $min; endif; ?>" placeholder="min price">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <input type="number" class="sharp-box space-item height-med" id="max" name="max" value="<?php if (isset($max)): echo $max; endif; ?>" placeholder="max price">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <input type="text" class="sharp-box space-item height-med" id="age" name="age" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="by age">
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+            <input type="text" class="sharp-box space-item height-med" id="level" name="level" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="by level">
+        </div>
     </div>
-    <div class="form-group">
-        <label>Filter by Price : </label>
-        <label for="min">From : </label>
-        <input type="number" class="form-control" id="min" name="min" value="<?php if (isset($max)): echo $min; endif; ?>">
-        <label for="max">To : </label>
-        <input type="number" class="form-control" id="max" name="max" value="<?php if (isset($max)): echo $max; endif; ?>">
-    </div>
-    <div class="form-group">
-        <label for="age">Filter by Age : </label>
-        <input type="text" class="form-control" id="age" name="age" value="<?php if (isset($age)): echo $age; endif; ?>">
-    </div>
-    <div class="form-group">
-        <label for="level">Filter by Level : </label>
-        <input type="text" class="form-control" id="level" name="level" value="<?php if (isset($level)): echo $level; endif; ?>">
-    </div>
-    <button class="btn btn-submit" type="submit">Search</button>
 </form>
 
 @if (isset($courses))
