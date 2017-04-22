@@ -21,13 +21,10 @@
             {{$item->ak_course_name}}
         </div>
         <div class="panel-body">
-        {{var_dump($item)}}
             <ul>
-            <li>{{$item->detail->ak_course_detail_price}}</li>
-            <li>{{$item->detail->ak_course_detail_level}}</li>
-            <li>{{$item->detail->ak_course_detail_age}}</li>
-            <li>{{$item->detail->ak_course_detail_size}}</li>
-            <li>{{$item->detail->ak_course_detail_desc}}</li>
+            <li>Harga       :   {{$item->detail->ak_course_detail_price}}</li>
+            <li>Level       :   {{$item->detail->ak_course_detail_level}}</li>
+            <li>Deskirpsi   :  {{$item->detail->ak_course_detail_desc}}</li>
             </ul>
         </div>
     </div>
