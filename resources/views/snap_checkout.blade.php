@@ -21,6 +21,7 @@
             {{$item->ak_course_name}}
         </div>
         <div class="panel-body">
+        {{var_dump($item)}}
             <ul>
             <li>{{$item->ak_course_detail_price}}</li>
             <li>{{$item->ak_course_detail_level}}</li>
