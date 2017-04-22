@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+#<!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
@@ -13,14 +13,14 @@
     <title>{{ config('app.name', 'Laravel' ) }}</title>
 
     <!-- Styles -->
-{{--     <link href="{{ asset('css/app.css')}}" rel="stylesheet"> --}}
+{{--     <link href="{{ asset('css/app.css',true)}}" rel="stylesheet"> --}}
 
-    <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css',true)}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{ asset('/vendor/font-awesome/css/font-awesome.min.css')}}"
+    <link href="{{ asset('/vendor/font-awesome/css/font-awesome.min.css',true)}}"
     rel="stylesheet" type="text/css">
-    <link href="{{ asset('/css/kursusin.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/css/kursusin.css',true)}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">    
 
@@ -39,11 +39,11 @@
         @include('layouts.footer')
 
     <!-- jQuery -->
-    <script src="{{ asset('/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('/vendor/jquery/jquery.min.js',true)}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('/js/kursusin.js')}}"></script>
+    <script src="{{ asset('/vendor/bootstrap/js/bootstrap.min.js',true)}}"></script>
+    <script src="{{ asset('/js/kursusin.js',true)}}"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
