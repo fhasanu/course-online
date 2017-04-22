@@ -38,7 +38,7 @@
     <div class="panel panel-danger sharp-box space-item course">
         <div class="panel-body row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <img src="#">
+                <img src="{{ $course->ak_provider_img_path }}">
             </div>
             <div class="parent col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <h1 class=""><a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">{{ $course->ak_course_name }}</a></h1>
