@@ -19,7 +19,7 @@
         @else
         @foreach($cart as $item)
 
-
+{{-- 
         <div class="panel panel-danger sharp-box space-item course">
             <div class="panel-body row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -31,9 +31,13 @@
                     <p class="margin-down-sml">{{ $item->ak_course_detail_desc }}</p>
                 </div>
             </div>
-        </div>
+    <p class="margin-down-med">Course held by : {{ $result->ak_provider_firstname }}{{ $result->ak_provider_lastname }}</p>
+        <p>Contact : {{ $result->ak_provider_telephone }}</p>
+        <p>Location : {{ $result->ak_provider_address }}, {{ $result->ak_region_cityname }}, {{ $result->ak_region_namefull }}, {{ $result->ak_provider_zipcode }}</p>
 
-{{-- 
+        </div>
+ --}}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             {{$item->ak_course_name}}
@@ -45,7 +49,7 @@
             <li>Deskirpsi   :  {{$item['detail']->ak_course_detail_desc}}</li>
   add           </ul>
         </div>
-    </div> --}}
+    </div>
         @endforeach
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>

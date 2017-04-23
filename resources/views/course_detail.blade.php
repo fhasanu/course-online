@@ -31,7 +31,7 @@
 				@endforeach
 			</tbody>
 		</table>
-		<p class="margin-down-med">Event held by : {{ $result->ak_provider_firstname }}{{ $result->ak_provider_lastname }}</p>
+		<p class="margin-down-med">Course held by : {{ $result->ak_provider_firstname }}{{ $result->ak_provider_lastname }}</p>
 		<p>Contact : {{ $result->ak_provider_telephone }}</p>
 		<p>Location : {{ $result->ak_provider_address }}, {{ $result->ak_region_cityname }}, {{ $result->ak_region_namefull }}, {{ $result->ak_provider_zipcode }}</p>
 	</div>
