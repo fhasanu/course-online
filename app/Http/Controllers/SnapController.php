@@ -38,9 +38,6 @@ class SnapController extends Controller
 
         $populate = function ($id) {
 
-        $detail     = CourseDetail::where('ak_course_detail_id', $course->ak_course_id)->first();
-        $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();
-
         $query = DB::table('ak_course')
                      ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_detail_id')
                      // ->join('ak_course_schedule', 'ak_course_schedule.ak_course_schedule_detid', '=', 'ak_course_detail.ak_course_detail_id')
@@ -54,7 +51,6 @@ class SnapController extends Controller
                      'ak_course.ak_course_name', 'ak_provider.ak_provider_firstname', 'ak_provider.ak_provider_lastname', 'ak_provider.ak_provider_address', 'ak_provider.ak_provider_zipcode', 'ak_provider.ak_provider_telephone', 'ak_provider_img.ak_provider_img_path', 'ak_region.ak_region_cityname', 'ak_region.ak_region_name', 'ak_region.ak_region_namefull')
                     ->where('ak_course.ak_course_id', '=', $id);
         $result     = $query->first();
-        $result->schedules = $schedules ;
         // $provider   = Provider::where('ak_provider_id', $course->ak_course_prov_id)->first();
         // $image      = ProviderImg::where('ak_provider_img_id', $provider->ak_provider_id)->get();
         // $region     = Region::where('ak_region_id', $provider->ak_provider_region)->get();
