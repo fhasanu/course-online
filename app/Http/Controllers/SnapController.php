@@ -34,7 +34,6 @@ class SnapController extends Controller
         $course = Course::find($id);
         $detail     = CourseDetail::where('ak_course_detail_id', $course->ak_course_id)->first();
         $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();
-        $facilities = Facility::where('ak_course_facility_detid', $detail->ak_course_detail_id)->get();
         $query = DB::table('ak_course')
                     // ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_detail_id')
                     // ->join('ak_course_schedule', 'ak_course_schedule.ak_course_schedule_detid', '=', 'ak_course_detail.ak_course_detail_id')
@@ -54,7 +53,6 @@ class SnapController extends Controller
             'result' => $result,
             'detail' => $detail,
             'schedules' => $schedules,
-            'facilities' => $facilities,
         ];
         };
 
