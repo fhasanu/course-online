@@ -1,6 +1,5 @@
 @extends('layouts.master')
 @section('content')
-{{var_dump($snap)}}
 <div class="alert alert-success" role="alert">Transaksi Sukses</div>
 <div class="panel panel-default">
 <div class="panel panel-body">

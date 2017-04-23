@@ -16,7 +16,7 @@
         
         @else
         @foreach($cart as $result)
-            <div class="space row course">
+{{--             <div class="space row course">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <img src="{{ $result->image->ak_provider_img_path }}">
                 </div>
@@ -28,7 +28,7 @@
 
                     {{var_dump($result->schedule)}}
                 </div>
-            </div>
+            </div> --}}
         @endforeach
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
