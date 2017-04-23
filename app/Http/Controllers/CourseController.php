@@ -64,7 +64,7 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
         if(!$course)
-            return redirect('/courses');
+            return redirect('/');
 
         $detail     = CourseDetail::where('ak_course_detail_id', $course->ak_course_id)->first();
         $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();

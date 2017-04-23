@@ -37,30 +37,22 @@ class SnapController extends Controller
 
 
         $populate = function ($id) {
-
-        $course = Course::find($id);
-        $detail     = CourseDetail::where('ak_course_detail_id', $course->ak_course_id)->first();
-        $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();
         $query = DB::table('ak_course')
-                    // ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_detail_id')
-                    // ->join('ak_course_schedule', 'ak_course_schedule.ak_course_schedule_detid', '=', 'ak_course_detail.ak_course_detail_id')
+                     ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_detail_id')
+                     ->join('ak_course_schedule', 'ak_course_schedule.ak_course_schedule_detid', '=', 'ak_course_detail.ak_course_detail_id')
                     // ->join('ak_course_facility', 'ak_course_facility.ak_course_facility_detid', '=', 'ak_course_detail.ak_course_detail_id')
                     ->join('ak_provider', 'ak_provider.ak_provider_id', '=', 'ak_course.ak_course_prov_id')
                     ->join('ak_provider_img', 'ak_provider_img.ak_provider_id', '=', 'ak_provider.ak_provider_id')
                     ->join('ak_region', 'ak_region.ak_region_id', '=', 'ak_provider.ak_provider_region')
-                    ->select('ak_course.ak_course_id', 'ak_course.ak_course_name', 'ak_provider.ak_provider_firstname', 'ak_provider.ak_provider_lastname', 'ak_provider.ak_provider_address', 'ak_provider.ak_provider_zipcode', 'ak_provider.ak_provider_telephone', 'ak_provider_img.ak_provider_img_path', 'ak_region.ak_region_cityname', 'ak_region.ak_region_name', 'ak_region.ak_region_namefull')
+                    ->select('ak_course_schedule.ak_course_schedule_day','ak_course_schedule.ak_course_schedule_time','ak_course.ak_course_id', 'ak_course.ak_course_name', 'ak_provider.ak_provider_firstname', 'ak_provider.ak_provider_lastname', 'ak_provider.ak_provider_address', 'ak_provider.ak_provider_zipcode', 'ak_provider.ak_provider_telephone', 'ak_provider_img.ak_provider_img_path', 'ak_region.ak_region_cityname', 'ak_region.ak_region_name', 'ak_region.ak_region_namefull')
                     ->where('ak_course.ak_course_id', '=', $id);
         $result     = $query->first();
         // $provider   = Provider::where('ak_provider_id', $course->ak_course_prov_id)->first();
         // $image      = ProviderImg::where('ak_provider_img_id', $provider->ak_provider_id)->get();
         // $region     = Region::where('ak_region_id', $provider->ak_provider_region)->get();
         // dd($course);
-        return [
-            'course' => $course,
             'result' => $result,
-            'detail' => $detail,
-            'schedules' => $schedules,
-        ];
+            return $result;
         };
 
 /*
@@ -73,7 +65,6 @@ class SnapController extends Controller
 */
 
         $cart = array_map($populate, $order_id);
-        dd($cart);
         return view('snap_checkout')->with('cart', $cart);
     }
 

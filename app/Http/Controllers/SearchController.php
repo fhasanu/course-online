@@ -121,7 +121,7 @@ class SearchController extends Controller
     {
         $schedule  = CourseSchedule::find($id);
         if(!$schedule)
-            return redirect('/courses');
+            return redirect('/');
 
         $detail = CourseDetail::find($schedule->ak_course_schedule_detid);
 
