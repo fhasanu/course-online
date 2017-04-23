@@ -7,6 +7,11 @@
 	padding: 20px 25px;
 
 }
+
+#cartadded{
+	display:none;
+}
+
 .footer-menu{
 	color:  #8f9296;
 	font-size: 14px;

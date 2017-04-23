@@ -26,7 +26,7 @@
         <p class="margin-down-sml">{{ $result->detail->ak_course_detail_desc }}</p>
         <p class="">Schedule : </p>
 
-        {{var_dump()}}
+        {{var_dump($result->schedule)}}
     </div>
 </div>
 
