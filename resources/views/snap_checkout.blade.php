@@ -32,7 +32,7 @@
                     <p class="">Schedule : </p>
                     <table class="width-big">
                         <tbody>
-                            @foreach($schedules as $schedule)
+                            @foreach($item->schedules as $schedule)
                             <tr>
                                 <td>{{$item->ak_course_schedule_day}}</td>
                                 <td>{{$item->ak_course_schedule_time}}</td>

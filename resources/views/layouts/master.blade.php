@@ -18,7 +18,6 @@
     <link href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css',true)}}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="{{ asset('/vendor/font-awesome/css/font-awesome.min.css',true)}}"
     rel="stylesheet" type="text/css">
     <link href="{{ asset('/css/kursusin.css',true)}}" rel="stylesheet" type="text/css">
 
