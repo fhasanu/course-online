@@ -16,6 +16,35 @@
         
         @else
         @foreach($cart as $item)
+
+
+        <div class="panel panel-danger sharp-box space-item course">
+            <div class="panel-body row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <img src="{{ $item->course->ak_provider_img_path }}">
+                </div>
+                <div class="parent col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <h1 class=""><a href="{{ URL::to('/courses/' . $item->course->ak_course_id) }}">{{ $item->result->ak_course_name }}</a></h1>
+                    <h2 class="margin-left-sml child set-up set-right red">Rp {{ $item->detail->ak_course_detail_price }}</h2>
+                    <h2 class="float-normal">{{ $item->course->ak_subcat_name }}   <span class="label label-success">{{ $item->course->ak_course_level_name }}</span>  <span class="label label-primary">{{ $item->course->ak_course_age_name_eng }}</span></h2>
+                    <p class="margin-down-sml">{{ $item->detail->ak_course_detail_desc }}</p>
+                    <p class="">Schedule : </p>
+                    <table class="width-big">
+                        <tbody>
+                            @foreach($schedules as $schedule)
+                            <tr>
+                                <td>{{$item->schedule->ak_course_schedule_day}}</td>
+                                <td>{{$item->schedule->ak_course_schedule_time}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+{{-- 
     <div class="panel panel-default">
         <div class="panel-heading">
             {{$item->ak_course_name}}
@@ -27,7 +56,7 @@
             <li>Deskirpsi   :  {{$item->detail->ak_course_detail_desc}}</li>
   add           </ul>
         </div>
-    </div>
+    </div> --}}
         @endforeach
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
