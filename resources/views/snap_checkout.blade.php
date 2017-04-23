@@ -12,7 +12,9 @@
         </form>
         @if (empty($cart))
 
-        <h1>EMPTY</h1>
+        <div class="alert alert-warning" role="alert">
+          <strong>Warning !</strong> Cart is empty.
+        </div>
         
         @else
         @foreach($cart as $item)

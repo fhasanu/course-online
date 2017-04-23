@@ -73,6 +73,7 @@ class SnapController extends Controller
 */
 
         $cart = array_map($populate, $order_id);
+        dd($cart);
         return view('snap_checkout')->with('cart', $cart);
     }
 

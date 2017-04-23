@@ -1,5 +1,5 @@
 <?php
-
+echo(env('APP_ENV') === 'production');
 if (env('APP_ENV') === 'production') {
     URL::forceSchema('https');
 }
