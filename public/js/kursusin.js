@@ -1,5 +1,6 @@
 $(".addToCart").click(function(){
 	event.preventDefault();
+        console.log(url);
         $.ajax({
             url: url + '/addtocart',
             type: 'GET',

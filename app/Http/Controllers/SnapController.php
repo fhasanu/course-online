@@ -13,9 +13,14 @@ use DB;
 
 use App\Course;
 use App\CourseDetail;
+use App\CourseLevel;
+use App\CourseAge;
+use App\MainCategory;
+use App\SubCategory;
 use App\Provider;
 use App\Region;
 use App\Province;
+use App\CourseSchedule;
 
 class SnapController extends Controller
 {
