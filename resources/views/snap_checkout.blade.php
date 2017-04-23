@@ -44,10 +44,10 @@
         </div>
         <div class="panel-body">
             <ul>
-            <li>Harga       :   {{$item['detail']->ak_course_detail_price}}</li>
-            <li>Level       :   {{$item['detail']->ak_course_detail_level}}</li>
-            <li>Deskirpsi   :  {{$item['detail']->ak_course_detail_desc}}</li>
-  add           </ul>
+            <li>Harga       :   {{$item->ak_course_detail_price}}</li>
+            <li>Level       :   {{$item->ak_course_detail_level}}</li>
+            <li>Deskirpsi   :  {{$item->ak_course_detail_desc}}</li>
+             </ul>
         </div>
     </div>
         @endforeach
