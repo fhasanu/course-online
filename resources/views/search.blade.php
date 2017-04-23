@@ -45,7 +45,10 @@
                 <h2 class="margin-left-sml child set-up set-right red">Rp {{ $course->ak_course_detail_price }}</h2>
                 <h2 class="float-normal">{{ $course->ak_subcat_name }}   <span class="label label-success">{{ $course->ak_course_level_name }}</span>  <span class="label label-primary">{{ $course->ak_course_age_name_eng }}</span></h2>
                 <p class="margin-down-sml">{{ $course->ak_course_detail_desc }}</p>
-                <button class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box">Enroll</button>
+                <form class="addToCartForm">
+                    <input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
+                    <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Add Cart</button>
+                </form>
             </div>
         </div>
     </div>
