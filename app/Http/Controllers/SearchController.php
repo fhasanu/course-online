@@ -29,6 +29,8 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
+        $min = null;
+        $max = null;
         // dd(request()->all());
         $target = $request->input('key');
         if (!isset($target) || $target == null): $target = ''; endif;

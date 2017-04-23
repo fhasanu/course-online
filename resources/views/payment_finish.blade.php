@@ -10,7 +10,7 @@
 	<li>Status 	:	{{ucfirst($snap->status_message)}}</li>
 	<li>Harga	:	Rp. {{$snap->gross_amount}}</li>
 	<li>Pembayaran:	{{ucfirst(preg_replace('/[^A-Za-z0-9\-]/', '', $snap->payment_type))}}</li>	
-	<li>{{$snap->trahsaction_time}}</li>	
+	<li>{{date(strtotime('d-m-Y H:i:s',$snap->transaction_time))}}</li>	
 </ul>
 </div>
 </div>

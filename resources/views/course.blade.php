@@ -4,7 +4,7 @@
 
 @if(empty($courses))
 
-<h1>EMPTY BIATCH</h1>
+<h1>EMPTY</h1>
 
 @endif
 
