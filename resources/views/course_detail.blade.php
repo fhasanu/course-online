@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="space row course">
+
+	<div class="alert alert-success" id="cartadded" role="alert"><strong>{{ $course->ak_course_name }}</strong> masuk ke cart</div>
+
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 		<img src="{{ $result->ak_provider_img_path }}">
 	</div>

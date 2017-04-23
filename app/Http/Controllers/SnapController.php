@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Veritrans\Midtrans;
 
+use App\ProviderImg;
 use App\MainCategory;
 use App\Course;
 use App\CourseSchedule;
@@ -30,6 +31,8 @@ class SnapController extends Controller
         $populate = function ($id) {
             $course = Course::find($id);
             $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
+            $course->image = ProviderImg::where('ak_provider_id', $course->ak_course_prov_id)->first();
+            $course->schedule = CourseSchedule::where('ak_course_schedule_detid',$course->detail->ak_course_detail_id);
             return $course;
         };
 

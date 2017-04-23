@@ -9,12 +9,6 @@
             <input type="text" class="sharp-box space-item height-big" id="key" name="key" value="<?php if (isset($target)): echo $target; endif; ?>" placeholder="Search all courses by keyword">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
-{{--         <input type="text" class="sharp-box space-item height-big" id="location" name="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="region">
-
-
-        <input type="text" name="location" id="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="region"
-         data-list="Bekasi, Bekasi, Bogor, Depok, Jakarta Selatan, Jakarta Timur, Jakarta Pusat, Jakarta Barat, Jakarta Utara, Tangerang, Tangerang Selatan" class="dropdown-input" />
- --}}
         <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-big" list="regionlist" type="text" name="location" id="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="Region"/>
         <datalist id="regionlist">
             <option>Bekasi</option>
@@ -52,8 +46,7 @@
             <option>ADULT</option>
         </datalist>
 
-{{--             <input type="text" class="sharp-box space-item height-med" id="age" name="age" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="by age">
- --}}        </div>
+    </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 
         <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="levellist" type="text" name="location" id="location" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="Level"/>
@@ -63,8 +56,7 @@
             <option>MAHIR</option>
         </datalist>
 
-{{--             <input type="text" class="sharp-box space-item height-med" id="level" name="level" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="by level">
- --}}        </div>
+       </div>
     </div>
 </form>
 
@@ -82,10 +74,12 @@
                 <h2 class="margin-left-sml child set-up set-right red">Rp {{ $course->ak_course_detail_price }}</h2>
                 <h2 class="float-normal">{{ $course->ak_subcat_name }}   <span class="label label-success">{{ $course->ak_course_level_name }}</span>  <span class="label label-primary">{{ $course->ak_course_age_name_eng }}</span></h2>
                 <p class="margin-down-sml">{{ $course->ak_course_detail_desc }}</p>
-                <form class="addToCartForm">
+{{--                 <form class="addToCartForm">
                     <input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
                     <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Detail</button>
                 </form>
+ --}}       
+                    <button class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box"><a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">{{ $course->ak_course_name }}</a></button>     
             </div>
         </div>
     </div>
