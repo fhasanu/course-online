@@ -127,6 +127,8 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('ak_course')->insert([
+            ['ak_course_name' => '', 'ak_course_cat_id' => 0, 'ak_course_prov_id' => ''],
+        ]);
     }
 }
