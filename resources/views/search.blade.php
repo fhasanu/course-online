@@ -79,7 +79,7 @@
                     <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Detail</button>
                 </form>
  --}}       
-                    <button class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box"><a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">{{ $course->ak_course_name }}</a></button>     
+                    <button class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box"><a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">DETAIL</a></button>     
             </div>
         </div>
     </div>

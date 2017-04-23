@@ -12,22 +12,23 @@
         </form>
         @if (empty($cart))
 
-        <h1>EMPTY</h1>
+        <div class="alert alert-warning" role="alert"><strong>Warning!</strong> Cart is empty</div>
         
         @else
-        @foreach($cart as $item)
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            {{$item->ak_course_name}}
-        </div>
-        <div class="panel-body">
-            <ul>
-            <li>Harga       :   {{$item->detail->ak_course_detail_price}}</li>
-            <li>Level       :   {{$item->detail->ak_course_detail_level}}</li>
-            <li>Deskirpsi   :  {{$item->detail->ak_course_detail_desc}}</li>
-  add           </ul>
-        </div>
-    </div>
+        @foreach($cart as $result)
+            <div class="space row course">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <img src="{{ $result->image->ak_provider_img_path }}">
+                </div>
+                <div class="parent col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <h1 class=""><a href="{{ URL::to('/courses/' . $result->ak_course_id) }}">{{ $result->ak_course_name }}</a></h1>
+                    <h2 class="margin-left-sml child set-up set-right red">Rp {{ $result->detail->ak_course_detail_price }}</h2>
+                    <p class="margin-down-sml">{{ $result->detail->ak_course_detail_desc }}</p>
+                    <p class="">Schedule : </p>
+
+                    {{var_dump($result->schedule)}}
+                </div>
+            </div>
         @endforeach
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>

@@ -1,17 +1,12 @@
 @extends('layouts.master')
 @section('content')
 {{var_dump($snap)}}
+<div class="alert alert-success" role="alert">Transaksi Sukses</div>
 <div class="panel panel-default">
-<div class="panel panel-title">
-	<h1>Pembayaran Sukses</h1>
-</div>
 <div class="panel panel-body">
-<ul>
-	<li>Status 	:	{{ucfirst($snap->status_message)}}</li>
-	<li>Harga	:	Rp. {{$snap->gross_amount}}</li>
-	<li>Pembayaran:	{{ucfirst(preg_replace('/[^A-Za-z0-9\-]/', ' ', $snap->payment_type))}}</li>	
-	<li>{{$snap->transaction_time}}</li>	
-</ul>
-</div>
+	<div>Status 	:	{{ucfirst($snap->status_message)}}</div>
+	<div>Harga		:	Rp. {{$snap->gross_amount}}</div>
+	<div>Pembayaran	:	{{ucfirst(preg_replace('/[^A-Za-z0-9\-]/', ' ', $snap->payment_type))}}</div>	
+	<div>Waktu		:	{{$snap->transaction_time}}</div>	
 </div>
 @endsection
