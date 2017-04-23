@@ -18,7 +18,7 @@
         @foreach($cart as $item)
 
 
-        <div class="panel panel-danger sharp-box space-item course">
+{{--         <div class="panel panel-danger sharp-box space-item course">
             <div class="panel-body row">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <img src="{{ $item->course->ak_provider_img_path }}">
@@ -43,8 +43,8 @@
                 </div>
             </div>
         </div>
+ --}}
 
-{{-- 
     <div class="panel panel-default">
         <div class="panel-heading">
             {{$item->ak_course_name}}
@@ -56,7 +56,7 @@
             <li>Deskirpsi   :  {{$item->detail->ak_course_detail_desc}}</li>
   add           </ul>
         </div>
-    </div> --}}
+    </div>
         @endforeach
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
