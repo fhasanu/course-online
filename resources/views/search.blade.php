@@ -46,7 +46,7 @@
                 <h2 class="float-normal">{{ $course->ak_subcat_name }}   <span class="label label-success">{{ $course->ak_course_level_name }}</span>  <span class="label label-primary">{{ $course->ak_course_age_name_eng }}</span></h2>
                 <p class="margin-down-sml">{{ $course->ak_course_detail_desc }}</p>
                 <form class="addToCartForm">
-                    <input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
+                    <input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">                    
                     <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Add Cart</button>
                 </form>
             </div>
@@ -68,4 +68,8 @@
         }
     ?>
 @endif
+<script type="text/javascript">
+    var url = {!! '"'.url('/').'"' !!};
+</script>
+
 @endsection

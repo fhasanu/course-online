@@ -30,7 +30,6 @@
 
 <script type="text/javascript">
 	var url = {!! '"'.url('/').'"' !!};
-	var course_id = {{$result->ak_course_id}};
 </script>
 
 @endsection
