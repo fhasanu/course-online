@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Veritrans\Midtrans;
 
-use App\MainCategory;
+use DB;
+
 use App\Course;
-use App\CourseSchedule;
 use App\CourseDetail;
-use App\Customer;
+use App\Provider;
+use App\Region;
+use App\Province;
 
 class SnapController extends Controller
 {
