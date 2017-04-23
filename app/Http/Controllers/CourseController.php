@@ -82,7 +82,7 @@ class CourseController extends Controller
         // $provider   = Provider::where('ak_provider_id', $course->ak_course_prov_id)->first();
         // $image      = ProviderImg::where('ak_provider_img_id', $provider->ak_provider_id)->get();
         // $region     = Region::where('ak_region_id', $provider->ak_provider_region)->get();
-        // dd($course);
+        // dd($result);
         return view('course_detail', [
 
             'course' => $course,
