@@ -44,7 +44,7 @@ class SnapController extends Controller
                     ->join('ak_provider', 'ak_provider.ak_provider_id', '=', 'ak_course.ak_course_prov_id')
                     ->join('ak_provider_img', 'ak_provider_img.ak_provider_id', '=', 'ak_provider.ak_provider_id')
                     ->join('ak_region', 'ak_region.ak_region_id', '=', 'ak_provider.ak_provider_region')
-                    ->select('ak_course_schedule.ak_course_schedule_day','ak_course_schedule.ak_course_schedule_time','ak_course.ak_course_id','ak_course_detail.ak_course_detail_price',
+                    ->select('ak_course_schedule.ak_course_schedule_day','ak_course_schedule.ak_course_schedule_time','ak_course.ak_course_id','ak_course_detail.ak_course_detail_price','ak_course_detail.ak_course_detail_desc',
                      'ak_course.ak_course_name', 'ak_provider.ak_provider_firstname', 'ak_provider.ak_provider_lastname', 'ak_provider.ak_provider_address', 'ak_provider.ak_provider_zipcode', 'ak_provider.ak_provider_telephone', 'ak_provider_img.ak_provider_img_path', 'ak_region.ak_region_cityname', 'ak_region.ak_region_name', 'ak_region.ak_region_namefull')
                     ->where('ak_course.ak_course_id', '=', $id);
         $result     = $query->first();
