@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+
+<script type="text/javascript">
+    var url = {!! '"'.url('/').'"' !!};
+</script>
+
+
 <div class="space row course">
 	<div class="col-lg-3 col-md-3 col-sm-4 col-xs-4">
 		<img class="margin-down-big" src="{{ $result->ak_provider_img_path }}">
@@ -30,9 +36,5 @@
 		<p>Location : {{ $result->ak_provider_address }}, {{ $result->ak_region_cityname }}, {{ $result->ak_region_namefull }}, {{ $result->ak_provider_zipcode }}</p>
 	</div>
 </div>
-
-<script type="text/javascript">
-	var url = {!! '"'.url('/').'"' !!};
-</script>
 
 @endsection

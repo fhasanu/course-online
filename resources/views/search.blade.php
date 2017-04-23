@@ -2,6 +2,11 @@
 
 @section('content')
 
+<script type="text/javascript">
+    var url = {!! '"'.url('/').'"' !!};
+</script>
+
+
 <form method="POST" action="/search">
     {{ csrf_field() }}
     <div class="form-inline row space">
@@ -68,8 +73,4 @@
         }
     ?>
 @endif
-<script type="text/javascript">
-    var url = {!! '"'.url('/').'"' !!};
-</script>
-
 @endsection
