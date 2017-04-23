@@ -27,9 +27,9 @@
                 </div>
             </div>
         @endforeach
-                
-        <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
-
+        <div>
+        <button type="button" class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" id="pay-button">Pay!</button>
+        </div>
         @endif
 
         <script type="text/javascript">
