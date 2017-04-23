@@ -44,7 +44,7 @@ Route::post('/search', 'SearchController@search');
 // Route::get('/home','HomeController@index');
 // Route::get('/admin','AdminController@index');
 
-Route::resource('/courses', 'CourseController');
+Route::get('/courses/{id}', ['uses'=>'CourseController@show']);
 
 // Route::get('/snap', 'SnapController@snap');
 // Route::get('/snaptoken', 'SnapController@token');
