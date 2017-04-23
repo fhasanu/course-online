@@ -55,6 +55,11 @@ p.footer-links a{
 	width: 100%;
 }
 
+.awesomplete-space-item {
+	padding: 0px 15px 0px 15px;
+	margin: 10px 0px 10px 0px;
+}
+
 .parent {
 	position: relative;
 }

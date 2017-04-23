@@ -9,8 +9,27 @@
             <input type="text" class="sharp-box space-item height-big" id="key" name="key" value="<?php if (isset($target)): echo $target; endif; ?>" placeholder="Search all courses by keyword">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
-            <input type="text" class="sharp-box space-item height-big" id="location" name="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="region">
-        </div>
+{{--         <input type="text" class="sharp-box space-item height-big" id="location" name="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="region">
+
+
+        <input type="text" name="location" id="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="region"
+         data-list="Bekasi, Bekasi, Bogor, Depok, Jakarta Selatan, Jakarta Timur, Jakarta Pusat, Jakarta Barat, Jakarta Utara, Tangerang, Tangerang Selatan" class="dropdown-input" />
+ --}}
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-big" list="regionlist" type="text" name="location" id="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="Region"/>
+        <datalist id="regionlist">
+            <option>Bekasi</option>
+            <option>Bogor</option>
+            <option>Depok</option>
+            <option>Jakarta Selatan</option>
+            <option>Jakarta Timur</option>
+            <option>Jakarta Pusat</option>
+            <option>Jakarta Barat</option>
+            <option>Jakarta Utara</option>
+            <option>Tangerang</option>
+            <option>Tangerang Selatan</option>
+        </datalist>
+
+         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <button class="btn btn-danger sharp-box space-item height-big" type="submit">Search</button>
         </div>
@@ -23,11 +42,29 @@
             <input type="number" class="sharp-box space-item height-med" id="max" name="max" value="<?php if (isset($max)): echo $max; endif; ?>" placeholder="max price">
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-            <input type="text" class="sharp-box space-item height-med" id="age" name="age" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="by age">
-        </div>
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="agelist" type="text" name="location" id="location" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="Age"/>
+        <datalist id="agelist">
+            <option>ANAK-ANAK</option>
+            <option>REMAJA</option>
+            <option>DEWASA</option>
+            <option>KIDS</option>
+            <option>TEENS</option>
+            <option>ADULT</option>
+        </datalist>
+
+{{--             <input type="text" class="sharp-box space-item height-med" id="age" name="age" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="by age">
+ --}}        </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-            <input type="text" class="sharp-box space-item height-med" id="level" name="level" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="by level">
-        </div>
+
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="levellist" type="text" name="location" id="location" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="Level"/>
+        <datalist id="levellist">
+            <option>PEMULA</option>
+            <option>MENENGAH</option>
+            <option>MAHIR</option>
+        </datalist>
+
+{{--             <input type="text" class="sharp-box space-item height-med" id="level" name="level" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="by level">
+ --}}        </div>
     </div>
 </form>
 
@@ -47,7 +84,7 @@
                 <p class="margin-down-sml">{{ $course->ak_course_detail_desc }}</p>
                 <form class="addToCartForm">
                     <input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
-                    <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Add Cart</button>
+                    <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Detail</button>
                 </form>
             </div>
         </div>
@@ -68,4 +105,5 @@
         }
     ?>
 @endif
+
 @endsection

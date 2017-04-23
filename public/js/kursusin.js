@@ -1,4 +1,5 @@
 $(".addToCart").click(function(){
+
 	event.preventDefault();
         $.ajax({
             url: url + '/addtocart',
