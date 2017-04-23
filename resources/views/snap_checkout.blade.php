@@ -16,8 +16,7 @@
         
         @else
         @foreach($cart as $result)
-        {{var_dump($result)}}
-{{--             <div class="space row course">
+            <div class="space row course">
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                     <img src="{{ $result->image->ak_provider_img_path }}">
                 </div>
@@ -25,12 +24,9 @@
                     <h1 class=""><a href="{{ URL::to('/courses/' . $result->ak_course_id) }}">{{ $result->ak_course_name }}</a></h1>
                     <h2 class="margin-left-sml child set-up set-right red">Rp {{ $result->detail->ak_course_detail_price }}</h2>
                     <p class="margin-down-sml">{{ $result->detail->ak_course_detail_desc }}</p>
-                    <p class="">Schedule : </p>
-
-                    {{var_dump($result->schedule)}}
                 </div>
             </div>
- --}}        @endforeach
+        @endforeach
                 
         <button type="button" class="btn btn-outline-primary" id="pay-button">Pay!</button>
 

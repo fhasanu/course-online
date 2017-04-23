@@ -32,7 +32,6 @@ class SnapController extends Controller
             $course = Course::find($id);
             $course->detail = CourseDetail::where('ak_course_id', $course->ak_course_id)->first();
             $course->image = ProviderImg::where('ak_provider_id', $course->ak_course_prov_id)->first();
-            $course->schedule = CourseSchedule::where('ak_course_schedule_detid',$course->detail->ak_course_detail_id);
             return $course;
         };
 

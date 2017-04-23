@@ -28,6 +28,9 @@
 			<input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
 			<button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Add Cart</button>
 		</form>
+		<p>Location:</p>
+		<p>City 	:	{{$result->ak_region_cityname}}</p>
+		<p>Region 	:	{{$result->ak_region_name}}</p>
 	</div>
 </div>
 
