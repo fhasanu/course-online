@@ -28,7 +28,7 @@
             </div>
         @endforeach
         <div>
-        <button type="button" class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" id="pay-button">Pay!</button>
+        <button type="button" class="margin-down-big btn btn-danger width-sml sharp-box" id="pay-button">Pay!</button>
         </div>
         @endif
 
