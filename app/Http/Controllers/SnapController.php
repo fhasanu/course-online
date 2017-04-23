@@ -51,7 +51,6 @@ class SnapController extends Controller
         // $image      = ProviderImg::where('ak_provider_img_id', $provider->ak_provider_id)->get();
         // $region     = Region::where('ak_region_id', $provider->ak_provider_region)->get();
         // dd($course);
-            'result' => $result,
             return $result;
         };
 
