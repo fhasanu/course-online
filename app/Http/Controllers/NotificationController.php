@@ -10,7 +10,7 @@ class NotificationController extends Controller
 
 	public function notify(Request $request)
     {
-        $result = $request->input('result_data');
+        $result = file_get_contents('php://input');
         $result = json_decode($result);
 
         if($result === null){
