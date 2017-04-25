@@ -210,6 +210,8 @@ class SnapController extends Controller
         $maincat = new MainCategory();
         $maincat->ak_maincat_name = $name;
         $maincat->save();
+
+        dd($request);
 /*
         $midtrans = new Midtrans();
         echo 'test notification handler';
