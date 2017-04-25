@@ -7,20 +7,20 @@
     
     <form id="payment-finish-form" method="post" action="/payment/finish">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-        <input type="hidden" name="result_type" id="result-type" value=""></div>
-        <input type="hidden" name="result_data" id="result-data" value=""></div>
+        <input type="hidden" name="result_type" id="result-type-f" value=""></div>
+        <input type="hidden" name="result_data" id="result-data-f" value=""></div>
     </form>
 
     <form id="payment-unfinish-form" method="post" action="/payment/unfinish">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-        <input type="hidden" name="result_type" id="result-type" value=""></div>
-        <input type="hidden" name="result_data" id="result-data" value=""></div>
+        <input type="hidden" name="result_type" id="result-type-u" value=""></div>
+        <input type="hidden" name="result_data" id="result-data-u" value=""></div>
     </form>
 
     <form id="payment-error-form" method="post" action="/payment/error">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-        <input type="hidden" name="result_type" id="result-type" value=""></div>
-        <input type="hidden" name="result_data" id="result-data" value=""></div>
+        <input type="hidden" name="result_type" id="result-type-e" value=""></div>
+        <input type="hidden" name="result_data" id="result-data-e" value=""></div>
     </form>
     @if (empty($cart))
 
@@ -63,8 +63,12 @@
                 var resultData = document.getElementById('result-data');
 
                 function changeResult(type,data){
-                    $("#result-type").val(type);
-                    $("#result-data").val(JSON.stringify(data));
+                    $("#result-type-f").val(type);
+                    $("#result-data-f").val(JSON.stringify(data));
+                    $("#result-type-u").val(type);
+                    $("#result-data-u").val(JSON.stringify(data));
+                    $("#result-type-e").val(type);
+                    $("#result-data-e").val(JSON.stringify(data));
                 }
 
                 snap.pay(data, {

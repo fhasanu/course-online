@@ -28,7 +28,7 @@ class NotificationController extends Controller
                 $result->transaction_status = 3;
                 break;
             default:
-                $result->transaction_status = 0;
+                $result->transaction_status = 2;
                 break;
         }
 
