@@ -142,7 +142,7 @@ class SnapController extends Controller
         $result = $request->input('result_data');
         $result = json_decode($result);
         if($result === null){
-            return dd($request->toJson());
+            return dd($request->toArray());
         }
         switch ($result->transaction_status) {
             case 'success':
