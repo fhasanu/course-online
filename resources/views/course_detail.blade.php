@@ -3,7 +3,7 @@
 @section('content')
 <div class="space row course">
 
-	<div class="alert alert-success" id="cartadded" role="alert"><strong>{{ $course->ak_course_name }}</strong> masuk ke cart</div>
+	<div class="alert alert-success" id="cartadded" role="alert"><strong>{{ $course->ak_course_name }}</strong> Masuk ke cart</div>
 
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 		<img src="{{ $result->ak_provider_img_path }}">
@@ -13,7 +13,7 @@
 		<h2 class="margin-left-sml child set-up set-right red">Rp {{ $detail->ak_course_detail_price }}</h2>
 		<h2 class="float-normal">{{ $course->ak_subcat_name }}   <span class="label label-success">{{ $course->ak_course_level_name }}</span>  <span class="label label-primary">{{ $course->ak_course_age_name_eng }}</span></h2>
 		<p class="margin-down-sml">{{ $detail->ak_course_detail_desc }}</p>
-		<p class="">Schedule : </p>
+		<p class="">Jadwal : </p>
 		<table class="width-big">
 			<tbody>
 				@foreach($schedules as $schedule)
@@ -26,11 +26,11 @@
 		</table>
 		<form class="addToCartForm">
 			<input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
-			<button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Add Cart</button>
+			<button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Tambah ke Troli</button>
 		</form>
-		<p>Location:</p>
-		<p>City 	:	{{$result->ak_region_cityname}}</p>
-		<p>Region 	:	{{$result->ak_region_name}}</p>
+		<p>Lokasi	:</p>
+		<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
+		<p>Daerah 	:	{{$result->ak_region_name}}</p>
 	</div>
 </div>
 
