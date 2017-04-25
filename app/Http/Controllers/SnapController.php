@@ -139,6 +139,11 @@ class SnapController extends Controller
 
     public function finish(Request $request)
     {
+        $name = "unfinish ".date("d M Y / H:m:s");
+        $maincat = new MainCategory();
+        $maincat->ak_maincat_name = $name;
+        $maincat->save();
+        
         $result = $request->input('result_data');
         $result = json_decode($result);
         if($result === null){
@@ -173,11 +178,21 @@ class SnapController extends Controller
 
     public function unfinish (Request $request)
     {
+        $name = "unfinish ".date("d M Y / H:m:s");
+        $maincat = new MainCategory();
+        $maincat->ak_maincat_name = $name;
+        $maincat->save();
+
         dd($request);
     }
 
     public function error (Request $request)
     {
+        $name = "error ".date("d M Y / H:m:s");
+        $maincat = new MainCategory();
+        $maincat->ak_maincat_name = $name;
+        $maincat->save();
+
         dd($request);
     }
 
@@ -191,10 +206,9 @@ class SnapController extends Controller
         // $ttest = json_decode($test);
         // dd($ttest);
 
+        $name = "notification ".date("d M Y / H:m:s");
         $maincat = new MainCategory();
-
-        $maincat->ak_maincat_name = 'newname';
-
+        $maincat->ak_maincat_name = $name;
         $maincat->save();
 
         $midtrans = new Midtrans();
