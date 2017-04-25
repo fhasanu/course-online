@@ -175,19 +175,19 @@ class SnapController extends Controller
     public function finish(Request $request)
     {
         $res = $this->savetrans($request);
-        return view('payment_finish')->with('snap', $result)->with('request', $request);
+        return view('payment_finish')->with('snap', $res)->with('request', $request);
     }
 
     public function unfinish (Request $request)
     {
         $res = $this->savetrans($request);
-        return view('payment_unfinish')->with('snap', $result)->with('request', $request);
+        return view('payment_unfinish')->with('snap', $res)->with('request', $request);
     }
 
     public function error (Request $request)
     {
         $res = $this->savetrans($request);
-        return view('payment_error')->with('snap', $result)->with('request', $request);
+        return view('payment_error')->with('snap', $res)->with('request', $request);
     }
 
 }    
