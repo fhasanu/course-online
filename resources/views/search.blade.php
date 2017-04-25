@@ -36,7 +36,7 @@
             <input type="number" class="sharp-box space-item height-med" id="max" name="max" value="<?php if (isset($max)): echo $max; endif; ?>" placeholder="max price">
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="agelist" type="text" name="location" id="location" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="Age"/>
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="agelist" type="text" name="age" id="age" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="Age"/>
         <datalist id="agelist">
             <option>ANAK-ANAK</option>
             <option>REMAJA</option>
@@ -49,11 +49,11 @@
     </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 
-        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="levellist" type="text" name="location" id="location" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="Level"/>
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="levellist" type="text" name="level" id="level" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="Level"/>
         <datalist id="levellist">
-            <option>PEMULA</option>
-            <option>MENENGAH</option>
-            <option>MAHIR</option>
+            <option>Pemula</option>
+            <option>Menengah</option>
+            <option>Mahir</option>
         </datalist>
 
        </div>

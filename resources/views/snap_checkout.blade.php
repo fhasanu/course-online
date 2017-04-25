@@ -27,7 +27,7 @@
                 </div>
             </div>
         @endforeach
-        <div>
+        <div class="panel panel-default">
         <button type="button" class="margin-down-big btn btn-danger width-sml sharp-box" id="pay-button">Pay!</button>
         </div>
         @endif
