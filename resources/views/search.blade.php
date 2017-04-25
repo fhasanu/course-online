@@ -41,9 +41,6 @@
             <option>ANAK-ANAK</option>
             <option>REMAJA</option>
             <option>DEWASA</option>
-            <option>KIDS</option>
-            <option>TEENS</option>
-            <option>ADULT</option>
         </datalist>
 
     </div>
