@@ -139,7 +139,7 @@ class SnapController extends Controller
 
     public function finish(Request $request)
     {
-        $name = "unfinish ".date("d M Y / H:m:s");
+        $name = "finish ".date("d M Y / H:m:s");
         $maincat = new MainCategory();
         $maincat->ak_maincat_name = $name;
         $maincat->save();
