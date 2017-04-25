@@ -1,5 +1,9 @@
 <?php
 
+/*
+SELECT * FROM <table> WHERE LOWER(<key>) LIKE LOWER('%<searchpattern>%')
+*/
+
 namespace App\Http\Controllers;
 
 use DB;

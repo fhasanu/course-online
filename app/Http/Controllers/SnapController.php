@@ -1,5 +1,5 @@
 <?php
-
+//Klikpay bermasalah
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -141,7 +141,7 @@ class SnapController extends Controller
     {
         $result = $request->input('result_data');
         $result = json_decode($result);
-
+        dd($result);
         switch ($result->transaction_status) {
             case 'success':
                 $result->transaction_status = 1;
