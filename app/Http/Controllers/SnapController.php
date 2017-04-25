@@ -22,7 +22,7 @@ class SnapController extends Controller
     {   
         Midtrans::$serverKey = 'VT-server-2VeBbUOXLfMXxH04FznIt83J';
         Midtrans::$isProduction = false;
-        // $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function snap ()
@@ -113,19 +113,19 @@ class SnapController extends Controller
         }
 
         // Data yang akan dikirim untuk request redirect_url.
-        $transaction_data = array(
+        $transaction_data = [
             'transaction_details'  => $transaction_details,
             'item_details'         => $items,
-
             'customer_details'     => $customer_details,
-       );
+       ];
 
         try
         {
             $midtrans = new Midtrans();
 
             session([
-                'saveorder' => session('orders', [])
+                'saveorder'    => session('orders', []),
+                'saveuser'     => Auth::user()->ak_user_id
             ]);
             $snap_token = $midtrans->getSnapToken($transaction_data);
 
@@ -137,26 +137,23 @@ class SnapController extends Controller
         }
     }
 
-    public function finish(Request $request)
+    public function savetrans(Request $request)
     {
-        $name = "finish ".date("d M Y / H:m:s");
-        $maincat = new MainCategory();
-        $maincat->ak_maincat_name = $name;
-        $maincat->save();
-        
         $result = $request->input('result_data');
         $result = json_decode($result);
+
         if($result === null){
             $result = json_decode($request->toArray()['response']);
         }
+
         switch ($result->transaction_status) {
-            case 'success':
+            case 'capture':
                 $result->transaction_status = 1;
                 break;
-            case 'error':
+            case 'deny':
                 $result->transaction_status = 2;
                 break;
-            case 'pending':
+            case 'pending': case 'settlement':
                 $result->transaction_status = 3;
                 break;
             default:
@@ -167,94 +164,29 @@ class SnapController extends Controller
         $orders = session('saveorder', []);
         $result->courses = json_encode($orders);
 
-        $user = Auth::user()->ak_user_id;
+        $user = session('saveuser', 0);
         $result->user_id = $user;
 
         TransactionController::save($result);
         $this->reset();
+    }
 
-        return view('payment_finish')->with('snap', $result);
+    public function finish(Request $request)
+    {
+        $this->savetrans($request);
+        return view('payment_finish')->with('request', $request);
     }
 
     public function unfinish (Request $request)
     {
-        $name = "unfinish ".date("d M Y / H:m:s");
-        $maincat = new MainCategory();
-        $maincat->ak_maincat_name = $name;
-        $maincat->save();
-
-        dd($request);
+        $this->savetrans($request);
+        return view('payment_unfinish')->with('request', $request);
     }
 
     public function error (Request $request)
     {
-        $name = "error ".date("d M Y / H:m:s");
-        $maincat = new MainCategory();
-        $maincat->ak_maincat_name = $name;
-        $maincat->save();
-
-        dd($request);
+        $this->savetrans($request);
+        return view('payment_error')->with('request', $request);
     }
 
-    public function notification(Request $request)
-    {
-        // echo $request;
-        // echo '<br />is this successful<br />';
-        // $test = file_get_contents('php://input');
-        // echo $test;
-        // echo '<br />this may be successful<br />';
-        // $ttest = json_decode($test);
-        // dd($ttest);
-
-        $name = "notification ".date("d M Y / H:m:s");
-        $maincat = new MainCategory();
-        $maincat->ak_maincat_name = $name;
-        $maincat->save();
-
-        dd($request);
-/*
-        $midtrans = new Midtrans();
-        echo 'test notification handler';
-        $json_result = file_get_contents('php://input');
-        $result = json_decode($json_result);
-
-        if($result){
-            $notif = $midtrans->status($result->order_id);
-            echo 'result is an object';
-        }
-
-        error_log(print_r($result,TRUE));
-
-        $transaction = $notif->transaction_status;
-        $type = $notif->payment_type;
-        $order_id = $notif->order_id;
-        $fraud = $notif->fraud_status;
-
-        if ($transaction == 'capture') {
-          // For credit card transaction, we need to check whether transaction is challenge by FDS or not
-          if ($type == 'credit_card'){
-            if($fraud == 'challenge'){
-              // TODO set payment status in merchant's database to 'Challenge by FDS'
-              // TODO merchant should decide whether this transaction is authorized or not in MAP
-              echo "Transaction order_id: " . $order_id ." is challenged by FDS";
-              } 
-              else {
-              // TODO set payment status in merchant's database to 'Success'
-              echo "Transaction order_id: " . $order_id ." successfully captured using " . $type;
-              }
-            }
-          }
-        else if ($transaction == 'settlement'){
-          // TODO set payment status in merchant's database to 'Settlement'
-          echo "Transaction order_id: " . $order_id ." successfully transfered using " . $type;
-          } 
-          else if($transaction == 'pending'){
-          // TODO set payment status in merchant's database to 'Pending'
-          echo "Waiting customer to finish transaction order_id: " . $order_id . " using " . $type;
-          } 
-          else if ($transaction == 'deny') {
-          // TODO set payment status in merchant's database to 'Denied'
-          echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
-        }*/
-    }
 }    

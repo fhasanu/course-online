@@ -62,7 +62,7 @@ Route::get('/checkout', 'SnapController@snap');
 // Route::post('/payment/snapnotif', 'SnapController@notification');
 // =======
 Route::get('/snaptoken', 'SnapController@token')->middleware('ajax');
-Route::post('/payment/notification', 'SnapController@notification');
+Route::post('/payment/notification', 'NotificationController@notify');
 Route::post('/payment/finish', 'SnapController@finish');
 Route::post('/payment/unfinish', 'SnapController@unfinish');
 Route::post('/payment/error', 'SnapController@error');

@@ -94,6 +94,19 @@ class TransactionController extends Controller
         $transaction->ak_tran_saction_status   = $data->transaction_status;
         $transaction->ak_tran_saction_user     = $data->user_id;
         $transaction->ak_tran_saction_course   = $data->courses;
+        $transaction->ak_tran_saction_midtrans_id  = $data->transaction_id;
+
+        $transaction->save();
+
+        return 'true';
+    }
+
+    // Manual update
+    public static function update_status($data)
+    {
+        $transaction = Transaction::where('ak_tran_saction_midtrans_id', $data->transaction_id)->first();
+        
+        $transaction->ak_tran_saction_status   = $data->transaction_status;
 
         $transaction->save();
 
