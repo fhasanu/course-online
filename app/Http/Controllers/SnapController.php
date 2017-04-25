@@ -33,7 +33,7 @@ class SnapController extends Controller
             $course->image = ProviderImg::where('ak_provider_id', $course->ak_course_prov_id)->first();
             return $course;
         };
-
+                
         $cart = array_map($populate, $order_id);
         return view('snap_checkout')->with('cart', $cart);
     }
@@ -138,6 +138,7 @@ class SnapController extends Controller
 
     public function savetrans(Request $request)
     {
+        dd($request);
         $result = $request->input('result_data');
         $result = json_decode($result);
 
