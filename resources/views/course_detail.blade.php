@@ -26,7 +26,7 @@
 		</table>
 		<form class="addToCartForm">
 			<input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
-			<button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Tambah ke Troli</button>
+			<button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Troli</button>
 		</form>
 		<p>Lokasi	:</p>
 		<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
