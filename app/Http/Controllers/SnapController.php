@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Veritrans\Midtrans;
 
 use App\ProviderImg;
-use App\MainCategory;
 use App\Course;
 use App\CourseSchedule;
 use App\CourseDetail;

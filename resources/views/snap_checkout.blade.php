@@ -5,13 +5,13 @@
                     data-client-key="<CLIENT-KEY>"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
-    <form id="payment-finished-form" method="post" action="/payment/finish">
+    <form id="payment-finish-form" method="post" action="/payment/finish">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
         <input type="hidden" name="result_type" id="result-type" value=""></div>
         <input type="hidden" name="result_data" id="result-data" value=""></div>
     </form>
 
-    <form id="payment-unfinished-form" method="post" action="/payment/unfinish">
+    <form id="payment-unfinish-form" method="post" action="/payment/unfinish">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
         <input type="hidden" name="result_type" id="result-type" value=""></div>
         <input type="hidden" name="result_data" id="result-data" value=""></div>
