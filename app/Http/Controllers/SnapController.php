@@ -210,7 +210,7 @@ class SnapController extends Controller
         $maincat = new MainCategory();
         $maincat->ak_maincat_name = $name;
         $maincat->save();
-
+/*
         $midtrans = new Midtrans();
         echo 'test notification handler';
         $json_result = file_get_contents('php://input');
@@ -220,7 +220,7 @@ class SnapController extends Controller
             $notif = $midtrans->status($result->order_id);
             echo 'result is an object';
         }
-/*
+
         error_log(print_r($result,TRUE));
 
         $transaction = $notif->transaction_status;
