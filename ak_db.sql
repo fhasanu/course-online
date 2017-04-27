@@ -29,8 +29,9 @@ SET time_zone = "+00:00";
 CREATE TABLE ak_admin (
   ak_admin_id int(11) NOT NULL,
   ak_admin_username varchar(45) NOT NULL,
-  ak_admin_password varchar(45) NOT NULL,
-  ak_admin_last_activity datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+  ak_admin_password varchar(255) NOT NULL,
+  ak_admin_last_activity datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  remember_token VARCHAR(100) NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -179,13 +180,15 @@ CREATE TABLE ak_provider (
   ak_provider_firstname varchar(45) NOT NULL,
   ak_provider_lastname varchar(45) NOT NULL,
   ak_provider_email varchar(45) NOT NULL,
-  ak_provider_password varchar(45) NOT NULL,
+  ak_provider_password varchar(255) NOT NULL,
   ak_provider_region int(11) NOT NULL,
   ak_provider_address longtext NOT NULL,
   ak_provider_zipcode smallint(5) NOT NULL,
   ak_provider_description longtext NOT NULL,
-  ak_provider_telephone int(11) NOT NULL,
-  ak_provider_last_activity datetime NOT NULL
+  ak_provider_telephone VARCHAR(13) NOT NULL,
+  ak_provider_last_activity datetime NOT NULL,
+  remember_token VARCHAR(100) NULL DEFAULT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -794,10 +797,11 @@ CREATE TABLE ak_sub_category (
 
 CREATE TABLE ak_tran_saction (
   ak_tran_saction_id int(11) NOT NULL,
-  ak_tran_saction_type int(11) NOT NULL,
+  ak_tran_saction_type TEXT NOT NULL,
   ak_tran_saction_user int(11) NOT NULL,
-  ak_tran_saction_course int(11) NOT NULL,
-  ak_tran_saction_status int(11) NOT NULL
+  ak_tran_saction_course TEXT NOT NULL,
+  ak_tran_saction_status int(11) NOT NULL,
+  ak_tran_saction_midtrans_id VARCHAR(100) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -831,9 +835,10 @@ CREATE TABLE ak_user (
   ak_user_firstname varchar(45) NOT NULL,
   ak_user_lastname varchar(45) NOT NULL,
   ak_user_email varchar(45) NOT NULL,
-  ak_user_password varchar(45) NOT NULL,
+  ak_user_password varchar(255) NOT NULL,
   ak_user_dob date NOT NULL,
-  ak_user_phone int(11) NOT NULL
+  ak_user_phone VARCHAR(13) NOT NULL,
+  remember_token VARCHAR(100) NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -950,7 +955,6 @@ ALTER TABLE ak_sub_category
 ALTER TABLE ak_tran_saction
   ADD PRIMARY KEY (ak_tran_saction_id),
   ADD KEY fk_ak_tran_saction_ak_user1_idx (ak_tran_saction_user),
-  ADD KEY fk_ak_tran_saction_ak_course1_idx (ak_tran_saction_course),
   ADD KEY fk_ak_tran_saction_ak_tran_status1_idx (ak_tran_saction_status);
 
 --
@@ -1120,7 +1124,6 @@ ALTER TABLE ak_sub_category
 -- Constraints for table ak_tran_saction
 --
 ALTER TABLE ak_tran_saction
-  ADD CONSTRAINT fk_ak_tran_saction_ak_course1 FOREIGN KEY (ak_tran_saction_course) REFERENCES ak_course (ak_course_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT fk_ak_tran_saction_ak_tran_status1 FOREIGN KEY (ak_tran_saction_status) REFERENCES ak_tran_status (id_ak_tran_status_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT fk_ak_tran_saction_ak_user1 FOREIGN KEY (ak_tran_saction_user) REFERENCES ak_user (ak_user_id) ON DELETE NO ACTION ON UPDATE NO ACTION;
 

@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <form method="POST" action="/search">
     {{ csrf_field() }}
     <div class="form-inline row space">

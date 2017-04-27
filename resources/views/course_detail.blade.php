@@ -24,13 +24,26 @@
 				@endforeach
 			</tbody>
 		</table>
+		@if(Auth::check())
 		<form class="addToCartForm">
 			<input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
-			<button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Troli</button>
+
+			<button href='' class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Troli</button>
 		</form>
 		<p>Lokasi	:</p>
 		<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
 		<p>Daerah 	:	{{$result->ak_region_name}}</p>
+
+		@else
+		<p>Lokasi	:</p>
+		<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
+		<p>Daerah 	:	{{$result->ak_region_name}}</p>
+
+			<div class="alert alert-warning" role="alert">
+			  <strong><a href="{{ route('login') }}">Login</a><strong> untuk mendaftar ke course
+			</div>
+
+		@endif
 	</div>
 </div>
 

@@ -144,7 +144,6 @@ class SnapController extends Controller
         if($result === null){
           dd($request);
         }
-
         switch ($result->transaction_status) {
             case 'capture':
                 $result->transaction_status = 1;
@@ -160,6 +159,8 @@ class SnapController extends Controller
                 break;
         }
 
+
+
         $orders = session('saveorder', []);
         $result->courses = json_encode($orders);
 
@@ -168,6 +169,7 @@ class SnapController extends Controller
 
         TransactionController::save($result);
         $this->reset();
+
 
         return $result;
     }

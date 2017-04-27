@@ -10,6 +10,7 @@ class NotificationController extends Controller
 
 	public function notify(Request $request)
     {
+
         $result = file_get_contents('php://input');
         $result = json_decode($result);
 
@@ -31,7 +32,6 @@ class NotificationController extends Controller
                 $result->transaction_status = 0;
                 break;
         }
-
         TransactionController::save($result);
 
         // $name = "notification ".date("d M Y / H:m:s");
