@@ -12,11 +12,11 @@
             }
         }?>
         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-{{-- <<<<<<< HEAD
-            <input type="text" class="sharp-box space-item height-big" id="key" name="key" value="<?php if (isset($target)): echo $target; endif; ?>" placeholder="Cari">
+
+            <input type="text" class="sharp-box space-item height-big" id="key" name="key" value="<?php getValue($target); ?>" placeholder="Cari">
         </div>
         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
-        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-big" list="regionlist" type="text" name="location" id="location" value="<?php if (isset($location)): echo $location; endif; ?>" placeholder="Daerah"/>
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-big" list="regionlist" type="text" name="location" id="location" value="<?php getValue($location); ?>" placeholder="Daerah"/>
         <datalist id="regionlist">
             <option>Bekasi</option>
             <option>Bogor</option>
@@ -31,12 +31,7 @@
         </datalist>
 
          </div>
-=======
- --}}            <input type="text" class="sharp-box space-item height-big" id="key" name="key" value="<?php getValue($target); ?>" placeholder="Search all courses by keyword">
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-12">
-            <input type="text" class="sharp-box space-item height-big" id="location" name="location" value="<?php getValue($location); ?>" placeholder="region">
-        </div>
+
 
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <button class="btn btn-danger sharp-box space-item height-big" type="submit">Cari</button>
@@ -50,8 +45,8 @@
             <input type="number" class="sharp-box space-item height-med" id="max" name="max" value="<?php if (isset($max)): echo $max; endif; ?>" placeholder="Harga Maksimal">
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-{{-- <<<<<<< HEAD
-        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="agelist" type="text" name="age" id="age" value="<?php if (isset($age)): echo $age; endif; ?>" placeholder="Umur"/>
+
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="agelist" type="text" name="age" id="age" value="<?php getValue($age); ?>" placeholder="Umur"/>
         <datalist id="agelist">
             <option>Anak-Anak</option>
             <option>Remaja</option>
@@ -61,20 +56,13 @@
     </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 
-        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="levellist" type="text" name="level" id="level" value="<?php if (isset($level)): echo $level; endif; ?>" placeholder="Level"/>
+        <input data-minchars=0 class="awesomplete awesomplete-space-item sharp-box height-med" list="levellist" type="text" name="level" id="level" value="<?php getValue($level); ?>" placeholder="Level"/>
         <datalist id="levellist">
             <option>Pemula</option>
             <option>Menengah</option>
             <option>Mahir</option>
         </datalist>
 
-       </div>
-=======
- --}}            <input type="text" class="sharp-box space-item height-med" id="age" name="age" value="<?php getValue($age); ?>" placeholder="by age">
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-            <input type="text" class="sharp-box space-item height-med" id="level" name="level" value="<?php getValue($level); ?>" placeholder="by level">
-        </div>
     </div>
 </form>
 
@@ -92,11 +80,7 @@
                 <h2 class="margin-left-sml child set-up set-right red">Rp {{ $course->ak_course_detail_price }}</h2>
                 <h2 class="float-normal">{{ $course->ak_subcat_name }}   <span class="label label-success">{{ $course->ak_course_level_name }}</span>  <span class="label label-primary">{{ $course->ak_course_age_name_id }}</span></h2>
                 <p class="margin-down-sml">{{ $course->ak_course_detail_desc }}</p>
-{{--                 <form class="addToCartForm">
-                    <input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
-                    <button class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Detail</button>
-                </form>
- --}}       
+       
                     <button class="margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box"><a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">DETAIL</a></button>     
             </div>
         </div>
