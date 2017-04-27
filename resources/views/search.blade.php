@@ -6,11 +6,8 @@
     <div class="form-inline row space">
         <?php function getValue($var){
             if (isset($var)) {
-                if (strlen($var) > 0 && $var != "%%") {
-                    echo $var;
-                }
-                else {
-
+                if (strlen($var) > 0) {
+                    echo str_replace("%", "", $var);
                 }
             }
         }?>
@@ -77,10 +74,5 @@
         }
     ?>
 @endif
-
-<script type="text/javascript">
-	var url = {!! '"'.url('/').'"' !!};
-	var course_id = {{$course->ak_course_id}};
-</script>
 
 @endsection
