@@ -89,6 +89,7 @@ class TransactionController extends Controller
     public static function save($data)
     {
         $transaction = new Transaction();
+
         $transaction->ak_tran_saction_type     = $data->payment_type;
         $transaction->ak_tran_saction_status   = $data->transaction_status;
         $transaction->ak_tran_saction_user     = $data->user_id;
