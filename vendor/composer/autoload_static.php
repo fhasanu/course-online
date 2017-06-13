@@ -344,6 +344,8 @@ class ComposerStaticInit51d85517555dacb8956f7e286d814c84
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CourseController' => __DIR__ . '/../..' . '/app/Http/Controllers/CourseController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\LandingController' => __DIR__ . '/../..' . '/app/Http/Controllers/LandingController.php',
+        'App\\Http\\Controllers\\LembagaController' => __DIR__ . '/../..' . '/app/Http/Controllers/LembagaController.php',
         'App\\Http\\Controllers\\NotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NotificationController.php',
         'App\\Http\\Controllers\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentController.php',
         'App\\Http\\Controllers\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/SearchController.php',

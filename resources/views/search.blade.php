@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="/search">
+<form method="POST" action="{{url('search')}}">
     {{ csrf_field() }}
     <div class="form-inline row space">
         <?php function getValue($var){

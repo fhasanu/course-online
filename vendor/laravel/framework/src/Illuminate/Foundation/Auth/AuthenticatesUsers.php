@@ -27,6 +27,7 @@ trait AuthenticatesUsers
      */
     public function login(Request $request)
     {
+        // dd($this->guard());
         $this->validateLogin($request);
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
@@ -36,7 +37,6 @@ trait AuthenticatesUsers
 
             return $this->sendLockoutResponse($request);
         }
-
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }

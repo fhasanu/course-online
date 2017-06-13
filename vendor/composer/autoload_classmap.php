@@ -37,6 +37,8 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CourseController' => $baseDir . '/app/Http/Controllers/CourseController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
+    'App\\Http\\Controllers\\LandingController' => $baseDir . '/app/Http/Controllers/LandingController.php',
+    'App\\Http\\Controllers\\LembagaController' => $baseDir . '/app/Http/Controllers/LembagaController.php',
     'App\\Http\\Controllers\\NotificationController' => $baseDir . '/app/Http/Controllers/NotificationController.php',
     'App\\Http\\Controllers\\PaymentController' => $baseDir . '/app/Http/Controllers/PaymentController.php',
     'App\\Http\\Controllers\\SearchController' => $baseDir . '/app/Http/Controllers/SearchController.php',

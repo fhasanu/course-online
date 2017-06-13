@@ -41,10 +41,21 @@ return [
             'provider' => 'users',
         ],
 
+        'provider' => [
+            'driver' => 'session',
+            'provider' => 'provider',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'provider-api' => [
+            'driver' => 'token',
+            'provider' => 'provider',
+        ],
+        
     ],
 
     /*
@@ -69,6 +80,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
+        'provider' => [
+            'driver' => 'eloquent',
+            'model' => App\Provider::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -96,6 +112,11 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
+        ],
+        'provider' => [
+            'provider' => 'provider',
+            'table' => 'password_resets',
+            'expire' => 30,
         ],
     ],
 

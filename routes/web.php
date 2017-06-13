@@ -22,11 +22,9 @@ Route::get('/', function () {
 // Route::get('/search', function () {
 //     return view('search');
 // });
-
 Route::get('/search', 'SearchController@search');
 
 Route::post('/search', 'SearchController@search');
-
 // Route::get('/payment/notification', 'PaymentController@notification');
 // Route::get('/payment/error', 'PaymentController@error');
 // Route::get('/payment/finish', 'PaymentController@finish');
@@ -68,6 +66,10 @@ Route::post('/payment/unfinish', 'SnapController@unfinish');
 Route::post('/payment/error', 'SnapController@error');
 Route::get('/addtocart', 'SnapController@addtocart');
 Route::get('/snapreset', 'SnapController@reset');
+
+Route::get('provider/login', 'Auth\ProviderLoginController@showLoginForm')->name('provider.login');
+Route::post('provider/login', 'Auth\ProviderLoginController@login')->name('provider.login.submit');
+Route::get('provider/dashboard', 'ProviderController@index')->name('provider.dashboard');
 
 Auth::routes();
 
