@@ -21,6 +21,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- jQuery -->
+    <script src="{{ asset('/vendor/jquery/jquery.min.js')}}"></script>
 
 
     <!-- Scripts -->
@@ -37,8 +39,6 @@
     </div>
         @include('layouts.footer')
 
-    <!-- jQuery -->
-    <script src="{{ asset('/vendor/jquery/jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('/vendor/bootstrap/js/bootstrap.min.js')}}"></script>

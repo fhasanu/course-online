@@ -250,7 +250,7 @@ CREATE TABLE `ak_provider` (
   `ak_provider_zipcode` smallint(5) NOT NULL,
   `ak_provider_description` longtext NOT NULL,
   `ak_provider_telephone` varchar(13) NOT NULL,
-  `ak_provider_last_activity` datetime NOT NULL,
+  `ak_provider_last_activity` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `remember_token` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

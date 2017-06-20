@@ -19,9 +19,23 @@
           <ul class="nav navbar-nav navbar-right">
 			<li>
 			<div class='panel-custom'>
-		        @if (Auth::guest())
+		        @if (Auth::guest() && !Auth::guard('provider')->check())
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
+                @else
+                @if(Auth::guard('provider')->check())
+                            <li>
+                                <a href="{{ route('provider.logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('provider.logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                    </li>
                 @else
                             <li>
                                 <a href="{{ route('logout') }}"
@@ -35,6 +49,7 @@
                                 </form>
                             </li>
                     </li>
+                @endif
                 @endif
 			</div>
 			</li>

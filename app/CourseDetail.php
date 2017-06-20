@@ -10,7 +10,7 @@ class CourseDetail extends Model
     protected $primaryKey = 'ak_course_detail_id';
 
     protected $fillable = [
-    	'ak_course_id',
+        'ak_course_id',
     	'ak_course_detail_name',
     	'ak_course_detail_price',
     	'ak_course_detail_level',

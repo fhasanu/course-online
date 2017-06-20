@@ -28,7 +28,29 @@ class SearchController extends Controller
      */
     public function index()
     {
-        return view('search');
+        $query = DB::table('ak_course')
+                    ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_id')
+                    ->join('ak_course_level', 'ak_course_detail.ak_course_detail_level', '=', 'ak_course_level.ak_course_level_id')
+                    ->join('ak_course_age', 'ak_course_detail.ak_course_detail_age', '=', 'ak_course_age.ak_course_age_id')
+                    ->join('ak_sub_category', 'ak_course.ak_course_cat_id', '=', 'ak_sub_category.ak_subcat_id')
+                    ->join('ak_provider', 'ak_course.ak_course_prov_id', '=', 'ak_provider.ak_provider_id')
+                    ->join('ak_provider_img', 'ak_provider.ak_provider_id', '=', 'ak_provider_img.ak_provider_id')
+                    ->join('ak_region', 'ak_provider.ak_provider_region', '=', 'ak_region.ak_region_id')
+                    ->join('ak_province', 'ak_region.ak_region_prov_id', '=', 'ak_province.ak_province_id')
+                    ->select('ak_course.ak_course_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc', 'ak_provider_img.ak_provider_img_path');
+                        $courses = $query->get();
+        // if (count($courses) < 1) {
+        //     $courses = [];
+        // }
+        return view('search')
+            ->with('courses', $courses)
+            ->with('target', '')
+            ->with('location', '')
+            ->with('min', '')
+            ->with('max', '')
+            ->with('age', '')
+            ->with('level', '');
+
     }
 
     public function search(Request $request)

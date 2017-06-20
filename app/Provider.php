@@ -11,7 +11,7 @@ class Provider extends Authenticatable
     protected $primaryKey = 'ak_provider_id';
     protected $table = 'ak_provider';
     protected $guard = 'provider';
-
+    public $timestamps = false;
     protected $fillable = [
         'ak_provider_firstname',
     	'ak_provider_lastname',
@@ -32,7 +32,9 @@ class Provider extends Authenticatable
     protected $hidden = [
         'ak_provider_password', 'remember_token',
     ];
-
+    public function getId(){
+        return $this->ak_provider_id;
+    }
     public function getAuthPassword()
     {
         return $this->ak_provider_password;

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -12,6 +11,9 @@ use App\Facility;
 use App\Provider;
 use App\ProviderImg;
 use App\Region;
+use App\MainCategory;
+use App\SubCategory;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -36,7 +38,12 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $subcat = SubCategory::all();
+        $maincat = MainCategory::all();
+        return view('create-course')
+                ->with('maincat', $maincat)
+                ->with('subcat', $subcat)
+                ;
     }
 
     /**
@@ -48,10 +55,20 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $course = new Course();
-        $detail = new Detail();
-        $schedules = [];
-
-        return redirect('/');
+        $detail = new CourseDetail();
+        $course->ak_course_name = $request->name;
+        $course->ak_course_cat_id = $request->subcat;
+        $course->ak_course_prov_id = Auth::user()->ak_provider_id;
+        $course->save();
+        $detail->ak_course_detail_name = $request->name . " detail";
+        $detail->ak_course_detail_price = $request->price;
+        $detail->ak_course_detail_level = $request->level;
+        $detail->ak_course_detail_age = $request->age;
+        $detail->ak_course_detail_size = $request->size;
+        $detail->ak_course_detail_desc = $request->description;
+        $detail->ak_course_id = $course->ak_course_id;
+        $detail->save();
+        return redirect('/provider/dashboard');
     }
 
     /**
@@ -70,19 +87,12 @@ class CourseController extends Controller
         $schedules  = CourseSchedule::where('ak_course_schedule_detid', $detail->ak_course_detail_id)->get();
         $facilities = Facility::where('ak_course_facility_detid', $detail->ak_course_detail_id)->get();
         $query = DB::table('ak_course')
-                    // ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_detail_id')
-                    // ->join('ak_course_schedule', 'ak_course_schedule.ak_course_schedule_detid', '=', 'ak_course_detail.ak_course_detail_id')
-                    // ->join('ak_course_facility', 'ak_course_facility.ak_course_facility_detid', '=', 'ak_course_detail.ak_course_detail_id')
                     ->join('ak_provider', 'ak_provider.ak_provider_id', '=', 'ak_course.ak_course_prov_id')
                     ->join('ak_provider_img', 'ak_provider_img.ak_provider_id', '=', 'ak_provider.ak_provider_id')
                     ->join('ak_region', 'ak_region.ak_region_id', '=', 'ak_provider.ak_provider_region')
                     ->select('ak_course.ak_course_id', 'ak_course.ak_course_name', 'ak_provider.ak_provider_firstname', 'ak_provider.ak_provider_lastname', 'ak_provider.ak_provider_address', 'ak_provider.ak_provider_zipcode', 'ak_provider.ak_provider_telephone', 'ak_provider_img.ak_provider_img_path', 'ak_region.ak_region_cityname', 'ak_region.ak_region_name', 'ak_region.ak_region_namefull')
                     ->where('ak_course.ak_course_id', '=', $id);
         $result     = $query->first();
-        // $provider   = Provider::where('ak_provider_id', $course->ak_course_prov_id)->first();
-        // $image      = ProviderImg::where('ak_provider_img_id', $provider->ak_provider_id)->get();
-        // $region     = Region::where('ak_region_id', $provider->ak_provider_region)->get();
-        // dd($course);
         return view('course_detail', [
 
             'course' => $course,
@@ -90,9 +100,6 @@ class CourseController extends Controller
             'detail' => $detail,
             'schedules' => $schedules,
             'facilities' => $facilities,
-            // 'provider' => $provider,
-            // 'image' => $image,
-            // 'region' => $region
         ]);
     }
 
@@ -104,7 +111,34 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $query = DB::table('ak_course')
+                    ->join('ak_course_detail', 'ak_course.ak_course_id', '=', 'ak_course_detail.ak_course_id')
+                    ->join('ak_course_level', 'ak_course_detail.ak_course_detail_level', '=', 'ak_course_level.ak_course_level_id')
+                    ->join('ak_course_age', 'ak_course_detail.ak_course_detail_age', '=', 'ak_course_age.ak_course_age_id')
+                    ->join('ak_sub_category', 'ak_course.ak_course_cat_id', '=', 'ak_sub_category.ak_subcat_id')
+                    ->join('ak_main_category', 'ak_main_category.ak_maincat_id', '=', 'ak_sub_category.ak_subcat_parent')
+                    ->join('ak_provider', 'ak_course.ak_course_prov_id', '=', 'ak_provider.ak_provider_id')
+                    ->select('ak_course.ak_course_id','ak_provider.ak_provider_id','ak_course_detail.*','ak_main_category.ak_maincat_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_id', 'ak_sub_category.ak_subcat_id', 'ak_course_age.ak_course_age_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc')
+                    ->where(function ($query) {
+                        return $query
+                        ->whereRaw('LOWER(ak_provider.ak_provider_email) like ?', Auth::user()->ak_provider_email);
+                    })
+                    ->where('ak_course.ak_course_id' , '=', $id);
+        $courses = $query->first();
+
+        $query = DB:: table('ak_provider_img')
+                    ->where('ak_provider_id' , '=', Auth::id());
+
+        $img = $query->first();
+
+        $subcat = SubCategory::all();
+        $maincat = MainCategory::all();
+        return view('edit-course', [
+            'maincat' => $maincat,
+            'subcat' => $subcat,
+            'course' => $courses,
+            'image' => $img->ak_provider_img_path,
+        ]);
     }
 
     /**
@@ -116,7 +150,19 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course =Course::find($id);
+        $course->ak_course_name = $request->name ;
+        $course->ak_course_cat_id = $request->subcat;
+        $course->save();   
+        $detail = CourseDetail::where('ak_course_id', '=', $course->ak_course_id)->first();
+        $detail->ak_course_detail_name = $request->name . " detail";
+        $detail->ak_course_detail_price = $request->price;
+        $detail->ak_course_detail_level = $request->level;
+        $detail->ak_course_detail_age = $request->age;
+        $detail->ak_course_detail_size = $request->size;
+        $detail->ak_course_detail_desc = $request->description;
+        $detail->save();
+        return redirect('provider/dashboard');
     }
 
     /**

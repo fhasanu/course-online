@@ -34,6 +34,7 @@ class ProviderLoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest:provider', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
     public function username()
