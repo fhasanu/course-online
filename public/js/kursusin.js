@@ -31,3 +31,31 @@ function doubleselect(main, sub){
 }
 doubleselect('#maincat', '#subcat');
 doubleselect('#editmaincat', '#editsubcat');
+
+$("#addschedule").click(function(e){
+    e.preventDefault();
+    schedule = $(".scheduleinput");
+    num = schedule.length + 1;
+    str = "<div id='schedule"+num+"' class='scheduleinput'>\
+                <div class='form-group row'>\
+                    <div class='col-md-5'>\
+                        <input class='form-control' name='day"+num+"' id='day"+num+"' type='text' placeholder='Hari'>\
+                    </div>\
+                    <div class='col-md-5'>\
+                        <input class='form-control' name='time"+num+"' id='time"+num+"' type='time' placeholder='Waktu'>\
+                    </div>\
+                    <div class='col-md-2'>\
+                        <input type='button' class='btndelete' id='btn"+num+"' value='x'>\
+                    </div>\
+                </div>\
+            </div>\
+";
+    $("#jml").val(num);
+    console.log($("#jml").val());
+    schedule.parent().append(str);
+});
+
+$(".btndelete").on("click" ,function() {
+    console.log("PRESSED");
+    $(".btndelete").parent().parent().hide();
+});

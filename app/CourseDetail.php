@@ -18,6 +18,8 @@ class CourseDetail extends Model
     	'ak_course_detail_size',
     	'ak_course_detail_desc',
     ];
-
+    public function getId(){
+        return $this->ak_course_detail_id;
+    }
     public $timestamps = false;
 }

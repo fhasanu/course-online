@@ -37,7 +37,7 @@
         </div>        
         <label for="price">Price</label> 
         <div class="form-group">
-            <input class="form-control" required name="price" id="price" type="number">
+            <input class="form-control" required name="price" id="price" type="number" value="{{$course->ak_course_detail_price}}">
         </div>
         <label for="level">Level</label> 
         <div class="form-group">
@@ -65,7 +65,7 @@
         </div>
         <label for="description">Description</label> 
         <div class="form-group">
-            <textarea class="form-control" rows="3" name="description" id="description" value={{$course->ak_course_detail_desc}}></textarea>
+            <textarea class="form-control" rows="3" name="description" id="description">{{$course->ak_course_detail_desc}}</textarea>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">SUBMIT</button>

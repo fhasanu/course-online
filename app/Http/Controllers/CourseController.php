@@ -68,6 +68,15 @@ class CourseController extends Controller
         $detail->ak_course_detail_desc = $request->description;
         $detail->ak_course_id = $course->ak_course_id;
         $detail->save();
+        for ($i=1; $i <= $request->jmlschedule; $i++) { 
+            if(!is_null(request("day".$i)) && !is_null(request("time".$i))){
+                $schedules = new CourseSchedule;
+                $schedules->ak_course_schedule_detid = $detail->getId();
+                $schedules->ak_course_schedule_day = request('day'.$i);
+                $schedules->ak_course_schedule_time = request('time'.$i);
+                $schedules->save();
+            }
+        }
         return redirect('/provider/dashboard');
     }
 

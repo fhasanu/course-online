@@ -50,6 +50,26 @@
                 <option value="3">DEWASA</option>
             </select>
         </div>
+        <div id="schedule">
+            <label>Schedule</label>
+            <div id="schedule1" class="scheduleinput">
+                <div class="form-group row">
+                    <div class="col-md-5">
+                        <input class="form-control" name="day1" id="day1" type="text" placeholder="Hari">
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" name="time1" id="time1" type="time" placeholder="Waktu">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="button" class="btndelete" id="btn1" value="x">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="jmlschedule" id="jml" value="1"> 
+        <div class="form-group">
+            <button class="btn btn-primary" id="addschedule">Add Schedule</button>
+        </div>
         <label for="size">Size</label> 
         <div class="form-group">
             <input class="form-control" required name="size" id="size" type="number">
