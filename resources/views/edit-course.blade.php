@@ -25,10 +25,9 @@
         <label for="subcat">Sub Catagory</label> 
         <div class="form-group">
             <select class="form-control" required name="subcat" id="editsubcat">
-                <option value="" disabled selected hidden>Sub Catagory</option>
                 @foreach($subcat as $i)
                     @if($i->ak_subcat_id === $course->ak_subcat_id)
-                        <option data-id="{{$i->ak_subcat_parent}}" value="{{$i->ak_subcat_id}}" selected>{{$i->ak_subcat_name}}</option>
+                        <option data-id="{{$i->ak_subcat_parent}}" id="selected" value="{{$i->ak_subcat_id}}" selected>{{$i->ak_subcat_name}}</option>
                     @else
                         <option data-id="{{$i->ak_subcat_parent}}" value="{{$i->ak_subcat_id}}">{{$i->ak_subcat_name}}</option>
                     @endif
@@ -55,9 +54,68 @@
                 <option value="3">DEWASA</option>
             </select>
         <script type="text/javascript">
+        sel11 = $('#editmaincat');
+        sel22 = $('#editsubcat');
+
+        if (sel11.data('options') == undefined) {
+        /*Taking an array of all options-2 and kind of embedding it on the select1*/
+            sel11.data('options', $('#editsubcat option').clone());
+        }
+        var id = sel11.val();
+        var options = sel11.data('options').filter('[data-id=' + id + ']');
+        sel22.html(options);
+
             $('#editlevel option[value='+{{$course->ak_course_level_id}}+']').attr('selected', true);
             $('#editage option[value='+{{$course->ak_course_age_id}}+']').attr('selected', true);
+            
         </script>
+        <div id="schedule">
+            <label>Schedule</label>
+            <?php
+                $count = 0;    
+            ?>
+            @foreach($schedules as $i)
+                <?php
+                    $count++; 
+                ?>    
+                @if($count === 1)
+                    <div id="schedule1" class="scheduleinput">
+                        <div class="form-group row">
+                            <div class="col-md-5">
+                                <input class="form-control" required name="day1" id="day1" type="text" value="{{$i->ak_course_schedule_day}}">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" required name="time1" id="time1" type="time" value="{{$i->ak_course_schedule_time}}">
+                            </div>
+                            <div class="col-md-2">
+                                {{-- <input type="button" class="btndelete" id="btn1" value="x"> --}}
+                            </div>
+                        </div>
+                    </div>
+                @else
+
+                    <div id="{{"schedule".$count}}" class="scheduleinput">
+                        <div class="form-group row">
+                            <div class="col-md-5">
+                                <input class="form-control" required name="{{"day".$count}}}" id="{{"day".$count}}}" type="text" value="{{$i->ak_course_schedule_day}}">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" required name="{{"time".$count}}}" id="{{"time".$count}}}" type="time" value="{{$i->ak_course_schedule_time}}">
+                            </div>
+                            <div class="col-md-2">
+                                <input type="button" class="btndelete" id="{{"btn".$count}}}" value="x">
+                            </div>
+                        </div>
+                    </div>
+
+                @endif
+            @endforeach
+        </div>
+        <input type="hidden" name="jmlschedule" id="jml" value="{{$count}}"> 
+        <div class="form-group">
+            <button class="btn btn-primary" id="addschedule">Add Schedule</button>
+        </div>
+
         </div>
         <label for="size">Size</label> 
         <div class="form-group">

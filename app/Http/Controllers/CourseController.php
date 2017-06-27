@@ -139,6 +139,7 @@ class CourseController extends Controller
                     ->where('ak_provider_id' , '=', Auth::id());
 
         $img = $query->first();
+        $schedules  = CourseSchedule::where('ak_course_schedule_detid', $courses->ak_course_detail_id)->get();
 
         $subcat = SubCategory::all();
         $maincat = MainCategory::all();
@@ -147,6 +148,7 @@ class CourseController extends Controller
             'subcat' => $subcat,
             'course' => $courses,
             'image' => $img->ak_provider_img_path,
+            'schedules' => $schedules,
         ]);
     }
 
@@ -171,6 +173,17 @@ class CourseController extends Controller
         $detail->ak_course_detail_size = $request->size;
         $detail->ak_course_detail_desc = $request->description;
         $detail->save();
+        dd($request->jmlschedule);
+        for ($i=1; $i <= $request->jmlschedule; $i++) { 
+            if(!is_null(request("day".$i)) && !is_null(request("time".$i))){
+                $schedules = new CourseSchedule;
+                $schedules->ak_course_schedule_detid = $detail->getId();
+                $schedules->ak_course_schedule_day = request('day'.$i);
+                $schedules->ak_course_schedule_time = request('time'.$i);
+                $schedules->save();
+            }
+        }
+
         return redirect('provider/dashboard');
     }
 

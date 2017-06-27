@@ -21,7 +21,7 @@
         </div>
         <label for="subcat">Sub Catagory</label> 
         <div class="form-group">
-            <select class="form-control" required name="subcat" id="subcat">
+            <select class="form-control" required name="subcat" id="subcat" disabled>
                 <option value="" disabled selected hidden>Sub Catagory</option>
                 @foreach($subcat as $i)
                     <option data-id="{{$i->ak_subcat_parent}}" value="{{$i->ak_subcat_id}}">{{$i->ak_subcat_name}}</option>
@@ -55,13 +55,13 @@
             <div id="schedule1" class="scheduleinput">
                 <div class="form-group row">
                     <div class="col-md-5">
-                        <input class="form-control" name="day1" id="day1" type="text" placeholder="Hari">
+                        <input class="form-control" required name="day1" id="day1" type="text" placeholder="Hari">
                     </div>
                     <div class="col-md-5">
-                        <input class="form-control" name="time1" id="time1" type="time" placeholder="Waktu">
+                        <input class="form-control" required name="time1" id="time1" type="time" placeholder="Waktu">
                     </div>
                     <div class="col-md-2">
-                        <input type="button" class="btndelete" id="btn1" value="x">
+                        {{-- <input type="button" class="btndelete" id="btn1" value="x"> --}}
                     </div>
                 </div>
             </div>
