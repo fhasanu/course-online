@@ -24,9 +24,17 @@
                 @foreach($course->schedule as $schedule)
                 <p class="margin-down-sml">{{ $schedule->ak_course_schedule_day }}, {{ $schedule->ak_course_schedule_time }}</p>
        			@endforeach
-                    <a href="{{ Route('course.update', $course->ak_course_id)}}">EDIT</a>
-                    <a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">DELETE</a>     
+                    <a href="{{ Route('course.update', $course->ak_course_id)}}">Edit</a>
 
+                    <a href="{{ URL::to('/provider/closecourse/' . $course->ak_course_id) }}"
+                        onclick="event.preventDefault();
+                                 document.getElementById('close-{{$course->ak_course_id}}').submit();">
+                        Close
+                    </a>
+
+                    <form id="close-{{$course->ak_course_id}}" action="{{ URL::to('/provider/closecourse/' . $course->ak_course_id) }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
             </div>
         </div>
     </div>

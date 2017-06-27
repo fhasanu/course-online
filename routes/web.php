@@ -58,6 +58,8 @@ Route::group(array('prefix' => 'provider'), function(){
 	Route::get('/editcourse/{id}', 'CourseController@edit')->name('course.update')->middleware('auth:provider');
 
 	Route::put('/editcourse/{id}', 'CourseController@update')->middleware('auth:provider');
+
+	Route::post('/closecourse/{id}', 'CourseController@close')->middleware('auth:provider');
 });
 
 Auth::routes();

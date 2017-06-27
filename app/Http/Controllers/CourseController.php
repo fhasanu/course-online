@@ -193,10 +193,8 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function close($id)
     {
-        DB::table('ak_course')->insert([
-            ['ak_course_name' => '', 'ak_course_cat_id' => 0, 'ak_course_prov_id' => ''],
-        ]);
+        
     }
 }
