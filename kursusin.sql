@@ -1,4 +1,372 @@
-﻿INSERT INTO ak_region (ak_region_id, ak_region_prov_id, ak_region_cityname, ak_region_name, ak_region_namefull, ak_region_parent_id) VALUES
+-- phpMyAdmin SQL Dump
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 14, 2017 at 04:14 PM
+-- Server version: 5.6.35
+-- PHP Version: 5.6.30
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS `ak_admin`, `ak_course`, `ak_course_age`, `ak_course_detail`, `ak_course_facility`, `ak_course_level`, `ak_course_schedule`, `ak_facility_type`, `ak_main_category`, `ak_pay_ment`, `ak_provider`, `ak_provider_img`, `ak_province`, `ak_region`, `ak_sub_category`, `ak_tran_saction`, `ak_tran_status`, `ak_user`, `password_resets`;
+SET FOREIGN_KEY_CHECKS=1;
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `u4961431_ak_database`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_admin`
+--
+
+CREATE TABLE `ak_admin` (
+  `ak_admin_id` int(11) NOT NULL,
+  `ak_admin_username` varchar(45) NOT NULL,
+  `ak_admin_password` varchar(255) NOT NULL,
+  `ak_admin_last_activity` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `remember_token` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_course`
+--
+
+CREATE TABLE `ak_course` (
+  `ak_course_id` int(11) NOT NULL,
+  `ak_course_name` varchar(45) NOT NULL,
+  `ak_course_cat_id` int(11) NOT NULL,
+  `ak_course_prov_id` int(11) NOT NULL,
+  `ak_course_active` tinyint(1) NOT NULL,
+  `ak_course_open` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_course`
+--
+
+INSERT INTO `ak_course` (`ak_course_id`, `ak_course_name`, `ak_course_cat_id`, `ak_course_prov_id`, `ak_course_active`, `ak_course_open`) VALUES
+(1, 'Persiapan TOEFL', 2, 2, 0, 0),
+(2, 'yourcourse2', 6, 1, 0, 0),
+(3, 'theircourse3', 6, 1, 0, 0),
+(4, 'ourcourse4', 8, 2, 0, 0),
+(5, 'itscourse5', 4, 2, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_course_age`
+--
+
+CREATE TABLE `ak_course_age` (
+  `ak_course_age_id` int(11) NOT NULL,
+  `ak_course_age_name_id` tinytext NOT NULL,
+  `ak_course_age_name_eng` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_course_age`
+--
+
+INSERT INTO `ak_course_age` (`ak_course_age_id`, `ak_course_age_name_id`, `ak_course_age_name_eng`) VALUES
+(1, 'ANAK-ANAK', 'KIDS'),
+(2, 'REMAJA', 'TEENS'),
+(3, 'DEWASA', 'ADULT');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_course_detail`
+--
+
+CREATE TABLE `ak_course_detail` (
+  `ak_course_detail_id` int(11) NOT NULL,
+  `ak_course_id` int(11) NOT NULL,
+  `ak_course_detail_name` varchar(45) NOT NULL,
+  `ak_course_detail_price` int(11) NOT NULL,
+  `ak_course_detail_level` int(11) NOT NULL,
+  `ak_course_detail_age` int(11) NOT NULL,
+  `ak_course_detail_size` smallint(3) NOT NULL,
+  `ak_course_detail_seat` tinyint(3) NOT NULL,
+  `ak_course_detail_desc` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_course_detail`
+--
+
+INSERT INTO `ak_course_detail` (`ak_course_detail_id`, `ak_course_id`, `ak_course_detail_name`, `ak_course_detail_price`, `ak_course_detail_level`, `ak_course_detail_age`, `ak_course_detail_size`, `ak_course_detail_seat`, `ak_course_detail_desc`) VALUES
+(1, 1, 'full TOEFL ITP', 100000, 2, 2, 10, 0, 'TOEFL ITP Preparation Course'),
+(2, 2, 'yourcourse2 detail', 200000, 3, 3, 15, 0, 'this description is useful'),
+(3, 3, 'Course Detail', 300000, 3, 3, 10, 0, 'Course Detail'),
+(4, 4, 'ourcourse4 detail', 400000, 1, 2, 13, 0, 'this description is utterly despicable'),
+(5, 5, 'itscourse5 detail', 500000, 2, 3, 25, 0, 'this description is awfully useful');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_course_facility`
+--
+
+CREATE TABLE `ak_course_facility` (
+  `ak_course_facility_id` int(11) NOT NULL,
+  `ak_course_facility_detid` int(11) NOT NULL,
+  `ak_facility_type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_course_facility`
+--
+
+INSERT INTO `ak_course_facility` (`ak_course_facility_id`, `ak_course_facility_detid`, `ak_facility_type_id`) VALUES
+(1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_course_level`
+--
+
+CREATE TABLE `ak_course_level` (
+  `ak_course_level_id` int(11) NOT NULL,
+  `ak_course_level_name` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_course_level`
+--
+
+INSERT INTO `ak_course_level` (`ak_course_level_id`, `ak_course_level_name`) VALUES
+(1, 'PEMULA'),
+(2, 'MENENGAH'),
+(3, 'MAHIR');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_course_schedule`
+--
+
+CREATE TABLE `ak_course_schedule` (
+  `ak_course_schedule_id` int(11) NOT NULL,
+  `ak_course_schedule_detid` int(11) NOT NULL,
+  `ak_course_schedule_day` tinytext NOT NULL,
+  `ak_course_schedule_time` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_course_schedule`
+--
+
+INSERT INTO `ak_course_schedule` (`ak_course_schedule_id`, `ak_course_schedule_detid`, `ak_course_schedule_day`, `ak_course_schedule_time`) VALUES
+(1, 1, 'senin', '08:00-20:00'),
+(2, 1, 'selasa', '08:00-20:00'),
+(3, 2, 'rabu', '08:00-20:00'),
+(4, 2, 'kamis', '08:00-20:00'),
+(5, 3, 'jumat', '08:00-20:00'),
+(6, 3, 'sabtu', '08:00-20:00'),
+(7, 4, 'senin', '08:00-20:00'),
+(8, 4, 'senin', '08:00-20:00'),
+(9, 5, 'selasa', '08:00-20:00'),
+(10, 5, 'selasa', '08:00-20:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_facility_type`
+--
+
+CREATE TABLE `ak_facility_type` (
+  `ak_facility_type_id` int(11) NOT NULL,
+  `ak_facility_type_name_idn` text NOT NULL,
+  `ak_facility_type_name_eng` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_facility_type`
+--
+
+INSERT INTO `ak_facility_type` (`ak_facility_type_id`, `ak_facility_type_name_idn`, `ak_facility_type_name_eng`) VALUES
+(1, 'tes', 'test'),
+(2, 'djakarta', 'jakarta'),
+(3, 'matamu', 'myass');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_main_category`
+--
+
+CREATE TABLE `ak_main_category` (
+  `ak_maincat_id` int(11) NOT NULL,
+  `ak_maincat_name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_main_category`
+--
+
+INSERT INTO `ak_main_category` (`ak_maincat_id`, `ak_maincat_name`) VALUES
+(1, 'Bahasa'),
+(2, 'biology'),
+(3, 'math'),
+(4, 'chemistry');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_pay_ment`
+--
+
+CREATE TABLE `ak_pay_ment` (
+  `ak_pay_ment_id` int(11) NOT NULL,
+  `ak_pay_ment_tran_id` int(11) NOT NULL,
+  `ak_pay_ment_price` varchar(45) NOT NULL,
+  `ak_pay_ment_paid` varchar(45) NOT NULL,
+  `ak_pay_ment_cc` varchar(45) NOT NULL,
+  `ak_pay_ment_dc` varchar(45) NOT NULL,
+  `ak_pay_ment_status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_provider`
+--
+
+CREATE TABLE `ak_provider` (
+  `ak_provider_id` int(11) NOT NULL,
+  `ak_provider_firstname` varchar(45) NOT NULL,
+  `ak_provider_lastname` varchar(45) NOT NULL,
+  `ak_provider_email` varchar(45) NOT NULL,
+  `ak_provider_password` varchar(255) NOT NULL,
+  `ak_provider_region` int(11) NOT NULL,
+  `ak_provider_address` longtext NOT NULL,
+  `ak_provider_zipcode` smallint(5) NOT NULL,
+  `ak_provider_description` longtext NOT NULL,
+  `ak_provider_telephone` varchar(13) NOT NULL,
+  `ak_provider_last_activity` datetime NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_provider`
+--
+
+INSERT INTO `ak_provider` (`ak_provider_id`, `ak_provider_firstname`, `ak_provider_lastname`, `ak_provider_email`, `ak_provider_password`, `ak_provider_region`, `ak_provider_address`, `ak_provider_zipcode`, `ak_provider_description`, `ak_provider_telephone`, `ak_provider_last_activity`, `remember_token`) VALUES
+(1, 'FFE', '(First For English)', 'fe@co.id', 'admin', 3171, 'Pejaten Village Mall\r\nLt3. Kav 31', 15432, 'FFE is the leading English provider, with WORLD CLASS teacher ready to meet you. ', '(021)897767', '0000-00-00 00:00:00', NULL),
+(2, 'my', 'provider', 'asd@asd.asd', 'asdasd', 1101, 'mwahahahaha', 12323, 'mwahahahaha', '1234567890', '2017-04-12 00:00:00', NULL),
+(3, 'your', 'unprovider', 'aaa@aaa.aaa', 'aaaaaa', 1102, 'kwihihihihihi', 18283, 'kwihihihihihi', '987654321', '2017-04-02 00:00:00', NULL),
+(4, 'Elang', 'Saya', 'elang.nobird@gmail.com', '$2y$10$YZ.A8PeJ1FKa1xAVLG7FJ.TCKZ6YRrtkj08lqrJywBFxUZvy9iAGe', 3101, 'Gang Nyamuk No 58', 16412, 'king', '081297451092', '2017-06-30 19:19:54', '20VmzVJElknIIGje3ED5EbU6lMx4sku7TCggfNWcXZrOvbfQqKKTIf6TqPSu');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_provider_img`
+--
+
+CREATE TABLE `ak_provider_img` (
+  `ak_provider_img_id` int(11) NOT NULL,
+  `ak_provider_id` int(11) NOT NULL,
+  `ak_provider_img_path` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_provider_img`
+--
+
+INSERT INTO `ak_provider_img` (`ak_provider_img_id`, `ak_provider_id`, `ak_provider_img_path`) VALUES
+(1, 1, 'default.jpg'),
+(2, 2, 'default.jpg'),
+(3, 3, 'default.jpg'),
+(4, 4, 'default.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_province`
+--
+
+CREATE TABLE `ak_province` (
+  `ak_province_id` int(11) NOT NULL,
+  `ak_province_name` text NOT NULL,
+  `ak_province_name_abbr` text NOT NULL,
+  `ak_province_name_idn` text NOT NULL,
+  `ak_province_name_eng` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_province`
+--
+
+INSERT INTO `ak_province` (`ak_province_id`, `ak_province_name`, `ak_province_name_abbr`, `ak_province_name_idn`, `ak_province_name_eng`) VALUES
+(11, 'Aceh', 'NAD', 'Nanggroe Aceh Darussalam', 0),
+(12, 'Sumatera Utara', 'Sumut', 'Sumatera Utara', 0),
+(13, 'Sumatera Barat', 'Sumbar', 'Sumatera Barat', 0),
+(14, 'Riau', 'Riau', 'Riau', 0),
+(15, 'Jambi', 'Jambi', 'Jambi', 0),
+(16, 'Sumatera Selatan', 'Sumsel', 'Sumatera Selatan', 0),
+(17, 'Bengkulu', 'Bengkulu', 'Bengkulu', 0),
+(18, 'Lampung', 'Lampung', 'Lampung', 0),
+(19, 'Kepulauan Bangka Belitung', 'Babel', 'Kepulauan Bangka Belitung', 0),
+(21, 'Kepulauan Riau', 'Kepri', 'Kepulauan Riau', 0),
+(31, 'DKI Jakarta', 'DKI', 'DKI Jakarta', 0),
+(32, 'Jawa Barat', 'Jabar', 'Jawa Barat', 0),
+(33, 'Jawa Tengah', 'Jateng', 'Jawa Tengah', 0),
+(34, 'DI Yogyakarta', 'DIY', 'DI Yogyakarta', 0),
+(35, 'Jawa Timur', 'Jatim', 'Jawa Timur', 0),
+(36, 'Banten', 'Banten', 'Banten', 0),
+(51, 'Bali', 'Bali', 'Bali', 0),
+(52, 'Nusa Tenggara Barat', 'NTB', 'Nusa Tenggara Barat', 0),
+(53, 'Nusa Tenggara Timur', 'NTT', 'Nusa Tenggara Timur', 0),
+(61, 'Kalimantan Barat', 'Kalbar', 'Kalimantan Barat', 0),
+(62, 'Kalimantan Tengah', 'Kalteng', 'Kalimantan Tengah', 0),
+(63, 'Kalimantan Selatan', 'Kalsel', 'Kalimantan Selatan', 0),
+(64, 'Kalimantan Timur', 'Kaltim', 'Kalimantan Timur', 0),
+(65, 'Kalimantan Utara', 'Kaltara', 'Kalimantan Utara', 0),
+(71, 'Sulawesi Utara', 'Sulut', 'Sulawesi Utara', 0),
+(72, 'Sulawesi Tengah', 'Sulteng', 'Sulawesi Tengah', 0),
+(73, 'Sulawesi Selatan', 'Sulsel', 'Sulawesi Selatan', 0),
+(74, 'Sulawesi Tenggara', 'Sultra', 'Sulawesi Tenggara', 0),
+(75, 'Gorontalo', 'Gorontalo', 'Gorontalo', 0),
+(76, 'Sulawesi Barat', 'Sulbar', 'Sulawesi Barat', 0),
+(81, 'Maluku', 'Maluku', 'Maluku', 0),
+(82, 'Maluku Utara', 'Malut', 'Maluku Utara', 0),
+(91, 'Papua Barat', 'Papua Barat', 'Papua Barat', 0),
+(94, 'Papua', 'Papua', 'Papua', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_region`
+--
+
+CREATE TABLE `ak_region` (
+  `ak_region_id` int(11) NOT NULL,
+  `ak_region_prov_id` int(11) NOT NULL,
+  `ak_region_cityname` text NOT NULL,
+  `ak_region_name` text NOT NULL,
+  `ak_region_namefull` text NOT NULL,
+  `ak_region_parent_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_region`
+--
+
+INSERT INTO `ak_region` (`ak_region_id`, `ak_region_prov_id`, `ak_region_cityname`, `ak_region_name`, `ak_region_namefull`, `ak_region_parent_id`) VALUES
 (1101, 11, 'Simeulue', '', 'Kabupaten Simeulue', NULL),
 (1102, 11, 'Aceh Singkil', '', 'Kabupaten Aceh Singkil', NULL),
 (1103, 11, 'Aceh Selatan', '', 'Kabupaten Aceh Selatan', NULL),
@@ -498,3 +866,414 @@
 (9435, 94, 'Intan Jaya', '', 'Kabupaten Intan Jaya', NULL),
 (9436, 94, 'Deiyai', '', 'Kabupaten Deiyai', NULL),
 (9471, 94, 'Jayapura ', '', 'Kota Jayapura ', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_sub_category`
+--
+
+CREATE TABLE `ak_sub_category` (
+  `ak_subcat_id` int(11) NOT NULL,
+  `ak_subcat_parent` int(11) NOT NULL,
+  `ak_subcat_name` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_sub_category`
+--
+
+INSERT INTO `ak_sub_category` (`ak_subcat_id`, `ak_subcat_parent`, `ak_subcat_name`) VALUES
+(1, 1, 'Bahasa Inggris'),
+(2, 1, 'Bahasa Jepang'),
+(3, 2, 'microbiology'),
+(4, 2, 'entomology'),
+(5, 2, 'physiology'),
+(6, 3, 'geometry'),
+(7, 3, 'numbertheory'),
+(8, 3, 'differentialequations'),
+(9, 4, 'organicchemistry'),
+(10, 4, 'inorganicchemistry');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_tran_saction`
+--
+
+CREATE TABLE `ak_tran_saction` (
+  `ak_tran_saction_id` int(11) NOT NULL,
+  `ak_tran_saction_type` text NOT NULL,
+  `ak_tran_saction_user` int(11) NOT NULL,
+  `ak_tran_saction_course` int(11) NOT NULL,
+  `ak_tran_saction_status` int(11) NOT NULL,
+  `ak_tran_saction_midtrans_id` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_tran_saction`
+--
+
+INSERT INTO `ak_tran_saction` (`ak_tran_saction_id`, `ak_tran_saction_type`, `ak_tran_saction_user`, `ak_tran_saction_course`, `ak_tran_saction_status`, `ak_tran_saction_midtrans_id`) VALUES
+(1, 'echannel', 1, 5, 3, 'ab3889af-1698-429b-a465-8b7082d90b16'),
+(2, 'bank_transfer', 1, 1, 3, '29c52d2d-44a0-40ac-9fbe-b3dbb97dc84c'),
+(3, 'echannel', 1, 2, 3, '3b68b795-4f98-4e2a-88d4-526a035d774a'),
+(4, 'echannel', 2, 1, 3, '084848ce-80ab-44a0-b065-368d31e8d20f');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_tran_status`
+--
+
+CREATE TABLE `ak_tran_status` (
+  `id_ak_tran_status_id` int(11) NOT NULL,
+  `ak_tran_status_name` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_tran_status`
+--
+
+INSERT INTO `ak_tran_status` (`id_ak_tran_status_id`, `ak_tran_status_name`) VALUES
+(1, 'SUCCESS'),
+(2, 'ERROR'),
+(3, 'PENDING');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ak_user`
+--
+
+CREATE TABLE `ak_user` (
+  `ak_user_id` int(11) NOT NULL,
+  `ak_user_firstname` varchar(45) NOT NULL,
+  `ak_user_lastname` varchar(45) NOT NULL,
+  `ak_user_email` varchar(45) NOT NULL,
+  `ak_user_password` varchar(255) NOT NULL,
+  `ak_user_dob` date NOT NULL,
+  `ak_user_phone` varchar(13) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `ak_user`
+--
+
+INSERT INTO `ak_user` (`ak_user_id`, `ak_user_firstname`, `ak_user_lastname`, `ak_user_email`, `ak_user_password`, `ak_user_dob`, `ak_user_phone`, `remember_token`) VALUES
+(1, 'Ahmad', 'Elang', 'sayaelang@gmail.com', '$2y$10$5RJ9eYZ8RKHMcG3WEC/8OupW7lkgrl5.EAnZVw.oVfkubbGnb/m0O', '1996-09-09', '081297451092', 'lEAFMZ8PU4ARkZDQJa2WIsgmcrDC2gMCQFOgslwDgYUocqEH0gg8so1QNc87'),
+(2, 'retno', 'larasati', 'wilsongay12@yahoo.com', '$2y$10$fYmZv8UZYPuzPnTSqrnK9eE8tgiBRD8Ga8/f0nP7IHmTd71/BBBD2', '2017-06-09', '85718489781', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ak_admin`
+--
+ALTER TABLE `ak_admin`
+  ADD PRIMARY KEY (`ak_admin_id`);
+
+--
+-- Indexes for table `ak_course`
+--
+ALTER TABLE `ak_course`
+  ADD PRIMARY KEY (`ak_course_id`),
+  ADD KEY `fk_ak_course_ak_provider1_idx` (`ak_course_prov_id`),
+  ADD KEY `fk_ak_course_ak_sub_category1_idx` (`ak_course_cat_id`);
+
+--
+-- Indexes for table `ak_course_age`
+--
+ALTER TABLE `ak_course_age`
+  ADD PRIMARY KEY (`ak_course_age_id`);
+
+--
+-- Indexes for table `ak_course_detail`
+--
+ALTER TABLE `ak_course_detail`
+  ADD PRIMARY KEY (`ak_course_detail_id`),
+  ADD KEY `fk_ak_course_detail_ak_course_idx` (`ak_course_id`),
+  ADD KEY `fk_ak_course_detail_ak_course_level1_idx` (`ak_course_detail_level`),
+  ADD KEY `fk_ak_course_detail_ak_course_age1_idx` (`ak_course_detail_age`);
+
+--
+-- Indexes for table `ak_course_facility`
+--
+ALTER TABLE `ak_course_facility`
+  ADD PRIMARY KEY (`ak_course_facility_id`),
+  ADD KEY `ak_course_facility_detid` (`ak_course_facility_detid`),
+  ADD KEY `ak_course_facility_detid_2` (`ak_course_facility_detid`),
+  ADD KEY `ak_facility_type_id` (`ak_facility_type_id`);
+
+--
+-- Indexes for table `ak_course_level`
+--
+ALTER TABLE `ak_course_level`
+  ADD PRIMARY KEY (`ak_course_level_id`);
+
+--
+-- Indexes for table `ak_course_schedule`
+--
+ALTER TABLE `ak_course_schedule`
+  ADD PRIMARY KEY (`ak_course_schedule_id`),
+  ADD KEY `fk_ak_course_schedule_ak_course_detail1_idx` (`ak_course_schedule_detid`);
+
+--
+-- Indexes for table `ak_facility_type`
+--
+ALTER TABLE `ak_facility_type`
+  ADD PRIMARY KEY (`ak_facility_type_id`);
+
+--
+-- Indexes for table `ak_main_category`
+--
+ALTER TABLE `ak_main_category`
+  ADD PRIMARY KEY (`ak_maincat_id`);
+
+--
+-- Indexes for table `ak_pay_ment`
+--
+ALTER TABLE `ak_pay_ment`
+  ADD PRIMARY KEY (`ak_pay_ment_id`),
+  ADD KEY `fk_ak_pay_ment_ak_tran_saction1_idx` (`ak_pay_ment_tran_id`);
+
+--
+-- Indexes for table `ak_provider`
+--
+ALTER TABLE `ak_provider`
+  ADD PRIMARY KEY (`ak_provider_id`),
+  ADD KEY `fk_ak_provider_ak_region1_idx` (`ak_provider_region`);
+
+--
+-- Indexes for table `ak_provider_img`
+--
+ALTER TABLE `ak_provider_img`
+  ADD PRIMARY KEY (`ak_provider_img_id`),
+  ADD KEY `ak_provider_id` (`ak_provider_id`);
+
+--
+-- Indexes for table `ak_province`
+--
+ALTER TABLE `ak_province`
+  ADD PRIMARY KEY (`ak_province_id`);
+
+--
+-- Indexes for table `ak_region`
+--
+ALTER TABLE `ak_region`
+  ADD PRIMARY KEY (`ak_region_id`),
+  ADD KEY `fk_ak_region_ak_province1_idx` (`ak_region_prov_id`);
+
+--
+-- Indexes for table `ak_sub_category`
+--
+ALTER TABLE `ak_sub_category`
+  ADD PRIMARY KEY (`ak_subcat_id`),
+  ADD KEY `fk_ak_sub_category_ak_main_category1_idx` (`ak_subcat_parent`);
+
+--
+-- Indexes for table `ak_tran_saction`
+--
+ALTER TABLE `ak_tran_saction`
+  ADD PRIMARY KEY (`ak_tran_saction_id`, `ak_tran_saction_user`, `ak_tran_saction_course`),
+  ADD KEY `fk_ak_tran_saction_ak_user1_idx` (`ak_tran_saction_user`),
+  ADD KEY `fk_ak_tran_saction_ak_tran_status1_idx` (`ak_tran_saction_status`);
+
+--
+-- Indexes for table `ak_tran_status`
+--
+ALTER TABLE `ak_tran_status`
+  ADD PRIMARY KEY (`id_ak_tran_status_id`);
+
+--
+-- Indexes for table `ak_user`
+--
+ALTER TABLE `ak_user`
+  ADD PRIMARY KEY (`ak_user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `ak_admin`
+--
+ALTER TABLE `ak_admin`
+  MODIFY `ak_admin_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ak_course`
+--
+ALTER TABLE `ak_course`
+  MODIFY `ak_course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ak_course_age`
+--
+ALTER TABLE `ak_course_age`
+  MODIFY `ak_course_age_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ak_course_detail`
+--
+ALTER TABLE `ak_course_detail`
+  MODIFY `ak_course_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ak_course_facility`
+--
+ALTER TABLE `ak_course_facility`
+  MODIFY `ak_course_facility_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `ak_course_level`
+--
+ALTER TABLE `ak_course_level`
+  MODIFY `ak_course_level_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ak_facility_type`
+--
+ALTER TABLE `ak_facility_type`
+  MODIFY `ak_facility_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ak_main_category`
+--
+ALTER TABLE `ak_main_category`
+  MODIFY `ak_maincat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `ak_pay_ment`
+--
+ALTER TABLE `ak_pay_ment`
+  MODIFY `ak_pay_ment_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ak_provider`
+--
+ALTER TABLE `ak_provider`
+  MODIFY `ak_provider_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ak_provider_img`
+--
+ALTER TABLE `ak_provider_img`
+  MODIFY `ak_provider_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ak_province`
+--
+ALTER TABLE `ak_province`
+  MODIFY `ak_province_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+--
+-- AUTO_INCREMENT for table `ak_region`
+--
+ALTER TABLE `ak_region`
+  MODIFY `ak_region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9472;
+--
+-- AUTO_INCREMENT for table `ak_sub_category`
+--
+ALTER TABLE `ak_sub_category`
+  MODIFY `ak_subcat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `ak_tran_saction`
+--
+ALTER TABLE `ak_tran_saction`
+  MODIFY `ak_tran_saction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `ak_tran_status`
+--
+ALTER TABLE `ak_tran_status`
+  MODIFY `id_ak_tran_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `ak_user`
+--
+ALTER TABLE `ak_user`
+  MODIFY `ak_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `ak_course_schedule`
+--
+ALTER TABLE `ak_course_schedule`
+  MODIFY `ak_course_schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ak_course`
+--
+ALTER TABLE `ak_course`
+  ADD CONSTRAINT `fk_ak_course_ak_provider1` FOREIGN KEY (`ak_course_prov_id`) REFERENCES `ak_provider` (`ak_provider_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ak_course_ak_sub_category1` FOREIGN KEY (`ak_course_cat_id`) REFERENCES `ak_sub_category` (`ak_subcat_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_course_detail`
+--
+ALTER TABLE `ak_course_detail`
+  ADD CONSTRAINT `fk_ak_course_detail_ak_course` FOREIGN KEY (`ak_course_id`) REFERENCES `ak_course` (`ak_course_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ak_course_detail_ak_course_age1` FOREIGN KEY (`ak_course_detail_age`) REFERENCES `ak_course_age` (`ak_course_age_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ak_course_detail_ak_course_level1` FOREIGN KEY (`ak_course_detail_level`) REFERENCES `ak_course_level` (`ak_course_level_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_course_facility`
+--
+ALTER TABLE `ak_course_facility`
+  ADD CONSTRAINT `ak_course_facility_ibfk_1` FOREIGN KEY (`ak_course_facility_detid`) REFERENCES `ak_course_detail` (`ak_course_detail_id`),
+  ADD CONSTRAINT `ak_course_facility_ibfk_2` FOREIGN KEY (`ak_facility_type_id`) REFERENCES `ak_facility_type` (`ak_facility_type_id`);
+
+--
+-- Constraints for table `ak_course_schedule`
+--
+ALTER TABLE `ak_course_schedule`
+  ADD CONSTRAINT `fk_ak_course_schedule_ak_course_detail1` FOREIGN KEY (`ak_course_schedule_detid`) REFERENCES `ak_course_detail` (`ak_course_detail_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_pay_ment`
+--
+ALTER TABLE `ak_pay_ment`
+  ADD CONSTRAINT `fk_ak_pay_ment_ak_tran_saction1` FOREIGN KEY (`ak_pay_ment_tran_id`) REFERENCES `ak_tran_saction` (`ak_tran_saction_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_provider`
+--
+ALTER TABLE `ak_provider`
+  ADD CONSTRAINT `fk_ak_provider_ak_region1` FOREIGN KEY (`ak_provider_region`) REFERENCES `ak_region` (`ak_region_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_provider_img`
+--
+ALTER TABLE `ak_provider_img`
+  ADD CONSTRAINT `ak_provider_img_ibfk_1` FOREIGN KEY (`ak_provider_id`) REFERENCES `ak_provider` (`ak_provider_id`);
+
+--
+-- Constraints for table `ak_region`
+--
+ALTER TABLE `ak_region`
+  ADD CONSTRAINT `fk_ak_region_ak_province1` FOREIGN KEY (`ak_region_prov_id`) REFERENCES `ak_province` (`ak_province_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_sub_category`
+--
+ALTER TABLE `ak_sub_category`
+  ADD CONSTRAINT `fk_ak_sub_category_ak_main_category1` FOREIGN KEY (`ak_subcat_parent`) REFERENCES `ak_main_category` (`ak_maincat_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ak_tran_saction`
+--
+ALTER TABLE `ak_tran_saction`
+  ADD CONSTRAINT `fk_ak_tran_saction_ak_tran_status1` FOREIGN KEY (`ak_tran_saction_status`) REFERENCES `ak_tran_status` (`id_ak_tran_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ak_tran_saction_ak_course1` FOREIGN KEY (`ak_tran_saction_course`) REFERENCES `ak_course` (`ak_course_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ak_tran_saction_ak_user1` FOREIGN KEY (`ak_tran_saction_user`) REFERENCES `ak_user` (`ak_user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- 
+-- Last Activity
+-- 
+ALTER TABLE `ak_provider` CHANGE `ak_provider_last_activity` `ak_provider_last_activity` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

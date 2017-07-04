@@ -13,6 +13,7 @@ use App\ProviderImg;
 use App\Region;
 use App\MainCategory;
 use App\SubCategory;
+use App\Transaction;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -46,19 +47,74 @@ class CourseController extends Controller
                 ;
     }
 
+    public function manage($id)
+    {
+        $query = DB::table('ak_course')
+                    ->join('ak_provider', 'ak_course.ak_course_prov_id', '=', 'ak_provider.ak_provider_id')
+                    ->select('*')
+                    ->where(function ($query) {
+                        return $query
+                        ->whereRaw('LOWER(ak_provider.ak_provider_email) like ?', Auth::user()->ak_provider_email);
+                    })
+                    ->where('ak_course.ak_course_id' , '=', $id);
+        $courses = $query->first();
+        if($courses === null){
+            return redirect('/provider/dashboard');
+        }
+
+        $query = DB::table('ak_user')
+                    ->join('ak_tran_saction', 'ak_tran_saction_user', '=', 'ak_user.ak_user_id')
+                    ->join('ak_tran_status', 'id_ak_tran_status_id', '=', 'ak_tran_saction_status')
+                    ->select('ak_user_firstname','ak_user_lastname','ak_user_email','ak_user_phone', 'ak_tran_saction_type', 'ak_tran_saction_status', 'ak_tran_saction_id', 'ak_tran_status_name')
+                    ->where('ak_tran_saction_course', '=', $courses->ak_course_id);
+        $user = $query->get();
+        return view('manage', [
+            'user' => $user,
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    private function validatecourse(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:6|max:255',
+            'subcat' => 'required',
+            'price' => 'required|numeric|min:0',
+            'level' => 'required',
+            'subcat' => 'required',
+            'age' => 'required',
+            'description' => 'required|min:6',
+            'size' => 'numeric|required|min:0',
+            'seat' => 'numeric|required|max:'.$request->size, 
+        ]);
+
+        for ($i=1; $i <= $request->jmlschedule; $i++) { 
+            if(!is_null(request("day".$i)) && !is_null(request("time".$i))){
+                $this->validate($request, [
+                    'day'.$i => 'required',
+                    'time'.$i => 'required',
+                ]);
+            }
+        }
+
+    }
     public function store(Request $request)
     {
+
+        $this->validatecourse($request);
+
         $course = new Course();
         $detail = new CourseDetail();
         $course->ak_course_name = $request->name;
         $course->ak_course_cat_id = $request->subcat;
         $course->ak_course_prov_id = Auth::user()->ak_provider_id;
+        $course->ak_course_active = true;
+        $course->ak_course_open = true;
         $course->save();
         $detail->ak_course_detail_name = $request->name . " detail";
         $detail->ak_course_detail_price = $request->price;
@@ -66,6 +122,7 @@ class CourseController extends Controller
         $detail->ak_course_detail_age = $request->age;
         $detail->ak_course_detail_size = $request->size;
         $detail->ak_course_detail_desc = $request->description;
+        $detail->ak_course_detail_seat = $request->seat;
         $detail->ak_course_id = $course->ak_course_id;
         $detail->save();
         for ($i=1; $i <= $request->jmlschedule; $i++) { 
@@ -102,6 +159,9 @@ class CourseController extends Controller
                     ->select('ak_course.ak_course_id', 'ak_course.ak_course_name', 'ak_provider.ak_provider_firstname', 'ak_provider.ak_provider_lastname', 'ak_provider.ak_provider_address', 'ak_provider.ak_provider_zipcode', 'ak_provider.ak_provider_telephone', 'ak_provider_img.ak_provider_img_path', 'ak_region.ak_region_cityname', 'ak_region.ak_region_name', 'ak_region.ak_region_namefull')
                     ->where('ak_course.ak_course_id', '=', $id);
         $result     = $query->first();
+        $tran = Transaction::where('ak_tran_saction_user', '=', Auth::id())
+                            ->where('ak_tran_saction_course', '=', $id)
+                            ->first();
         return view('course_detail', [
 
             'course' => $course,
@@ -109,6 +169,7 @@ class CourseController extends Controller
             'detail' => $detail,
             'schedules' => $schedules,
             'facilities' => $facilities,
+            'transaction' => $tran,
         ]);
     }
 
@@ -127,13 +188,16 @@ class CourseController extends Controller
                     ->join('ak_sub_category', 'ak_course.ak_course_cat_id', '=', 'ak_sub_category.ak_subcat_id')
                     ->join('ak_main_category', 'ak_main_category.ak_maincat_id', '=', 'ak_sub_category.ak_subcat_parent')
                     ->join('ak_provider', 'ak_course.ak_course_prov_id', '=', 'ak_provider.ak_provider_id')
-                    ->select('ak_course.ak_course_id','ak_provider.ak_provider_id','ak_course_detail.*','ak_main_category.ak_maincat_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_id', 'ak_sub_category.ak_subcat_id', 'ak_course_age.ak_course_age_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc')
+                    ->select('ak_course.*','ak_provider.ak_provider_id','ak_course_detail.*','ak_main_category.ak_maincat_id', 'ak_course_level.ak_course_level_id', 'ak_sub_category.ak_subcat_id', 'ak_course_age.ak_course_age_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc')
                     ->where(function ($query) {
                         return $query
                         ->whereRaw('LOWER(ak_provider.ak_provider_email) like ?', Auth::user()->ak_provider_email);
                     })
                     ->where('ak_course.ak_course_id' , '=', $id);
         $courses = $query->first();
+        if($courses === null){
+            return redirect('/provider/dashboard');
+        }
 
         $query = DB:: table('ak_provider_img')
                     ->where('ak_provider_id' , '=', Auth::id());
@@ -143,13 +207,21 @@ class CourseController extends Controller
 
         $subcat = SubCategory::all();
         $maincat = MainCategory::all();
-        return view('edit-course', [
+        return view('course-edit', [
             'maincat' => $maincat,
             'subcat' => $subcat,
             'course' => $courses,
             'image' => $img->ak_provider_img_path,
             'schedules' => $schedules,
         ]);
+    }
+
+    public function changestatus(Request $request)
+    {
+        $tran = Transaction::find($request->transactionid);
+        $tran->ak_tran_saction_status = $request->statuspembayaran;
+        $tran->save();
+        return redirect('provider/manage/'.$tran->ak_tran_saction_course);
     }
 
     /**
@@ -159,11 +231,16 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
+
+        $this->validatecourse($request);
+
         $course =Course::find($id);
         $course->ak_course_name = $request->name ;
         $course->ak_course_cat_id = $request->subcat;
+        $course->ak_course_open = $request->open;
         $course->save();   
         $detail = CourseDetail::where('ak_course_id', '=', $course->ak_course_id)->first();
         $detail->ak_course_detail_name = $request->name . " detail";
@@ -171,6 +248,7 @@ class CourseController extends Controller
         $detail->ak_course_detail_level = $request->level;
         $detail->ak_course_detail_age = $request->age;
         $detail->ak_course_detail_size = $request->size;
+        $detail->ak_course_detail_seat = $request->seat;
         $detail->ak_course_detail_desc = $request->description;
         $detail->save();
         dd($request->jmlschedule);
@@ -193,8 +271,20 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function close($id)
+    public function open($id)
     {
-        
+        $course =Course::find($id);
+        $course->ak_course_open = !$course->ak_course_open;
+        $course->save();
+        return redirect('provider/dashboard');
+    }
+
+    public function active($id)
+    {
+        $course =Course::find($id);
+        $course->ak_course_active = !$course->ak_course_active;
+        $course->save();
+        return redirect('provider/dashboard');
+
     }
 }

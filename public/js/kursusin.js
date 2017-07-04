@@ -1,5 +1,5 @@
-$(".addToCart").click(function(){
-	event.preventDefault();
+$(".addToCart").click(function(e){
+    e.preventDefault();
         $.ajax({
             url: url + '/addtocart',
             type: 'GET',
@@ -85,4 +85,24 @@ $("#schedule").on("click", '.btndelete' ,function() {
     console.log($(this));
     console.log($(".scheduleinput").length);
     $(this).parent().parent().remove();
+});
+
+var orov = $('#province');
+var region = $('#region');
+
+orov.change(function() {
+    var disabled = region.attr('disabled');
+    console.log(region.attr('name'));
+    if(typeof disabled !== typeof undefined && disabled !== false){
+        region.removeAttr('disabled');
+    }
+    if ($(this).data('options') == undefined) {
+    /*Taking an array of all options-2 and kind of embedding it on the select1*/
+        $(this).data('options', $('#region option').clone());
+    }
+    var id = $(this).val();
+    console.log(id);
+    var options = $(this).data('options').filter('[data-id=' + id + ']');
+    console.log(options);
+    region.html(options);
 });

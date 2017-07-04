@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Auth;
-
+use DB;
+use App\Provider;
 class ProviderLoginController extends Controller
 {
 
@@ -24,7 +25,22 @@ class ProviderLoginController extends Controller
     //     Auth::attempt($credetials, $remember);
 
     // }
-    protected $redirectTo = '/';
+    protected $redirectTo = '/provider/dashboard';
+
+    public function logout(Request $request)
+    {
+        $id = $this->guard()->id();
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        $provider = Provider::find($id);
+        $provider->ak_provider_last_activity = DB::raw('now()');
+        $provider->save();
+        return redirect('/provider/login');
+    }
 
     /**
      * Create a new controller instance.

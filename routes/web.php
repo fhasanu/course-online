@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
@@ -59,7 +60,15 @@ Route::group(array('prefix' => 'provider'), function(){
 
 	Route::put('/editcourse/{id}', 'CourseController@update')->middleware('auth:provider');
 
-	Route::post('/closecourse/{id}', 'CourseController@close')->middleware('auth:provider');
+	Route::post('/open/{id}', 'CourseController@open')->middleware('auth:provider');
+
+	Route::post('/active/{id}', 'CourseController@active')->middleware('auth:provider');
+
+	Route::post('/changepicture', 'ProviderController@changePict')->name('provider.image.upload');
+
+	Route::get('/manage/{id}', 'CourseController@manage')->middleware('auth:provider');
+
+	Route::put('/changestatus', 'CourseController@changestatus')->middleware('auth:provider')->name('status.change.submit');
 });
 
 Auth::routes();

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-
+use DB;
 use App\Provider;
 use App\ProviderImg;
+use App\Region;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -37,7 +38,7 @@ class ProviderRegisterController extends Controller
 
         $img = new ProviderImg;
         $img->ak_provider_id = $user->getId();
-        $img->ak_provider_img_path = 'https://myanimelist.cdn-dena.com/images/anime/3/38295l.jpg';
+        $img->ak_provider_img_path = 'default.jpg';
         $img->save();
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
@@ -50,7 +51,15 @@ class ProviderRegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.provider-register');
+        $query = DB::table('ak_province')
+                    ->select('*');
+        $province = $query->get();
+        $region = Region::all();
+        // dd($province);
+        // dd($region);
+        return view('auth.provider-register')
+                ->with('province', $province)
+                ->with('region', $region);
     }
 
     /**
@@ -93,7 +102,7 @@ class ProviderRegisterController extends Controller
         return Validator::make($data, [
             'firstname' => 'required|max:255',
             'lastname' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:ak_provider,ak_provider_email',
+            'email' => 'required|email|max:255|unique:ak_provider,ak_provider_email|unique:ak_user,ak_user_email',
             'password' => 'required|min:6|confirmed',
             'region' => 'required|max:11',
             'address' => 'required',

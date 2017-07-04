@@ -17,6 +17,7 @@ class CourseDetail extends Model
     	'ak_course_detail_age',
     	'ak_course_detail_size',
     	'ak_course_detail_desc',
+        'ak_course_detail_seat',
     ];
     public function getId(){
         return $this->ak_course_detail_id;

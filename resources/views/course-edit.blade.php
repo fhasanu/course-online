@@ -121,6 +121,12 @@
         <div class="form-group">
             <input class="form-control" required name="size" id="size" type="number" value={{$course->ak_course_detail_size}}>
         </div>
+
+        <label for="seat">Seat</label> 
+        <div class="form-group">
+            <input class="form-control" required name="seat" id="seat" type="number" value="{{$course->ak_course_detail_seat}}">
+        </div>
+
         <label for="description">Description</label> 
         <div class="form-group">
             <textarea class="form-control" rows="3" name="description" id="description">{{$course->ak_course_detail_desc}}</textarea>

@@ -37,7 +37,8 @@ class SearchController extends Controller
                     ->join('ak_provider_img', 'ak_provider.ak_provider_id', '=', 'ak_provider_img.ak_provider_id')
                     ->join('ak_region', 'ak_provider.ak_provider_region', '=', 'ak_region.ak_region_id')
                     ->join('ak_province', 'ak_region.ak_region_prov_id', '=', 'ak_province.ak_province_id')
-                    ->select('ak_course.ak_course_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc', 'ak_provider_img.ak_provider_img_path');
+                    ->select('ak_course.*', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id', 'ak_course_detail.*', 'ak_provider_img.ak_provider_img_path')
+                    ->where('ak_course_active');
                         $courses = $query->get();
         // if (count($courses) < 1) {
         //     $courses = [];
@@ -85,13 +86,14 @@ class SearchController extends Controller
                     ->join('ak_provider_img', 'ak_provider.ak_provider_id', '=', 'ak_provider_img.ak_provider_id')
                     ->join('ak_region', 'ak_provider.ak_provider_region', '=', 'ak_region.ak_region_id')
                     ->join('ak_province', 'ak_region.ak_region_prov_id', '=', 'ak_province.ak_province_id')
-                    ->select('ak_course.ak_course_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc', 'ak_provider_img.ak_provider_img_path')
+                    ->select('ak_course.*', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id', 'ak_course_detail.*', 'ak_provider_img.ak_provider_img_path')
                     ->where(function ($query) use ($target) {
                         return $query->whereRaw('LOWER(ak_course.ak_course_name) like ?', [$target])
                         ->orWhereRaw('LOWER(ak_course_detail.ak_course_detail_desc) like ?', [$target])
                         ->orWhereRaw('LOWER(ak_provider.ak_provider_firstname) like ?', [$target])
                         ->orWhereRaw('LOWER(ak_provider.ak_provider_lastname) like ?', [$target]);
                     });
+                    $query->where('ak_course_active', '=', true);
                     $query->where (function ($query) use ($location) {
                         return $query->whereRaw('LOWER(ak_region.ak_region_name) like ?', [$location])
                         ->orWhereRaw('LOWER(ak_region.ak_region_namefull) like ?', [$location])

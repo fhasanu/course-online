@@ -17,8 +17,10 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/');
+        if (Auth::guard('provider')->check()) {
+            return redirect('/provider/dashboard');
+        } else if(Auth::guard()->check()){
+            return redirect('/');            
         }
 
         return $next($request);

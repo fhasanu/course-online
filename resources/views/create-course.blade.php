@@ -1,6 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
+
+@foreach ($errors->all() as $error)
+  <div>{{ $error }}</div>
+@endforeach
+
 <div class="panel">
         <form method="POST" action="{{route('course.store.submit')}}">
         {{ csrf_field() }}
@@ -32,6 +37,7 @@
         <div class="form-group">
             <input class="form-control" required name="price" id="price" type="number">
         </div>
+
         <label for="level">Level</label> 
         <div class="form-group">
             <select class="form-control" required name="level" id="level">
@@ -74,6 +80,12 @@
         <div class="form-group">
             <input class="form-control" required name="size" id="size" type="number">
         </div>
+
+        <label for="seat">Seat</label> 
+        <div class="form-group">
+            <input class="form-control" required name="seat" id="seat" type="number">
+        </div>
+
         <label for="description">Description</label> 
         <div class="form-group">
             <textarea class="form-control" rows="3" name="description" id="description"></textarea>

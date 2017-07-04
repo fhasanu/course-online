@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Provider;
+use App\Region;
+use App\Province;
+use App\ProviderImg;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
@@ -29,7 +33,7 @@ class ProviderController extends Controller
                     ->join('ak_sub_category', 'ak_course.ak_course_cat_id', '=', 'ak_sub_category.ak_subcat_id')
                     ->join('ak_main_category', 'ak_main_category.ak_maincat_id', '=', 'ak_sub_category.ak_subcat_parent')
                     ->join('ak_provider', 'ak_course.ak_course_prov_id', '=', 'ak_provider.ak_provider_id')
-                    ->select('ak_course.ak_course_id','ak_course_detail.ak_course_detail_id','ak_main_category.ak_maincat_id','ak_course.ak_course_name', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id', 'ak_course_detail.ak_course_detail_price', 'ak_course_detail.ak_course_detail_desc')
+                    ->select('ak_course.*','ak_course_detail.*','ak_main_category.ak_maincat_id', 'ak_course_level.ak_course_level_name', 'ak_sub_category.ak_subcat_name', 'ak_course_age.ak_course_age_name_id')
                     ->where(function ($query) {
                         return $query
                         ->whereRaw('LOWER(ak_provider.ak_provider_email) like ?', Auth::user()->ak_provider_email);
@@ -82,7 +86,6 @@ class ProviderController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -91,7 +94,25 @@ class ProviderController extends Controller
      */
     public function edit(Provider $provider)
     {
-        //
+        // 'ak_provider_firstname',
+        // 'ak_provider_lastname',
+        // 'ak_provider_email',
+        // 'ak_provider_password',
+        // 'ak_provider_region',
+        // 'ak_provider_address',
+        // 'ak_provider_zipcode',
+        // 'ak_provider_description',
+        // 'ak_provider_telephone'
+
+        $provider = Provider::find(Auth::id());
+
+        $province = Province::all();
+        $region = Region::all();
+
+        return view('provider-edit')
+                ->with('province', $province)
+                ->with('region', $region);
+        
     }
 
     /**
@@ -104,6 +125,30 @@ class ProviderController extends Controller
     public function update(Request $request, Provider $provider)
     {
         //
+    }
+
+    public function changePict(Request $request)
+    {
+            $this->validate($request, [
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ]);
+
+
+        $imageName = time().'.'.$request->image->getClientOriginalExtension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+        $imgPath = ProviderImg::where('ak_provider_id','=' ,Auth::id())->first();
+        if($imgPath->ak_provider_img_path !== 'default.jpg'){
+            File::delete('images/' .$imgPath->ak_provider_img_path);
+        }
+        $imgPath->ak_provider_img_path = $imageName;
+        $imgPath->save();
+        return back()
+            ->with('success','Image Uploaded successfully.')
+            ->with('image',$imgPath);
     }
 
     /**

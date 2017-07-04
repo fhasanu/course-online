@@ -5,19 +5,19 @@
                     data-client-key="<CLIENT-KEY>"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
-    <form id="payment-finish-form" method="post" action="/payment/finish">
+    <form id="payment-finish-form" method="post" action="{{url('/payment/finish')}}">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
         <input type="hidden" name="result_type" id="result-type-f" value=""></div>
         <input type="hidden" name="result_data" id="result-data-f" value=""></div>
     </form>
 
-    <form id="payment-unfinish-form" method="post" action="/payment/unfinish">
+    <form id="payment-unfinish-form" method="post" action="{{url('/payment/unfinish')}}">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
         <input type="hidden" name="result_type" id="result-type-u" value=""></div>
         <input type="hidden" name="result_data" id="result-data-u" value=""></div>
     </form>
 
-    <form id="payment-error-form" method="post" action="/payment/error">
+    <form id="payment-error-form" method="post" action="{{url('/payment/error')}}">
         <input type="hidden" name="_token" value="{!! csrf_token() !!}">
         <input type="hidden" name="result_type" id="result-type-e" value=""></div>
         <input type="hidden" name="result_data" id="result-data-e" value=""></div>
@@ -30,7 +30,7 @@
     @foreach($cart as $result)
         <div class="space row course">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <img src="{{ $result->image->ak_provider_img_path }}">
+                <img src="{{ asset('images/'.$result->image->ak_provider_img_path) }}">
             </div>
             <div class="parent col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <h1 class=""><a href="{{ URL::to('/courses/' . $result->ak_course_id) }}">{{ $result->ak_course_name }}</a></h1>
