@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<form method="POST" action="/search">
+<form method="POST" action="{{url('search')}}">
     {{ csrf_field() }}
     <div class="form-inline row space">
         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">

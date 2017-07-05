@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Transaction;
+use App\CourseDetail;
 class NotificationController extends Controller
 {
 
@@ -31,8 +32,19 @@ class NotificationController extends Controller
                 $result->transaction_status = 0;
                 break;
         }
+        if($transaction_status === 1){
+            $tran = Transaction::where('ak_tran_saction_midtrans_id' , '=', $result->transaction_id)->get();
+            foreach($tran as $i){
+              $course = CourseDetail::where('ak_course_id', '=', $i->ak_tran_saction_user)->first();
+              if($course->ak_course_detail_seat > 0){
+                $course->ak_course_detail_seat = $course->ak_course_detail_seat - 1;
+              }
+              $course->save();
+            }
+        }
 
-        TransactionController::save($result);
+        Transaction::where('ak_tran_saction_midtrans_id', '=', $result->transaction_id)
+                  ->update(['ak_tran_saction_status' => $result->transaction_status]);
 
         // $name = "notification ".date("d M Y / H:m:s");
         // $maincat = new MainCategory();

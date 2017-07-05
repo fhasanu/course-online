@@ -6,7 +6,7 @@
 	<div class="alert alert-success" id="cartadded" role="alert"><strong>{{ $course->ak_course_name }}</strong> Masuk ke cart</div>
 
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-		<img src="{{ $result->ak_provider_img_path }}">
+		<img src="{{asset('images/'.$result->ak_provider_img_path) }}">
 	</div>
 	<div class="parent col-lg-8 col-md-8 col-sm-8 col-xs-8">
 		<h1 class=""><a href="{{ URL::to('/courses/' . $course->ak_course_id) }}">{{ $result->ak_course_name }}</a></h1>
@@ -24,15 +24,32 @@
 				@endforeach
 			</tbody>
 		</table>
-		@if(Auth::check())
+		@if(Auth::check() && $transaction !== null && $transaction->ak_tran)saction_status === 1)
+			<p>Lokasi	:</p>
+			<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
+			<p>Daerah 	:	{{$result->ak_region_name}}</p>
+		<p>Course sudah dibeli</p>
+		@elseif(Auth::check() && $course->ak_course_open === 1)
 		<form class="addToCartForm">
 			<input type='hidden' name='courseid' value="{{ $course->ak_course_id }}">
 
 			<button href='' class="addToCart margin-down-big child set-bottom set-right btn btn-danger width-sml sharp-box" data="{{$course->ak_course_id}}">Troli</button>
 		</form>
+
 		<p>Lokasi	:</p>
 		<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
 		<p>Daerah 	:	{{$result->ak_region_name}}</p>
+
+		@elseif($course->ak_course_open === 0)
+		<p>Lokasi	:</p>
+		<p>Kota	 	:	{{$result->ak_region_cityname}}</p>
+		<p>Daerah 	:	{{$result->ak_region_name}}</p>
+
+
+		<div class="alert alert-warning" role="alert">
+		  <strong>Kelas Ditutup<strong>
+		</div>
+
 
 		@else
 		<p>Lokasi	:</p>

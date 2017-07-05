@@ -3838,6 +3838,54 @@
         ]
     },
     {
+        "name": "xethron/laravel-4-generators",
+        "version": "3.1.1",
+        "version_normalized": "3.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Xethron/Laravel-4-Generators.git",
+            "reference": "526f0a07d8ae44e365a20b1bf64c9956acd2a859"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Xethron/Laravel-4-Generators/zipball/526f0a07d8ae44e365a20b1bf64c9956acd2a859",
+            "reference": "526f0a07d8ae44e365a20b1bf64c9956acd2a859",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "~5.0",
+            "php": ">=5.4.0"
+        },
+        "require-dev": {
+            "behat/behat": "~2.5.1",
+            "behat/mink": "~1.5.0",
+            "behat/mink-extension": "~1.2.0",
+            "behat/mink-goutte-driver": "~1.0.9",
+            "behat/mink-selenium2-driver": "~1.1.1",
+            "phpspec/phpspec": "~2.0",
+            "phpunit/phpunit": "~3.7"
+        },
+        "time": "2017-02-23T11:20:49+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Way\\Generators": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jeffrey Way",
+                "email": "jeffrey@jeffrey-way.com"
+            }
+        ],
+        "description": "Rapidly generate resources, migrations, models, and much more."
+    },
+    {
         "name": "doctrine/dbal",
         "version": "v2.5.12",
         "version_normalized": "2.5.12.0",
@@ -3909,54 +3957,6 @@
             "persistence",
             "queryobject"
         ]
-    },
-    {
-        "name": "xethron/laravel-4-generators",
-        "version": "3.1.1",
-        "version_normalized": "3.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Xethron/Laravel-4-Generators.git",
-            "reference": "526f0a07d8ae44e365a20b1bf64c9956acd2a859"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Xethron/Laravel-4-Generators/zipball/526f0a07d8ae44e365a20b1bf64c9956acd2a859",
-            "reference": "526f0a07d8ae44e365a20b1bf64c9956acd2a859",
-            "shasum": ""
-        },
-        "require": {
-            "illuminate/support": "~5.0",
-            "php": ">=5.4.0"
-        },
-        "require-dev": {
-            "behat/behat": "~2.5.1",
-            "behat/mink": "~1.5.0",
-            "behat/mink-extension": "~1.2.0",
-            "behat/mink-goutte-driver": "~1.0.9",
-            "behat/mink-selenium2-driver": "~1.1.1",
-            "phpspec/phpspec": "~2.0",
-            "phpunit/phpunit": "~3.7"
-        },
-        "time": "2017-02-23T11:20:49+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Way\\Generators": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jeffrey Way",
-                "email": "jeffrey@jeffrey-way.com"
-            }
-        ],
-        "description": "Rapidly generate resources, migrations, models, and much more."
     },
     {
         "name": "xethron/migrations-generator",

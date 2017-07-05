@@ -10,8 +10,6 @@ class ProviderImg extends Model
     protected $primaryKey = 'ak_provider_img_id';
 
     protected $fillable = [
-    	'ak_provider_image_id',
-        'ak_provider_id',
         'ak_provider_img_path'
     ];
 

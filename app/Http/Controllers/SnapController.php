@@ -140,33 +140,36 @@ class SnapController extends Controller
     {
         $result = $request->input('result_data');
         $result = json_decode($result);
-
         if($result === null){
           dd($request);
         }
-
+        $transaction_status = 0;
         switch ($result->transaction_status) {
             case 'capture':
-                $result->transaction_status = 1;
+                $transaction_status = 1;
                 break;
             case 'deny':
-                $result->transaction_status = 2;
+                $transaction_status = 2;
                 break;
             case 'pending': case 'settlement':
-                $result->transaction_status = 3;
+                $transaction_status = 3;
                 break;
             default:
-                $result->transaction_status = 0;
+                $transaction_status = 0;
                 break;
         }
 
         $orders = session('saveorder', []);
-        $result->courses = json_encode($orders);
-
         $user = session('saveuser', 0);
-        $result->user_id = $user;
-
-        TransactionController::save($result);
+        foreach($orders as $order){
+            $data = new \stdClass();
+            $data->transaction_status = $transaction_status;
+            $data->user_id = $user;
+            $data->courses = $order;
+            $data->payment_type = $result->payment_type;
+            $data->transaction_id = $result->transaction_id;
+            TransactionController::save($data);
+        }
         $this->reset();
 
         return $result;

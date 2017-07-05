@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 14, 2017 at 04:14 PM
+-- Generation Time: Jun 12, 2017 at 07:41 PM
 -- Server version: 5.6.35
 -- PHP Version: 5.6.30
 
@@ -44,21 +44,19 @@ CREATE TABLE `ak_course` (
   `ak_course_id` int(11) NOT NULL,
   `ak_course_name` varchar(45) NOT NULL,
   `ak_course_cat_id` int(11) NOT NULL,
-  `ak_course_prov_id` int(11) NOT NULL,
-  `ak_couse_active` tinyint(1) NOT NULL,
-  `ak_course_open` tinyint(1) NOT NULL
+  `ak_course_prov_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ak_course`
 --
 
-INSERT INTO `ak_course` (`ak_course_id`, `ak_course_name`, `ak_course_cat_id`, `ak_course_prov_id`, `ak_couse_active`, `ak_course_open`) VALUES
-(1, 'Persiapan TOEFL', 2, 2, 0, 0),
-(2, 'yourcourse2', 6, 1, 0, 0),
-(3, 'theircourse3', 6, 1, 0, 0),
-(4, 'ourcourse4', 8, 2, 0, 0),
-(5, 'itscourse5', 4, 2, 0, 0);
+INSERT INTO `ak_course` (`ak_course_id`, `ak_course_name`, `ak_course_cat_id`, `ak_course_prov_id`) VALUES
+(1, 'Persiapan TOEFL', 2, 2),
+(2, 'yourcourse2', 6, 1),
+(3, 'theircourse3', 6, 1),
+(4, 'ourcourse4', 8, 2),
+(5, 'itscourse5', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -95,7 +93,6 @@ CREATE TABLE `ak_course_detail` (
   `ak_course_detail_level` int(11) NOT NULL,
   `ak_course_detail_age` int(11) NOT NULL,
   `ak_course_detail_size` smallint(3) NOT NULL,
-  `ak_course_detail_seat` tinyint(3) NOT NULL,
   `ak_course_detail_desc` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -103,12 +100,12 @@ CREATE TABLE `ak_course_detail` (
 -- Dumping data for table `ak_course_detail`
 --
 
-INSERT INTO `ak_course_detail` (`ak_course_detail_id`, `ak_course_id`, `ak_course_detail_name`, `ak_course_detail_price`, `ak_course_detail_level`, `ak_course_detail_age`, `ak_course_detail_size`, `ak_course_detail_seat`, `ak_course_detail_desc`) VALUES
-(1, 1, 'full TOEFL ITP', 100000, 2, 2, 10, 0, 'TOEFL ITP Preparation Course'),
-(2, 2, 'yourcourse2 detail', 200000, 3, 3, 15, 0, 'this description is useful'),
-(3, 3, 'Course Detail', 300000, 3, 3, 10, 0, 'Course Detail'),
-(4, 4, 'ourcourse4 detail', 400000, 1, 2, 13, 0, 'this description is utterly despicable'),
-(5, 5, 'itscourse5 detail', 500000, 2, 3, 25, 0, 'this description is awfully useful');
+INSERT INTO `ak_course_detail` (`ak_course_detail_id`, `ak_course_id`, `ak_course_detail_name`, `ak_course_detail_price`, `ak_course_detail_level`, `ak_course_detail_age`, `ak_course_detail_size`, `ak_course_detail_desc`) VALUES
+(1, 1, 'full TOEFL ITP', 100000, 2, 2, 10, 'TOEFL ITP Preparation Course'),
+(2, 2, 'yourcourse2 detail', 200000, 3, 3, 15, 'this description is useful'),
+(3, 3, 'Course Detail', 300000, 3, 3, 10, 'Course Detail'),
+(4, 4, 'ourcourse4 detail', 400000, 1, 2, 13, 'this description is utterly despicable'),
+(5, 5, 'itscourse5 detail', 500000, 2, 3, 25, 'this description is awfully useful');
 
 -- --------------------------------------------------------
 
@@ -253,7 +250,7 @@ CREATE TABLE `ak_provider` (
   `ak_provider_zipcode` smallint(5) NOT NULL,
   `ak_provider_description` longtext NOT NULL,
   `ak_provider_telephone` varchar(13) NOT NULL,
-  `ak_provider_last_activity` datetime NOT NULL,
+  `ak_provider_last_activity` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `remember_token` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1112,7 +1109,7 @@ ALTER TABLE `ak_admin`
 -- AUTO_INCREMENT for table `ak_course`
 --
 ALTER TABLE `ak_course`
-  MODIFY `ak_course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ak_course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `ak_course_age`
 --
